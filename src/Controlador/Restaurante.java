@@ -3,17 +3,13 @@ package Controlador;
 import Vista.Primer_ingreso_gerente;
 import Modelo.Bebidas;
 import Modelo.Gerente;
-import Modelo.Logica;
 import Modelo.Mesero;
 import Modelo.Plato_principal;
 import Modelo.Postre;
 import java.io.*;
-import java.util.List;
-import java.util.Scanner;
 
 public class Restaurante {
 
-    static Scanner sc = new Scanner(System.in);
     
     public static Lista Lista_de_Platos = new Lista(), Lista_de_Postres = new Lista(), Lista_de_Bebidas = new Lista(), Lista_de_Empleados = new Lista(), Lista_de_Gerentes = new Lista();
 
