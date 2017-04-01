@@ -161,7 +161,7 @@ public class Restaurante {
                 System.out.println(line);
                 separacionMejorada(line, 0, 0, 0, 0, lista, Tipo_de_lista);
             }
-            
+            //System.out.println("yolo");
             br.close();
         } catch (Exception e) {
             e.printStackTrace();
