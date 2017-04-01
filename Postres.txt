@@ -1,0 +1,3 @@
+Tres leches|6000|700|
+Napoleon|10000|700|
+Torta Chocolate|10000|700|

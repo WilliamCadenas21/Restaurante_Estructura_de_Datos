@@ -1,0 +1,3 @@
+Coca Cola|2000|500|
+Jugo de Tomate|2000|500|
+Vino|40000|350|
