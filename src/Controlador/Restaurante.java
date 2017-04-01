@@ -29,7 +29,7 @@ public class Restaurante {
         new Vista.Vista_Menu_Gerente().setVisible(true);
         new Vista.Vista_Cocina().setVisible(true);
         
-        System.out.println("HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASFASDFASDF");
+
         
     }
 
