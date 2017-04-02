@@ -13,7 +13,7 @@ public class Restaurante {
     public static Lista Lista_de_Platos = new Lista(), Lista_de_Postres = new Lista(), Lista_de_Bebidas = new Lista(), Lista_de_Empleados = new Lista(), Lista_de_Gerentes = new Lista();
 
     public static void main(String[] args) {
-
+        
         try {
             llenarListas(Lista_de_Gerentes, new File("Archivo_Gerente.txt"), "Gerente");
             llenarListas(Lista_de_Empleados, new File("Mesero.txt"), "Mesero");
