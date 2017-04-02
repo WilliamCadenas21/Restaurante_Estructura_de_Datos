@@ -36,10 +36,14 @@ public class Vista_Agregar_Comida extends javax.swing.JFrame {
         Acept_Button = new javax.swing.JButton();
         Food_Type_Combobox = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        Timer_minutos = new javax.swing.JSpinner();
+        jLabel8 = new javax.swing.JLabel();
+        Timer_segundos = new javax.swing.JSpinner();
 
         jLabel4.setText("Precio:");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setBackground(new java.awt.Color(204, 204, 204));
         jLabel1.setOpaque(true);
@@ -63,6 +67,10 @@ public class Vista_Agregar_Comida extends javax.swing.JFrame {
 
         jLabel6.setText("Tipo de comida:");
 
+        jLabel7.setText("Minutos:");
+
+        jLabel8.setText("Segundos: ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -79,7 +87,15 @@ public class Vista_Agregar_Comida extends javax.swing.JFrame {
                             .addComponent(Food_Text_Fat, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5)
                             .addComponent(jLabel6)
-                            .addComponent(Food_Type_Combobox, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(Food_Type_Combobox, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(Timer_minutos, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(Timer_segundos, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(128, 128, 128)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -105,16 +121,26 @@ public class Vista_Agregar_Comida extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Food_Text_Price, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Food_Text_Fat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Food_Text_Price, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Food_Text_Fat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Timer_minutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Timer_segundos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Food_Type_Combobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Acept_Button)
                 .addContainerGap())
         );
@@ -134,7 +160,7 @@ public class Vista_Agregar_Comida extends javax.swing.JFrame {
                 
             case 2:
                 
-                Controlador.Restaurante.Lista_de_Postres.Agregar(new Postre(Food_Text_Name.getText(), Double.parseDouble(Food_Text_Price.getText()), Double.parseDouble(Food_Text_Fat.getText())));
+                Controlador.Restaurante.Lista_de_Postres.Agregar(new Postre(Food_Text_Name.getText(), Double.parseDouble(Food_Text_Price.getText()), Double.parseDouble(Food_Text_Fat.getText()), (String.valueOf(Timer_minutos) + ":" + String.valueOf(Timer_segundos) )));
                 
                 break;
         
@@ -161,7 +187,7 @@ public class Vista_Agregar_Comida extends javax.swing.JFrame {
                 Postre po = (Postre) Controlador.Restaurante.Lista_de_Postres.getPosicion(Controlador.Restaurante.Lista_de_Postres.getTamaño()).ObtenerInfo();
                 
                 Escritor_X.write(po.getNombre() + "|");
-                Escritor_X.write(String.valueOf(po.getprecio()) + "|");
+                Escritor_X.write(String.valueOf(po.getPrecio()) + "|");
                 Escritor_X.write(String.valueOf(po.getCarboidratos()) + "|");      
                 Escritor_X.write("Postre" + "|");
           
@@ -210,11 +236,15 @@ public class Vista_Agregar_Comida extends javax.swing.JFrame {
     private javax.swing.JTextField Food_Text_Name;
     private javax.swing.JTextField Food_Text_Price;
     private javax.swing.JComboBox Food_Type_Combobox;
+    private javax.swing.JSpinner Timer_minutos;
+    private javax.swing.JSpinner Timer_segundos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     // End of variables declaration//GEN-END:variables
 }

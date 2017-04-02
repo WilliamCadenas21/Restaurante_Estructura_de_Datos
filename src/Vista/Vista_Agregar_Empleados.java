@@ -108,7 +108,7 @@ public class Vista_Agregar_Empleados extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         Photo.setBackground(new java.awt.Color(153, 153, 153));
         Photo.setOpaque(true);

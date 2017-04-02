@@ -5,7 +5,6 @@ public class Lista{
     private Nodo inicio;//Inicio de la lista
     private Nodo fin;//Fin de la lista
     private Nodo n;//Me funciona como un nodo auxiliar para poder llenar de informacion la lista.
-    private Object info;
     private int Tamaño = 0;
     
     public Lista(){
@@ -13,16 +12,14 @@ public class Lista{
     }
 
     public void Agregar(Object info){//Sirve para agregar nodos a una lista
-
-        n = new Nodo(info);
         
         if (inicio == null) {//Si aun no se han creado nodos
 
-            inicio = n;//Crea el nodo
+            inicio = new Nodo(info);//Crea el nodo
             inicio.Enlaza_a(null);//El puntero del nodo apunta, valga la reduncia, a nulo ya que no hay mas nodos al ser este el primero.
         } else {
 
-            
+            n = new Nodo(info);
             if (Tamaño == 1) {//En caso de que solo halla un nodo en la lista
 
                 inicio.Enlaza_a(n);
@@ -33,7 +30,7 @@ public class Lista{
             }
 
             fin = n;//El nodo nuevo se convierte en el ultimo nodo
-            fin.Enlaza_a(null);//El nodo fin apunta a nulo al ser el ultimo.
+            n.Enlaza_a(null);//El nodo fin apunta a nulo al ser el ultimo.
         }
 
         Tamaño++;

@@ -66,7 +66,7 @@ public class Loging_de_Meseros extends javax.swing.JFrame {
             .addGap(0, 267, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Meseros");
 
         User_Text.addActionListener(new java.awt.event.ActionListener() {
