@@ -147,10 +147,9 @@ public class Restaurante {
 
                 Primer_ingreso_gerente ventana = new Primer_ingreso_gerente();
                 ventana.setVisible(true);
-
             }
         } catch (Exception e) {
-
+            
         }
     }
 
@@ -159,7 +158,7 @@ public class Restaurante {
         try {
             FileReader fr = new FileReader(archivo);
             BufferedReader br = new BufferedReader(fr);
-            String line = "";
+            String line;
             int i = 1;
             while (br.ready()) {
                 i++;
