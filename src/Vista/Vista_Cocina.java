@@ -36,14 +36,14 @@ public class Vista_Cocina extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mesa", "Pedido", "Listo"
+                "Mesa", "Pedido", "Listo", "Tiempo Inicial "
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true
+                false, true, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -59,6 +59,7 @@ public class Vista_Cocina extends javax.swing.JFrame {
             Tabla_Cocina.getColumnModel().getColumn(0).setResizable(false);
             Tabla_Cocina.getColumnModel().getColumn(1).setResizable(false);
             Tabla_Cocina.getColumnModel().getColumn(2).setResizable(false);
+            Tabla_Cocina.getColumnModel().getColumn(3).setResizable(false);
         }
 
         Aceptar.setText("Aceptar");
