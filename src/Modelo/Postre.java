@@ -4,9 +4,9 @@ package Modelo;
 public class Postre {
     
     private String Nombre, Tiempo;
-    private double Precio, Carbohidratos;
+    private int Precio, Carbohidratos;
     
-    public Postre(String nombre, double precio, double carbohidratos, String Tiempo){
+    public Postre(String nombre, int precio, int carbohidratos, String Tiempo){
     
         Nombre = nombre;
         Precio = precio;
@@ -24,20 +24,20 @@ public class Postre {
        
     //Precio
        
-       public double getPrecio(){
+       public int getPrecio(){
        
            return Precio;
        
        }
     
-       public void setPrecio(double precio){
+       public void setPrecio(int precio){
        
            this.Precio = precio;
        }
        
     //Carbohidratos
        
-       public double getCarboidratos(){
+       public int getCarboidratos(){
        
            return Carbohidratos;
        
