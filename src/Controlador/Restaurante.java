@@ -23,11 +23,12 @@ public class Restaurante {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        new Reloj();
         /*new Vista.Vista_Menu().setVisible(true);
         new Vista.Vista_Menu_Gerente().setVisible(true);
         new Vista.Vista_Cocina().setVisible(true);*/
         comprobarIngresosAnteriores();
+        
 
     }
 
