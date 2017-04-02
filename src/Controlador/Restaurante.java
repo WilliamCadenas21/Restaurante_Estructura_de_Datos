@@ -1,5 +1,6 @@
 package Controlador;
 
+import Vista.Reloj;
 import Vista.Primer_ingreso_gerente;
 import Modelo.Bebidas;
 import Modelo.Gerente;
@@ -25,12 +26,7 @@ public class Restaurante {
             e.printStackTrace();
         }
         new Reloj();
-        /*new Vista.Vista_Menu().setVisible(true);
-        new Vista.Vista_Menu_Gerente().setVisible(true);
-        new Vista.Vista_Cocina().setVisible(true);*/
         comprobarIngresosAnteriores();
-        
-
     }
 
     public static void agregarGerente(Lista List) {

@@ -1,5 +1,5 @@
 
-package Controlador;
+package Vista;
 import java.util.*;
 
 public class Reloj extends javax.swing.JFrame implements Runnable{
@@ -11,9 +11,6 @@ public class Reloj extends javax.swing.JFrame implements Runnable{
         initComponents();
         h1 = new Thread(this);
         h1.start();
-        
-        setLocationRelativeTo(null);
-        setTitle("Reloj");
         setVisible(true);
     }
 
@@ -24,6 +21,9 @@ public class Reloj extends javax.swing.JFrame implements Runnable{
         lblReloj = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation(new java.awt.Point(450, 50));
+        setName("Reloj"); // NOI18N
+        setResizable(false);
 
         lblReloj.setFont(new java.awt.Font("Trebuchet MS", 1, 48)); // NOI18N
         lblReloj.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

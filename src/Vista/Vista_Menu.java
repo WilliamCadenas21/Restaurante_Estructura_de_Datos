@@ -79,10 +79,6 @@ public class Vista_Menu extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        Resultado_pedidos = new javax.swing.JTable();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        Tabla_factura = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -96,71 +92,19 @@ public class Vista_Menu extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         Lista_de_mesas = new javax.swing.JList<>();
         Cambiar_pedido = new javax.swing.JButton();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        Resultado_pedidos = new javax.swing.JTable();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        Tabla_factura = new javax.swing.JTable();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane4.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        Resultado_pedidos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Mesa", "Tiempo", "Resultado"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane6.setViewportView(Resultado_pedidos);
-        if (Resultado_pedidos.getColumnModel().getColumnCount() > 0) {
-            Resultado_pedidos.getColumnModel().getColumn(0).setResizable(false);
-            Resultado_pedidos.getColumnModel().getColumn(1).setResizable(false);
-            Resultado_pedidos.getColumnModel().getColumn(2).setResizable(false);
-        }
-
-        jTabbedPane1.addTab("Resultado de pedidos", jScrollPane6);
-
-        Tabla_factura.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Mesa"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane7.setViewportView(Tabla_factura);
-
-        jTabbedPane1.addTab("Factura", jScrollPane7);
+        setLocation(new java.awt.Point(250, 350));
+        setName("Tablet Mesero"); // NOI18N
+        setResizable(false);
 
         Tabla_Plato_principal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -319,6 +263,65 @@ public class Vista_Menu extends javax.swing.JFrame {
         jTabbedPane2.getAccessibleContext().setAccessibleName("Pedido");
 
         jTabbedPane1.addTab("Pedidos", jPanel1);
+
+        Resultado_pedidos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mesa", "Tiempo", "Resultado"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane6.setViewportView(Resultado_pedidos);
+        if (Resultado_pedidos.getColumnModel().getColumnCount() > 0) {
+            Resultado_pedidos.getColumnModel().getColumn(0).setResizable(false);
+            Resultado_pedidos.getColumnModel().getColumn(1).setResizable(false);
+            Resultado_pedidos.getColumnModel().getColumn(2).setResizable(false);
+        }
+
+        jTabbedPane1.addTab("Resultado de pedidos", jScrollPane6);
+
+        Tabla_factura.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mesa"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane7.setViewportView(Tabla_factura);
+
+        jTabbedPane1.addTab("Factura", jScrollPane7);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

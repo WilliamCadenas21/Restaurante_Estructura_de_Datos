@@ -1,10 +1,6 @@
 package Vista;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 import Modelo.*;
-import Controlador.Lista;
 
 public class Loging_de_Gerente extends javax.swing.JFrame {
 
@@ -19,7 +15,6 @@ public class Loging_de_Gerente extends javax.swing.JFrame {
         initComponents();
 
         Password_Text.setEditable(false);
-
     }
 
     @SuppressWarnings("unchecked")
@@ -46,6 +41,10 @@ public class Loging_de_Gerente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerente");
+        setLocation(new java.awt.Point(20, 50));
+        setName("Login"); // NOI18N
+        setResizable(false);
+        setSize(new java.awt.Dimension(0, 0));
 
         User_Text.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
