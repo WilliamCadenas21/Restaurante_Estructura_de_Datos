@@ -2,24 +2,26 @@ package Modelo;
 
 
 public class Mesas {
+   
+    private int Numero_mesa, Total;
     
-    private String Nombre_mesero;
-    private int Numero_mesas;
     
-    
-    public Mesas(String nombre_mesero, int numero_mesa){
+    public Mesas(int numero_mesa, int Total){
         
-        Nombre_mesero = nombre_mesero;
-        Numero_mesas = numero_mesa;
+        this.Total = Total;
+        Numero_mesa = numero_mesa;
     
     }
     
-    //Nombre mesero
+    //Numero de mesa
     
-        String getNombre_mesero(){
-        
-            return Nombre_mesero;
-        
-        }
+    public int getNumeroMesa(){
+        return this.Numero_mesa;
+    }
     
+    //Total recaudado de la mesa
+    
+    public int getTotalRecaudado(){
+        return this.Total;
+    }
 }
