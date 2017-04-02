@@ -4,9 +4,9 @@ package Modelo;
 public class Comida_auxiliar {
     
     private String Tipo, NombrePlato;
-    private double Precio;
+    private int Precio;
     
-    public Comida_auxiliar(String Tipo, String NombrePlato, double Precio){
+    public Comida_auxiliar(String Tipo, String NombrePlato, int Precio){
         
         this.Tipo = Tipo;
         this.NombrePlato = NombrePlato;
@@ -21,7 +21,7 @@ public class Comida_auxiliar {
         return NombrePlato;
     }
 
-    public double getPrecio() {
+    public int getPrecio() {
         return Precio;
     }
     
