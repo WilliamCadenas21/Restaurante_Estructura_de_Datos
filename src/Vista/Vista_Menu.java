@@ -1,6 +1,10 @@
 package Vista;
 
 import Controlador.Lista;
+import Controlador.Pedido;
+import Modelo.Bebidas;
+import Modelo.Comida_auxiliar;
+import Modelo.Plato_principal;
 import Modelo.Postre;
 import static Vista.Vista_Cocina.Tabla_Cocina;
 import java.awt.Point;
@@ -16,8 +20,11 @@ public class Vista_Menu extends javax.swing.JFrame {
 
     int i = 0, j = 0;
 
+    Lista Lista_comida_auxiliar = new Lista(), Lista_pedidos = new Lista();
+
     public Vista_Menu() {
         initComponents();
+
         setLocationRelativeTo(null);
 
         System.out.println("Estoy en component");
@@ -28,33 +35,29 @@ public class Vista_Menu extends javax.swing.JFrame {
 
         while (i < Controlador.Restaurante.Lista_de_Platos.getTamaño()) {
 
-            //Modelo.Plato_principal p = (Modelo.Plato_principal) Controlador.Restaurante.Lista_de_Platos.getPosicion(i).ObtenerInfo();
-            //System.out.println("T; " + p.getNombre());
-            modelo_tabla_plato_principal.addRow(new Object[]{Controlador.Restaurante.Lista_de_Platos.getPosicion(i).ObtenerInfo(), Controlador.Restaurante.Lista_de_Platos.getPosicion(i + 1).ObtenerInfo(), Controlador.Restaurante.Lista_de_Platos.getPosicion(i + 2).ObtenerInfo(), 0});
-            i = i + 3;
-            j = 0;
+            Plato_principal p = (Plato_principal) Controlador.Restaurante.Lista_de_Platos.getPosicion(i).ObtenerInfo();
+            modelo_tabla_plato_principal.addRow(new Object[]{p.getNombre(), p.getprecio(), p.getCarboidratos(), 0});
+            i++;
         }
 
         Tiempo();
-        
+
         while (i < Controlador.Restaurante.Lista_de_Postres.getTamaño()) {
 
             Postre p = (Postre) Controlador.Restaurante.Lista_de_Postres.getPosicion(i).ObtenerInfo();
-            //modelo_tabla_postres.addRow(new Object[]{Controlador.Restaurante.Lista_de_Postres.getPosicion(i).ObtenerInfo(), Controlador.Restaurante.Lista_de_Postres.getPosicion(i + 1).ObtenerInfo(), Controlador.Restaurante.Lista_de_Postres.getPosicion(i + 2).ObtenerInfo(), 0});
-            modelo_tabla_postres.addRow(new Object[]{p.getNombre(), p.getprecio(), p.getCarboidratos(), 0});
+            modelo_tabla_postres.addRow(new Object[]{p.getNombre(), p.getPrecio(), p.getCarboidratos(), 0});
 
-            i = i + 3;
-            j = 0;
+            i++;
         }
 
         Tiempo();
 
         while (i < Controlador.Restaurante.Lista_de_Bebidas.getTamaño()) {
 
-            //Modelo.Bebidas b = (Modelo.Bebidas) Controlador.Restaurante.Lista_de_Bebidas.getPosicion(i).ObtenerInfo();
-            modelo_tabla_bebidas.addRow(new Object[]{Controlador.Restaurante.Lista_de_Bebidas.getPosicion(i).ObtenerInfo(), Controlador.Restaurante.Lista_de_Bebidas.getPosicion(i + 1).ObtenerInfo(), Controlador.Restaurante.Lista_de_Bebidas.getPosicion(i + 2).ObtenerInfo(), 0});
+            Bebidas b = (Bebidas) Controlador.Restaurante.Lista_de_Bebidas.getPosicion(i).ObtenerInfo();
+            modelo_tabla_bebidas.addRow(new Object[]{b.getNombre(), b.getprecio(), b.getCarboidratos(), 0});
 
-            i = i + 3;
+            i++;
         }
     }
 
@@ -64,7 +67,7 @@ public class Vista_Menu extends javax.swing.JFrame {
         i = 0;
 
         try {
-            this.wait(500);
+            this.wait(5000);
         } catch (Exception e) {
         }
     }
@@ -76,6 +79,10 @@ public class Vista_Menu extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        Resultado_pedidos = new javax.swing.JTable();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        Tabla_factura = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -87,18 +94,73 @@ public class Vista_Menu extends javax.swing.JFrame {
         Aceptar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        Mesas_Lista = new javax.swing.JList<>();
-        jButton1 = new javax.swing.JButton();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        Resultado_pedidos = new javax.swing.JTable();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        Tabla_factura = new javax.swing.JTable();
+        Lista_de_mesas = new javax.swing.JList<>();
+        Cambiar_pedido = new javax.swing.JButton();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane4.setViewportView(jTextArea1);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        Resultado_pedidos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mesa", "Tiempo", "Resultado"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane6.setViewportView(Resultado_pedidos);
+        if (Resultado_pedidos.getColumnModel().getColumnCount() > 0) {
+            Resultado_pedidos.getColumnModel().getColumn(0).setResizable(false);
+            Resultado_pedidos.getColumnModel().getColumn(1).setResizable(false);
+            Resultado_pedidos.getColumnModel().getColumn(2).setResizable(false);
+        }
+
+        jTabbedPane1.addTab("Resultado de pedidos", jScrollPane6);
+
+        Tabla_factura.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mesa"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane7.setViewportView(Tabla_factura);
+
+        jTabbedPane1.addTab("Factura", jScrollPane7);
 
         Tabla_Plato_principal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -199,14 +261,19 @@ public class Vista_Menu extends javax.swing.JFrame {
 
         jLabel1.setText("Mesa:");
 
-        Mesas_Lista.setModel(new javax.swing.AbstractListModel<String>() {
+        Lista_de_mesas.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Mesa 1", "Mesa 2", "Mesa 3", "Mesa 4", "Mesa 5", "Mesa 6", "Mesa 7", "Mesa 8", "Mesa 9", "Mesa 10", "Mesa 11", "Mesa 12", "Mesa 13", "Mesa 14", "Mesa 15", "Mesa 16", "Mesa 17", "Mesa 18", "Mesa 19", "Mesa 20" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane5.setViewportView(Mesas_Lista);
+        jScrollPane5.setViewportView(Lista_de_mesas);
 
-        jButton1.setText("Cambiar pedido");
+        Cambiar_pedido.setText("Cambiar pedido");
+        Cambiar_pedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Cambiar_pedidoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -214,121 +281,60 @@ public class Vista_Menu extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTabbedPane2)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(Aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Cambiar_pedido, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 47, Short.MAX_VALUE))
-                    .addComponent(jScrollPane5))
+                    .addComponent(jLabel1)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(109, 109, 109)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Aceptar, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Aceptar, jButton1});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Aceptar, Cambiar_pedido});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Aceptar)
+                            .addComponent(Cambiar_pedido)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Aceptar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addContainerGap())
+                        .addComponent(jScrollPane5)))
+                .addGap(66, 66, 66))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {Aceptar, jButton1});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {Aceptar, Cambiar_pedido});
 
         jTabbedPane2.getAccessibleContext().setAccessibleName("Pedido");
 
         jTabbedPane1.addTab("Pedidos", jPanel1);
-
-        Resultado_pedidos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Mesa", "Tiempo", "Resultado"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane6.setViewportView(Resultado_pedidos);
-        if (Resultado_pedidos.getColumnModel().getColumnCount() > 0) {
-            Resultado_pedidos.getColumnModel().getColumn(0).setResizable(false);
-            Resultado_pedidos.getColumnModel().getColumn(1).setResizable(false);
-            Resultado_pedidos.getColumnModel().getColumn(2).setResizable(false);
-        }
-
-        jTabbedPane1.addTab("Resultado de pedidos", jScrollPane6);
-
-        Tabla_factura.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Mesa"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane7.setViewportView(Tabla_factura);
-
-        jTabbedPane1.addTab("Factura", jScrollPane7);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -336,10 +342,74 @@ public class Vista_Menu extends javax.swing.JFrame {
 
     private void AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarActionPerformed
 
-        Llenar_tabla_de_cocina();
-        Llenar_tabla_de_resultado_de_pedidos();
+        AgregarPedido();
 
+        DefaultTableModel tabla_resultados = (DefaultTableModel) Resultado_pedidos.getModel();
+
+        tabla_resultados.addRow(new Object[]{Lista_de_mesas.getSelectedValue(), "0:30", "Esperando cambio"});
+
+        Llenar_tabla_de_resultado_de_pedidos();
     }//GEN-LAST:event_AceptarActionPerformed
+
+    void AgregarPedido() {
+
+        DefaultTableModel modelo_platos = (DefaultTableModel) Tabla_Plato_principal.getModel();
+        DefaultTableModel modelo_tabla_postres = (DefaultTableModel) Tabla_Postre.getModel();
+        DefaultTableModel modelo_tabla_bebidas = (DefaultTableModel) Tabla_Bebidas.getModel();
+
+        double Total = 0;
+
+        for (int k = 0; k < modelo_tabla_postres.getRowCount(); k++) {
+            if (Integer.parseInt(String.valueOf(modelo_tabla_postres.getValueAt(k, 3))) > 0) {
+
+                Lista_comida_auxiliar.Agregar(new Comida_auxiliar("Postre", (String) modelo_tabla_postres.getValueAt(k, 0), Integer.parseInt((String) modelo_tabla_postres.getValueAt(k, 3))));//Primero llenó una lista de objetos 
+                Total = Total + Integer.parseInt(String.valueOf(modelo_tabla_postres.getValueAt(k, 1)));                                                                                                                                                   //tipo Lista_comida_auxiliar para asi poder llenar la lista de pedidos, que me servira
+            }                                                                                                                                                                                //despues para la creacion de la factura y el cambio de pedido durante los primeros 5 minutos
+
+        }
+
+        for (int k = 0; k < modelo_platos.getRowCount(); k++) {
+            if (Integer.parseInt(String.valueOf(modelo_platos.getValueAt(k, 3))) > 0) {
+
+                Lista_comida_auxiliar.Agregar(new Comida_auxiliar("Plato", (String) modelo_platos.getValueAt(k, 0), Integer.parseInt((String) modelo_platos.getValueAt(k, 3))));
+                Total = Total + Integer.parseInt(String.valueOf(modelo_platos.getValueAt(k, 1)));
+            }
+        }
+
+        for (int k = 0; k < modelo_tabla_bebidas.getRowCount(); k++) {
+
+            if (Integer.parseInt(String.valueOf(modelo_tabla_bebidas.getValueAt(k, 3))) > 0) {
+
+                Lista_comida_auxiliar.Agregar(new Comida_auxiliar("Bebida", (String) modelo_tabla_bebidas.getValueAt(k, 0), Integer.parseInt((String) modelo_tabla_bebidas.getValueAt(k, 3))));
+                Total = Total + Integer.parseInt(String.valueOf(modelo_tabla_bebidas.getValueAt(k, 1))); //Precio total del pedido, sirve para realizar la factura
+            }
+        }
+
+        Lista_pedidos.Agregar(new Pedido(Lista_de_mesas.getSelectedValue(), Lista_comida_auxiliar, Total));
+    }
+
+    private void Cambiar_pedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cambiar_pedidoActionPerformed
+
+        Object[] v = new Object[Lista_pedidos.getTamaño()];
+
+        for (int k = 0; k < Lista_pedidos.getTamaño(); k++) {//Este ciclo me funciona unicamente para poder llenar el vector que será utilizado en la ventana emergente, para seleccionar la mesa.
+
+            Pedido p = (Pedido) Lista_pedidos.getPosicion(k).ObtenerInfo();
+
+            v[k] = p.getMesa();//El vector se llena con todas las mesas que han realizado un pedido.
+        }
+
+        Object j = javax.swing.JOptionPane.showInputDialog(this, i, "", i, null, v, i);//Me permite seleccionar la mesa a la cual se le vá a realizar el cambio de pedido.
+
+        for (int k = 0; k < Lista_pedidos.getTamaño(); k++) {
+
+            Pedido p = (Pedido) Lista_pedidos.getPosicion(k).ObtenerInfo();
+
+            if (j.equals( p.getMesa() )) {//Busco la mesa  que ha sido seleccionada para realizar el cambio de pedido.
+                
+            }
+        }
+    }//GEN-LAST:event_Cambiar_pedidoActionPerformed
 
     void Llenar_tabla_de_cocina() {
 
@@ -355,7 +425,7 @@ public class Vista_Menu extends javax.swing.JFrame {
 
                 Lista_Auxiliar.Agregar(modelo_tabla_postres.getValueAt(k, 0));
             }
-            modelo_tabla_postres.setValueAt(0, k, 3);
+            modelo_tabla_postres.setValueAt(0, k, 3);//Me reinicia el valor de la cantidad de alimentos seleccionados, para poder escojer nuevamente.
         }
 
         for (int k = 0; k < modelo_platos.getRowCount(); k++) {
@@ -388,11 +458,11 @@ public class Vista_Menu extends javax.swing.JFrame {
 
         try {
 
-            System.out.println("V: " + Mesas_Lista.getSelectedValue());
+            System.out.println("V: " + Lista_de_mesas.getSelectedValue());
 
-            if (!(Mesas_Lista.getSelectedValue() == null)) {
+            if (!(Lista_de_mesas.getSelectedValue() == null)) {
 
-                modelo_pedidos.addRow(new Object[]{Mesas_Lista.getSelectedValue(), Vector[0], false});
+                modelo_pedidos.addRow(new Object[]{Lista_de_mesas.getSelectedValue(), Vector[0], false});
             } else {
 
                 javax.swing.JOptionPane.showMessageDialog(this, "Por favor indique una mesa a la cual se le asigne un pedido.");
@@ -409,7 +479,9 @@ public class Vista_Menu extends javax.swing.JFrame {
 
         DefaultTableModel tabla_resultados = (DefaultTableModel) Resultado_pedidos.getModel();
 
-        tabla_resultados.addRow(new Object[]{Mesas_Lista.getSelectedValue(), "0:00", "Preparando"});
+        Llenar_tabla_de_cocina();
+
+        tabla_resultados.setValueAt("Preparando", tabla_resultados.getRowCount() - 1, 2);
     }
 
     public static void main(String args[]) {
@@ -423,13 +495,13 @@ public class Vista_Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Aceptar;
-    private javax.swing.JList<String> Mesas_Lista;
+    private javax.swing.JButton Cambiar_pedido;
+    private javax.swing.JList<String> Lista_de_mesas;
     public static javax.swing.JTable Resultado_pedidos;
     private javax.swing.JTable Tabla_Bebidas;
     private javax.swing.JTable Tabla_Plato_principal;
     private javax.swing.JTable Tabla_Postre;
     public static javax.swing.JTable Tabla_factura;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
