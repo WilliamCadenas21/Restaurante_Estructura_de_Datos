@@ -1,3 +1,3 @@
-Tres leches|6000|700|
-Napoleon|10000|700|
-Torta Chocolate|10000|700|
+Tres leches|6000|700|4:30|
+Napoleon|10000|700|2:30|
+Torta Chocolate|10000|700|1:00|
