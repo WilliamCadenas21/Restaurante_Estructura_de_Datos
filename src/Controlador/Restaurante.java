@@ -15,6 +15,7 @@ public class Restaurante {
     public static void main(String[] args) {
         
         try {
+            
             llenarListas(Lista_de_Gerentes, new File("Archivo_Gerente.txt"), "Gerente");
             llenarListas(Lista_de_Empleados, new File("Mesero.txt"), "Mesero");
             llenarListas(Lista_de_Platos, new File("Platos principales.txt"), "Plato");
@@ -40,14 +41,9 @@ public class Restaurante {
         String str5 = (String) List.getPosicion(4).ObtenerInfo();
 
         Gerente g = new Gerente(str1, str2, str3, str4, str5);
-        System.out.println(g.getNombre());
-        System.out.println(g);
 
         Lista_de_Gerentes.Agregar(g);
 
-        System.out.println("TAMAÑO 1: " + Lista_de_Gerentes.getTamaño());
-
-        System.out.println("Lista de gerentes: " + Lista_de_Gerentes.getPosicion(0).ObtenerInfo());//No me esta agregando un objeto gerente sino los atributos.
     }
 
     public static void agregarMesero(Lista List) {
@@ -66,10 +62,10 @@ public class Restaurante {
 
     private static void agregarPostre(Lista List) {
 
-        String str1 = (String) List.getPosicion(0).ObtenerInfo();
-        double str2 = Integer.parseInt(String.valueOf(List.getPosicion(1).ObtenerInfo()));
-        double str3 = Integer.parseInt(String.valueOf(List.getPosicion(2).ObtenerInfo()));
-        String str4 = (String) List.getPosicion(3).ObtenerInfo();
+        String str1 = (String) List.getPosicion(0).ObtenerInfo();//Nombre
+        int str2 = Integer.parseInt(String.valueOf(List.getPosicion(1).ObtenerInfo()));//Precio
+        int str3 = Integer.parseInt(String.valueOf(List.getPosicion(2).ObtenerInfo()));//Carbohidratos
+        String str4 = (String) List.getPosicion(3).ObtenerInfo();//Tiempo
 
         Postre postre = new Postre(str1, str2, str3, str4);
         Lista_de_Postres.Agregar(postre);
@@ -81,12 +77,11 @@ public class Restaurante {
 
     private static void agregarBebida(Lista List) {
         String str1 = (String) List.getPosicion(0).ObtenerInfo();
-        double str2 = Integer.parseInt(String.valueOf(List.getPosicion(1).ObtenerInfo()));
-        double str3 = Integer.parseInt(String.valueOf(List.getPosicion(2).ObtenerInfo()));
+        int str2 = Integer.parseInt(String.valueOf(List.getPosicion(1).ObtenerInfo()));
+        int str3 = Integer.parseInt(String.valueOf(List.getPosicion(2).ObtenerInfo()));
 
         Bebidas bebidas = new Bebidas(str1, str2, str3);
-        System.out.println(bebidas.getNombre());
-        System.out.println(bebidas);
+
         Lista_de_Bebidas.Agregar(bebidas);
 
         System.out.println("Bebida agregada");
@@ -94,8 +89,8 @@ public class Restaurante {
 
     private static void agregarPlato(Lista List) {
         String str1 = (String) List.getPosicion(0).ObtenerInfo();
-        double str2 = Integer.parseInt(String.valueOf(List.getPosicion(1).ObtenerInfo()));
-        double str3 = Integer.parseInt(String.valueOf(List.getPosicion(2).ObtenerInfo()));
+        int str2 = Integer.parseInt(String.valueOf(List.getPosicion(1).ObtenerInfo()));
+        int str3 = Integer.parseInt(String.valueOf(List.getPosicion(2).ObtenerInfo()));
 
         Lista_de_Platos.Agregar(new Plato_principal(str1, str3, str3));
 
@@ -190,15 +185,7 @@ public class Restaurante {
                 fin = fin + 1;
             }
         }
-
-        /*if (i < Registro.length()) {
-            if (Registro.substring(Posicion, Posicion + 1).equals("|")) {
-                List.Agregar(Registro.substring(Inicio, Fin));
-                separacionMejorada(Registro, i + 1, Fin + 1, Fin + 1, Posicion + 1, List, Tipo_de_lista);
-            } else {
-                separacionMejorada(Registro, i + 1, Inicio, Fin + 1, Posicion + 1, List, Tipo_de_lista);
-            }
-        } else {*/
+        
         if (Tipo_de_lista.equals("Mesero")) {
             agregarMesero(Lista);
         } else if (Tipo_de_lista.equals("Postre")) {
@@ -210,7 +197,6 @@ public class Restaurante {
         } else if (Tipo_de_lista.equals("Gerente")) {
             agregarGerente(Lista);
         }
-        //}
-
+        
     }
 }

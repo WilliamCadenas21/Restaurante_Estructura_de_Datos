@@ -347,7 +347,7 @@ public class Vista_Menu extends javax.swing.JFrame {
         DefaultTableModel tabla_resultados = (DefaultTableModel) Resultado_pedidos.getModel();
 
         tabla_resultados.addRow(new Object[]{Lista_de_mesas.getSelectedValue(), "0:30", "Esperando cambio"});
-
+        
         Llenar_tabla_de_resultado_de_pedidos();
     }//GEN-LAST:event_AceptarActionPerformed
 
@@ -357,7 +357,7 @@ public class Vista_Menu extends javax.swing.JFrame {
         DefaultTableModel modelo_tabla_postres = (DefaultTableModel) Tabla_Postre.getModel();
         DefaultTableModel modelo_tabla_bebidas = (DefaultTableModel) Tabla_Bebidas.getModel();
 
-        double Total = 0;
+        int Total = 0;
 
         for (int k = 0; k < modelo_tabla_postres.getRowCount(); k++) {
             if (Integer.parseInt(String.valueOf(modelo_tabla_postres.getValueAt(k, 3))) > 0) {
@@ -371,7 +371,7 @@ public class Vista_Menu extends javax.swing.JFrame {
         for (int k = 0; k < modelo_platos.getRowCount(); k++) {
             if (Integer.parseInt(String.valueOf(modelo_platos.getValueAt(k, 3))) > 0) {
 
-                Lista_comida_auxiliar.Agregar(new Comida_auxiliar("Plato", (String) modelo_platos.getValueAt(k, 0), Integer.parseInt((String) modelo_platos.getValueAt(k, 3))));
+                Lista_comida_auxiliar.Agregar(new Comida_auxiliar("Plato", String.valueOf( modelo_platos.getValueAt(k, 0)), Integer.parseInt( String.valueOf( modelo_platos.getValueAt(k, 3)) ) ) );
                 Total = Total + Integer.parseInt(String.valueOf(modelo_platos.getValueAt(k, 1)));
             }
         }
@@ -380,7 +380,7 @@ public class Vista_Menu extends javax.swing.JFrame {
 
             if (Integer.parseInt(String.valueOf(modelo_tabla_bebidas.getValueAt(k, 3))) > 0) {
 
-                Lista_comida_auxiliar.Agregar(new Comida_auxiliar("Bebida", (String) modelo_tabla_bebidas.getValueAt(k, 0), Integer.parseInt((String) modelo_tabla_bebidas.getValueAt(k, 3))));
+                Lista_comida_auxiliar.Agregar(new Comida_auxiliar("Bebida", String.valueOf( modelo_tabla_bebidas.getValueAt(k, 0) ), Integer.parseInt(String.valueOf( modelo_tabla_bebidas.getValueAt(k, 3)) ) ) );
                 Total = Total + Integer.parseInt(String.valueOf(modelo_tabla_bebidas.getValueAt(k, 1))); //Precio total del pedido, sirve para realizar la factura
             }
         }
@@ -405,12 +405,23 @@ public class Vista_Menu extends javax.swing.JFrame {
 
             Pedido p = (Pedido) Lista_pedidos.getPosicion(k).ObtenerInfo();
 
-            if (j.equals( p.getMesa() )) {//Busco la mesa  que ha sido seleccionada para realizar el cambio de pedido.
-                
+            if (j.equals( p.getMesa() )) {//Busco la mesa  que ha sido seleccionada para realizar el cambio de pedido de dicha mesa.
+                Cambiar_pedido();
             }
         }
     }//GEN-LAST:event_Cambiar_pedidoActionPerformed
 
+    void Cambiar_pedido(){
+        
+        DefaultTableModel modelo_platos = (DefaultTableModel) Tabla_Plato_principal.getModel();
+        DefaultTableModel modelo_tabla_postres = (DefaultTableModel) Tabla_Postre.getModel();
+        DefaultTableModel modelo_tabla_bebidas = (DefaultTableModel) Tabla_Bebidas.getModel();
+        
+        for (int k = 0; k < Lista_pedidos.getTamaño() ; k++) {
+            
+        }
+    }
+    
     void Llenar_tabla_de_cocina() {
 
         DefaultTableModel modelo_platos = (DefaultTableModel) Tabla_Plato_principal.getModel();

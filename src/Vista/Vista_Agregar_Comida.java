@@ -154,19 +154,19 @@ public class Vista_Agregar_Comida extends javax.swing.JFrame {
         
             case 1:
 
-                Controlador.Restaurante.Lista_de_Platos.Agregar(new Plato_principal(Food_Text_Name.getText(), Double.parseDouble(Food_Text_Price.getText()), Double.parseDouble(Food_Text_Fat.getText())));
+                Controlador.Restaurante.Lista_de_Platos.Agregar(new Plato_principal(Food_Text_Name.getText(), Integer.parseInt(Food_Text_Price.getText()), Integer.parseInt(Food_Text_Fat.getText())));
                 
                 break;
                 
             case 2:
                 
-                Controlador.Restaurante.Lista_de_Postres.Agregar(new Postre(Food_Text_Name.getText(), Double.parseDouble(Food_Text_Price.getText()), Double.parseDouble(Food_Text_Fat.getText()), (String.valueOf(Timer_minutos) + ":" + String.valueOf(Timer_segundos) )));
+                Controlador.Restaurante.Lista_de_Postres.Agregar(new Postre(Food_Text_Name.getText(), Integer.parseInt(Food_Text_Price.getText()), Integer.parseInt(Food_Text_Fat.getText()), (String.valueOf(Timer_minutos) + ":" + String.valueOf(Timer_segundos) )));
                 
                 break;
         
             case 3:
                 
-                Controlador.Restaurante.Lista_de_Bebidas.Agregar(new Bebidas(Food_Text_Name.getText(), Double.parseDouble(Food_Text_Price.getText()), Double.parseDouble(Food_Text_Fat.getText())));
+                Controlador.Restaurante.Lista_de_Bebidas.Agregar(new Bebidas(Food_Text_Name.getText(), Integer.parseInt(Food_Text_Price.getText()), Integer.parseInt(Food_Text_Fat.getText())));
                 
                 break;
         }
