@@ -18,7 +18,7 @@ import javax.swing.table.TableColumn;
 
 public class Vista_Menu extends javax.swing.JFrame {
 
-    int i = 0, j = 0;
+    int i = 0, j = 0, Numero_de_la_mesa_a_cambiar_el_pedido = 0;
 
     Lista Lista_comida_auxiliar = new Lista(), Lista_pedidos = new Lista();
 
@@ -365,9 +365,9 @@ public class Vista_Menu extends javax.swing.JFrame {
         for (int k = 0; k < modelo_tabla_postres.getRowCount(); k++) {
             if (Integer.parseInt(String.valueOf(modelo_tabla_postres.getValueAt(k, 3))) > 0) {
 
-                Lista_comida_auxiliar.Agregar(new Comida_auxiliar("Postre", (String) modelo_tabla_postres.getValueAt(k, 0), Integer.parseInt((String) modelo_tabla_postres.getValueAt(k, 3))));//Primero llenó una lista de objetos 
-                Total = Total + Integer.parseInt(String.valueOf(modelo_tabla_postres.getValueAt(k, 1)));                                                                                                                                                   //tipo Lista_comida_auxiliar para asi poder llenar la lista de pedidos, que me servira
-            }                                                                                                                                                                                //despues para la creacion de la factura y el cambio de pedido durante los primeros 5 minutos
+                Lista_comida_auxiliar.Agregar(new Comida_auxiliar("Postre", String.valueOf(modelo_tabla_postres.getValueAt(k, 0) ), Integer.parseInt( String.valueOf(modelo_tabla_postres.getValueAt(k, 3) ) )));//Primero llenó una lista de objetos 
+                Total = Total + Integer.parseInt(String.valueOf(modelo_tabla_postres.getValueAt(k, 1)));                                                                                                         //tipo Lista_comida_auxiliar para asi poder llenar la lista de pedidos, que me servira
+            }                                                                                                                                                                                                    //despues para la creacion de la factura y el cambio de pedido durante los primeros 5 minutos
 
         }
 
@@ -404,13 +404,21 @@ public class Vista_Menu extends javax.swing.JFrame {
 
         Object j = javax.swing.JOptionPane.showInputDialog(this, i, "", i, null, v, i);//Me permite seleccionar la mesa a la cual se le vá a realizar el cambio de pedido.
 
-        for (int k = 0; k < Lista_pedidos.getTamaño(); k++) {
+        boolean a = true;
+        
+        while(Numero_de_la_mesa_a_cambiar_el_pedido++ < Lista_pedidos.getTamaño() && a) {
 
-            Pedido p = (Pedido) Lista_pedidos.getPosicion(k).ObtenerInfo();
+            Pedido p = (Pedido) Lista_pedidos.getPosicion(Numero_de_la_mesa_a_cambiar_el_pedido).ObtenerInfo();
 
-            if (j.equals( p.getMesa() )) {//Busco la mesa  que ha sido seleccionada para realizar el cambio de pedido de dicha mesa.
+            System.out.println("J: " + j);
+            System.out.println("P: " + p.getMesa());
+            
+            if (j.equals(p.getMesa() )) {//Busco la mesa  que ha sido seleccionada para realizar el cambio de pedido de dicha mesa.
+                
+                a = false;
                 Cambiar_pedido();
             }
+             
         }
     }//GEN-LAST:event_Cambiar_pedidoActionPerformed
 
@@ -420,8 +428,21 @@ public class Vista_Menu extends javax.swing.JFrame {
         DefaultTableModel modelo_tabla_postres = (DefaultTableModel) Tabla_Postre.getModel();
         DefaultTableModel modelo_tabla_bebidas = (DefaultTableModel) Tabla_Bebidas.getModel();
         
-        for (int k = 0; k < Lista_pedidos.getTamaño() ; k++) {
+        Lista Lista_de_los_platos_del_pedido = ( (Pedido) Lista_pedidos.getPosicion(Numero_de_la_mesa_a_cambiar_el_pedido).ObtenerInfo() ).getListaComida();
+        
+        for (int k = 0; k < Lista_de_los_platos_del_pedido.getTamaño() ; k++) {
             
+            Comida_auxiliar comida = (Comida_auxiliar) Lista_de_los_platos_del_pedido.getPosicion(k).ObtenerInfo();
+            
+            if (comida.getTipo().equals("Plato")) {
+                
+                
+            }else if (comida.getTipo().equals("Postre")) {
+                
+                
+            }else if (comida.getTipo().equals("Bebida")) {
+                
+            }
         }
     }
     
