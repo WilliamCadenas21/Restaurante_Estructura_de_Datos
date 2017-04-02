@@ -406,7 +406,7 @@ public class Vista_Menu extends javax.swing.JFrame {
         Lista_pedidos.Agregar(new Pedido(Lista_de_mesas.getSelectedValue(), Lista_comida_auxiliar, Total));
     }
 
-    private void Cambiar_pedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cambiar_pedidoActionPerformed
+    private void Cambiar_pedidoActionPerformed(java.awt.event.ActionEvent evt) {                                               
         
         DefaultTableModel modelo_tabla_cocina = (DefaultTableModel) Tabla_Cocina.getModel();
         
@@ -445,13 +445,14 @@ public class Vista_Menu extends javax.swing.JFrame {
             if (j.equals(p.getMesa())) {//Busco la mesa  que ha sido seleccionada para realizar el cambio de pedido de dicha mesa.
                 a = false; // para salirse del mientrasQ
                 if (calcularDiferenciaDeTiempos(hora_Inicial,horaCapturada)) {
-                    Cambiar_pedido();
+                    Cambiar_pedido(p.getMesa());
                 }else{
                     System.out.println("no se puede cambiar PEDIDO !!!");
                 }
             }
             Numero_de_la_mesa_a_cambiar_el_pedido++;
         }
+    }
 
     void Cambiar_pedido(String mesa) {
 
@@ -492,9 +493,7 @@ public class Vista_Menu extends javax.swing.JFrame {
                 //Lleno la tabla correspondiente a bebidas, si se ha escogido alguna Bebida.
 
             }
-        }*/
-        
-        
+        }*/  
     }
 
     void Llenar_tabla_de_cocina() {
