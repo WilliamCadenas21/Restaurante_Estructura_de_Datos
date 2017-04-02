@@ -49,7 +49,7 @@ public class Reloj extends javax.swing.JFrame implements Runnable{
         pack();
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel lblReloj;
+    public static javax.swing.JLabel lblReloj;
     // End of variables declaration//GEN-END:variables
 
     @Override

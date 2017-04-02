@@ -10,6 +10,7 @@ import static Vista.Vista_Cocina.Tabla_Cocina;
 import java.awt.Point;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
@@ -392,33 +393,50 @@ public class Vista_Menu extends javax.swing.JFrame {
     }
 
     private void Cambiar_pedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cambiar_pedidoActionPerformed
-
+        
+        DefaultTableModel modelo_tabla_cocina = (DefaultTableModel) Tabla_Cocina.getModel();
+        
+        String hora_Inicial = "";
+        
+        String horaCapturada = Reloj.lblReloj.getText();
+        
         Object[] v = new Object[Lista_pedidos.getTamaño()];
 
         for (int k = 0; k < Lista_pedidos.getTamaño(); k++) {//Este ciclo me funciona unicamente para poder llenar el vector que será utilizado en la ventana emergente, para seleccionar la mesa.
 
             Pedido p = (Pedido) Lista_pedidos.getPosicion(k).ObtenerInfo();
-
+            
             v[k] = p.getMesa();//El vector se llena con todas las mesas que han realizado un pedido.
         }
 
         Object j = javax.swing.JOptionPane.showInputDialog(this, i, "", i, null, v, i);//Me permite seleccionar la mesa a la cual se le vá a realizar el cambio de pedido.
 
+        for (int k = 0; k < modelo_tabla_cocina.getRowCount(); k++) {
+            
+            if (j.equals(String.valueOf(modelo_tabla_cocina.getValueAt(k, 0)))) {
+                
+                hora_Inicial = (String) modelo_tabla_cocina.getValueAt(k, 3);
+            }
+        }
+        
         boolean a = true;
         
-        while(Numero_de_la_mesa_a_cambiar_el_pedido++ < Lista_pedidos.getTamaño() && a) {
+        while(Numero_de_la_mesa_a_cambiar_el_pedido < Lista_pedidos.getTamaño() && a) {
 
             Pedido p = (Pedido) Lista_pedidos.getPosicion(Numero_de_la_mesa_a_cambiar_el_pedido).ObtenerInfo();
 
             System.out.println("J: " + j);
             System.out.println("P: " + p.getMesa());
             
-            if (j.equals(p.getMesa() )) {//Busco la mesa  que ha sido seleccionada para realizar el cambio de pedido de dicha mesa.
-                
-                a = false;
-                Cambiar_pedido();
+            if (j.equals(p.getMesa())) {//Busco la mesa  que ha sido seleccionada para realizar el cambio de pedido de dicha mesa.
+                a = false; // para salirse del mientrasQ
+                if (calcularDiferenciaDeTiempos(hora_Inicial,horaCapturada)) {
+                    Cambiar_pedido();
+                }else{
+                    System.out.println("no se puede cambiar PEDIDO !!!");
+                }
             }
-             
+            Numero_de_la_mesa_a_cambiar_el_pedido++;
         }
     }//GEN-LAST:event_Cambiar_pedidoActionPerformed
 
@@ -490,14 +508,16 @@ public class Vista_Menu extends javax.swing.JFrame {
         TableColumn Columna_a_cambiar = Tabla_Cocina.getColumnModel().getColumn(1);
         TableCellEditor Editor_celda = new DefaultCellEditor(Combo);
         Columna_a_cambiar.setCellEditor(Editor_celda);
-
+        
+        String hora =  Reloj.lblReloj.getText();//Captura del tiempo actual en el que se ordena el pedido para cocina 
+        
         try {
 
             System.out.println("V: " + Lista_de_mesas.getSelectedValue());
 
             if (!(Lista_de_mesas.getSelectedValue() == null)) {
-
-                modelo_pedidos.addRow(new Object[]{Lista_de_mesas.getSelectedValue(), Vector[0], false});
+                //Aqui se Llena la tabla cocina 
+                modelo_pedidos.addRow(new Object[]{Lista_de_mesas.getSelectedValue(), Vector[0], false,hora});
             } else {
 
                 javax.swing.JOptionPane.showMessageDialog(this, "Por favor indique una mesa a la cual se le asigne un pedido.");
@@ -527,7 +547,31 @@ public class Vista_Menu extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    /**
+     * funcion para calcular el tiempo que ha pasado
+     * @param inicial timepo en el que se realizo el pedido
+     * @param actual tiempo en el que se pidio cambiar el pedido
+     * @return 
+     */
+    private boolean calcularDiferenciaDeTiempos(String inicial, String actual) {
+        
+        String ini = inicial.substring(0,inicial.length()-3);
+        String fin = actual.substring(0,actual.length()-3);
+        
+        String[] vec0 = ini.split(":");
+        String[] vec1 = fin.split(":");
+        
+        int inicial1 = Integer.parseInt(vec0[1])*60*1000 + Integer.parseInt(vec0[2])*1000;
+        int final2 = Integer.parseInt(vec1[1])*60*1000 + Integer.parseInt(vec1[2])*1000;   
+        
+        if ( final2 - inicial1 <= 5000 ) {         
+            return true;
+        }else{
+            return false;
+        }         
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Aceptar;
     private javax.swing.JButton Cambiar_pedido;
@@ -550,5 +594,5 @@ public class Vista_Menu extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
-
+    
 }
