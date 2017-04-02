@@ -1,5 +1,6 @@
 package Controlador;
 
+import Vista.Reloj;
 import Vista.Primer_ingreso_gerente;
 import Modelo.Bebidas;
 import Modelo.Gerente;
@@ -10,31 +11,26 @@ import java.io.*;
 
 public class Restaurante {
 
-    
     public static Lista Lista_de_Platos = new Lista(), Lista_de_Postres = new Lista(), Lista_de_Bebidas = new Lista(), Lista_de_Empleados = new Lista(), Lista_de_Gerentes = new Lista();
 
     public static void main(String[] args) {
-
+        
         try {
+            
             llenarListas(Lista_de_Gerentes, new File("Archivo_Gerente.txt"), "Gerente");
             llenarListas(Lista_de_Empleados, new File("Mesero.txt"), "Mesero");
-            llenarListas(Lista_de_Platos, new File("Platos principales.txt"), "Platos");
-            llenarListas(Lista_de_Postres, new File("Postres.txt"), "Postres");
-            llenarListas(Lista_de_Bebidas, new File("Bebidas.txt"), "Bebidas");
+            llenarListas(Lista_de_Platos, new File("Platos principales.txt"), "Plato");
+            llenarListas(Lista_de_Postres, new File("Postres.txt"), "Postre");
+            llenarListas(Lista_de_Bebidas, new File("Bebidas.txt"), "Bebida");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
-        new Vista.Vista_Menu().setVisible(true);
-        new Vista.Vista_Menu_Gerente().setVisible(true);
-        new Vista.Vista_Cocina().setVisible(true);
-        
-
-        
+        new Reloj();
+        comprobarIngresosAnteriores();
     }
 
-    public static void agregarGerente(Lista List){
-        
+    public static void agregarGerente(Lista List) {
+
         String str1 = (String) List.getPosicion(0).ObtenerInfo();
         int str2 = Integer.parseInt((String) List.getPosicion(1).ObtenerInfo());
         String str3 = (String) List.getPosicion(2).ObtenerInfo();
@@ -44,12 +40,9 @@ public class Restaurante {
         Gerente g = new Gerente(str1, str2, str3, str4, str5);
 
         Lista_de_Gerentes.Agregar(g);
-        
-        System.out.println("TAMAÑO: " + Lista_de_Gerentes.getTamaño());
-        
-        System.out.println("Lista de gerentes: " + Lista_de_Gerentes.getPosicion(4).ObtenerInfo());//No me esta agregando un objeto gerente sino los atributos.
+
     }
-    
+
     public static void agregarMesero(Lista List) {
 
         String str1 = (String) List.getPosicion(0).ObtenerInfo();
@@ -57,44 +50,50 @@ public class Restaurante {
         String str3 = (String) List.getPosicion(2).ObtenerInfo();
         String str4 = (String) List.getPosicion(3).ObtenerInfo();
         String str5 = (String) List.getPosicion(4).ObtenerInfo();
-        
+
         Mesero mesero = new Mesero(str1, str2, str3, str4, str5);
+
         Lista_de_Empleados.Agregar(mesero);
-        System.out.println("todo bien");
+        System.out.println("Tamaño 2: " + Lista_de_Empleados.getTamaño());
     }
 
     private static void agregarPostre(Lista List) {
-        String str1 = (String) List.getPosicion(0).ObtenerInfo();
-        double str2 = (double) List.getPosicion(1).ObtenerInfo();
-        double str3 = (double) List.getPosicion(2).ObtenerInfo();
-        
-        Postre postre = new Postre(str1, str2, str3);
+
+        String str1 = (String) List.getPosicion(0).ObtenerInfo();//Nombre
+        int str2 = Integer.parseInt(String.valueOf(List.getPosicion(1).ObtenerInfo()));//Precio
+        int str3 = Integer.parseInt(String.valueOf(List.getPosicion(2).ObtenerInfo()));//Carbohidratos
+        String str4 = (String) List.getPosicion(3).ObtenerInfo();//Tiempo
+
+        Postre postre = new Postre(str1, str2, str3, str4);
         Lista_de_Postres.Agregar(postre);
-        
+
+        System.out.println("Tamaño 3: " + Lista_de_Postres.getTamaño());
+
         System.out.println("Postre agregado");
     }
 
     private static void agregarBebida(Lista List) {
         String str1 = (String) List.getPosicion(0).ObtenerInfo();
-        double str2 = (double) List.getPosicion(1).ObtenerInfo();
-        double str3 = (double) List.getPosicion(2).ObtenerInfo();
-        
+        int str2 = Integer.parseInt(String.valueOf(List.getPosicion(1).ObtenerInfo()));
+        int str3 = Integer.parseInt(String.valueOf(List.getPosicion(2).ObtenerInfo()));
+
         Bebidas bebidas = new Bebidas(str1, str2, str3);
+
         Lista_de_Bebidas.Agregar(bebidas);
-        
+
         System.out.println("Bebida agregada");
     }
 
     private static void agregarPlato(Lista List) {
         String str1 = (String) List.getPosicion(0).ObtenerInfo();
-        double str2 = (double) List.getPosicion(1).ObtenerInfo();
-        double str3 = (double) List.getPosicion(2).ObtenerInfo();
+        int str2 = Integer.parseInt(String.valueOf(List.getPosicion(1).ObtenerInfo()));
+        int str3 = Integer.parseInt(String.valueOf(List.getPosicion(2).ObtenerInfo()));
 
         Lista_de_Platos.Agregar(new Plato_principal(str1, str3, str3));
-        
+
         System.out.println("Plato principal agregado");
     }
- 
+
     public static void comprobarIngresosAnteriores() {
         File Primer_Ingreso = new File("Primer_ingreso.txt");
         Lista Resultado = new Lista();
@@ -110,22 +109,27 @@ public class Restaurante {
             Lector_X.close();
 
             if (Resultado.getPosicion(0).ObtenerInfo().equals("Ya ha ingresado")) {//verificaciones de si por lo menos ya ha ingresado un gerente.
-                
-                new Vista.Vista_Menu_Gerente().setVisible(true);
-                
-                if (Resultado.getPosicion(1).ObtenerInfo().equals("Ya ingreso un mesero")) {
-                    
-                     new Vista.Vista_Menu().setVisible(true);
-                    
-                    if (Resultado.getPosicion(2).ObtenerInfo().equals("Ya existen tres platos")) {
-                        
-                       new Vista.Vista_Cocina().setVisible(true);
 
-                    }
+                new Vista.Loging_de_Gerente().setVisible(true);
+
+                if (Resultado.getPosicion(1).ObtenerInfo().equals("Ya ingreso un mesero")) {
+
+                    new Vista.Vista_Menu().setVisible(true);
 
                 } else {
-                    // TODO implementar mesro
+
+                    new Vista.Vista_Agregar_Empleados().setVisible(true);
                 }
+
+                if (Resultado.getPosicion(2).ObtenerInfo().equals("Ya existen tres platos")) {
+
+                    new Vista.Vista_Cocina().setVisible(true);
+
+                }else{
+                    
+                    new Vista.Vista_Agregar_Comida().setVisible(true);
+                }
+
             } else {//Esto es encaso de que el gerente no ha sido contratado
                 FileWriter Escritor = new FileWriter(Primer_Ingreso);
                 BufferedWriter Escritor_X = new BufferedWriter(Escritor);
@@ -135,10 +139,9 @@ public class Restaurante {
 
                 Primer_ingreso_gerente ventana = new Primer_ingreso_gerente();
                 ventana.setVisible(true);
-
             }
         } catch (Exception e) {
-
+            
         }
     }
 
@@ -147,15 +150,13 @@ public class Restaurante {
         try {
             FileReader fr = new FileReader(archivo);
             BufferedReader br = new BufferedReader(fr);
-            String line = "";
-            System.out.println("procede a separar los campos");
+            String line;
             int i = 1;
             while (br.ready()) {
-                System.out.println("numeor:" + i);
                 i++;
                 line = br.readLine();
                 System.out.println(line);
-                separacionMejorada(line, 0, 0, 0, 0, lista, Tipo_de_lista);
+                separacionMejorada(line, Tipo_de_lista);
             }
             br.close();
         } catch (Exception e) {
@@ -163,32 +164,36 @@ public class Restaurante {
         }
     }
 
-    public static void separacionMejorada(String Registro, int i, int Inicio, int Fin, int Posicion, Lista List, String Tipo_de_lista) {
+    public static void separacionMejorada(String Registro, String Tipo_de_lista) {
 
-        if (i < Registro.length()) {
-            if (Registro.substring(Posicion, Posicion + 1).equals("|")) {
-                List.Agregar(Registro.substring(Inicio, Fin));
-                System.out.println(Registro.substring(Inicio, Fin));
-                //Comprobacion_Y_Llenado_De_Listas(Registro.substring(Inicio, Fin), Lista);
-                separacionMejorada(Registro, i + 1, Fin + 1, Fin + 1, Posicion + 1, List, Tipo_de_lista);
+        Lista Lista = new Lista();
+        int inicio = 0, fin = 0;
+
+        for (int j = 0; j < Registro.length(); j++) {
+
+            if (Registro.substring(j, j + 1).equals("|")) {
+
+                Lista.Agregar(Registro.substring(inicio, fin));
+
+                inicio = fin + 1;
+                fin = fin + 1;
             } else {
-                separacionMejorada(Registro, i + 1, Inicio, Fin + 1, Posicion + 1, List, Tipo_de_lista);
-            }
-        } else {
-            System.out.println("llama agregar");
-            
-            if (Tipo_de_lista.equals("Mesero")) {
-                agregarMesero(List);
-            }else if (Tipo_de_lista.equals("Postre")) {
-                agregarPostre(List);
-            }else if (Tipo_de_lista.equals("Bebida")) {
-                agregarBebida(List);
-            }else if (Tipo_de_lista.equals("Plato")) {
-                agregarPlato(List);
-            }else if (Tipo_de_lista.equals("Gerente")) {
-                agregarGerente(List);
+
+                fin = fin + 1;
             }
         }
-
+        
+        if (Tipo_de_lista.equals("Mesero")) {
+            agregarMesero(Lista);
+        } else if (Tipo_de_lista.equals("Postre")) {
+            agregarPostre(Lista);
+        } else if (Tipo_de_lista.equals("Bebida")) {
+            agregarBebida(Lista);
+        } else if (Tipo_de_lista.equals("Plato")) {
+            agregarPlato(Lista);
+        } else if (Tipo_de_lista.equals("Gerente")) {
+            agregarGerente(Lista);
+        }
+        
     }
 }

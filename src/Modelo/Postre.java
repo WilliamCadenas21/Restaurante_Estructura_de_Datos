@@ -3,15 +3,15 @@ package Modelo;
 
 public class Postre {
     
-    private String Nombre;
-    private double Precio, Carbohidratos;
+    private String Nombre, Tiempo;
+    private int Precio, Carbohidratos;
     
-    public Postre(String nombre, double precio, double carbohidratos){
+    public Postre(String nombre, int precio, int carbohidratos, String Tiempo){
     
         Nombre = nombre;
         Precio = precio;
         Carbohidratos = carbohidratos;
-
+        this.Tiempo = Tiempo;
     }
     
    //Nombre
@@ -24,18 +24,34 @@ public class Postre {
        
     //Precio
        
-       public double getprecio(){
+       public int getPrecio(){
        
            return Precio;
        
        }
     
+       public void setPrecio(int precio){
+       
+           this.Precio = precio;
+       }
+       
     //Carbohidratos
        
-       public double getCarboidratos(){
+       public int getCarboidratos(){
        
            return Carbohidratos;
        
        } 
-    
+       
+    //Tiempo
+       
+       public String getTiempo(){
+           
+           return this.Tiempo;
+       }
+       
+       public void setTiempo(String tiempo){
+           
+           this.Tiempo = tiempo;
+       }
 }

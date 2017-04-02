@@ -26,11 +26,11 @@ public class Gerente extends Empleado {
                 System.out.println("info: " + Controlador.Restaurante.Lista_de_Gerentes.getPosicion(j).ObtenerInfo());
             }
             
-            //Gerente m = (Gerente) (Controlador.Restaurante.Lista_de_Gerentes.getPosicion(Indice_Lista).ObtenerInfo());
+            Gerente m = (Gerente) (Controlador.Restaurante.Lista_de_Gerentes.getPosicion(Indice_Lista).ObtenerInfo());
             
-            System.out.println("m: " +Controlador.Restaurante.Lista_de_Gerentes.getPosicion(Indice_Lista).ObtenerInfo());
+            System.out.println("m: " + Controlador.Restaurante.Lista_de_Gerentes.getPosicion(Indice_Lista).ObtenerInfo());
 
-            if (Dato_a_comparar.equals(((Gerente) Controlador.Restaurante.Lista_de_Gerentes.getPosicion(Indice_Lista).ObtenerInfo()).getNombre())) {//Comparacion con el usuario.
+            if (Dato_a_comparar.equals(m.getNombre())) {//Comparacion con el usuario.
 
                 Encontro_Usuario = true;
 

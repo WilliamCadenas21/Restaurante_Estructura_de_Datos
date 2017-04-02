@@ -2,15 +2,8 @@ package Vista;
 
 import Controlador.Coordinador;
 import java.io.File;
-import Vista.Primer_ingreso_gerente;
-import Vista.Vista_Menu_Gerente;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.JOptionPane;
 
 public class Primer_ingreso_gerente extends javax.swing.JFrame {
 
@@ -19,8 +12,6 @@ public class Primer_ingreso_gerente extends javax.swing.JFrame {
 
     public Primer_ingreso_gerente() {
         initComponents();
-        this.setResizable(false);
-        this.setLocationRelativeTo(null);
         /*
             Esta clase me permite obtener la informacion del gerente,el cual administrará todo los procesos   
          */
@@ -45,7 +36,8 @@ public class Primer_ingreso_gerente extends javax.swing.JFrame {
         Address_Text = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setResizable(false);
 
         Name_Text.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

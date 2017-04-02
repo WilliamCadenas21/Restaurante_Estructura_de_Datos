@@ -4,9 +4,9 @@ package Modelo;
 public class Bebidas {
     
     private String Nombre;
-    private double Precio, Carbohidratos;
+    private int Precio, Carbohidratos;
     
-    public Bebidas( String nombre, double precio, double carbohidratos){
+    public Bebidas( String nombre, int precio, int carbohidratos){
     
         Nombre = nombre;
         Precio = precio;
@@ -18,21 +18,20 @@ public class Bebidas {
     
        public String getNombre(){
        
-           return Nombre;
+           return Nombre; 
            
        }
        
     //Precio
        
-       public double getprecio(){
+       public int getprecio(){
        
            return Precio;
-       
        }
     
     //Carbohidratos
        
-       public double getCarboidratos(){
+       public int getCarboidratos(){
        
            return Carbohidratos;
        

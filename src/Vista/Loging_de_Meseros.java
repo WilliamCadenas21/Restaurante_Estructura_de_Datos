@@ -1,20 +1,15 @@
 package Vista;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import Modelo.*;
 import Controlador.Lista;
 
 public class Loging_de_Meseros extends javax.swing.JFrame {
 
     File Archivo_Meseros = Vista.Vista_Agregar_Empleados.Archivo_Meseros;
     /*
-    
      Estructura Archivo_empleados
     
      Name    |   Phone   |   Address   |   Age   |   Cargo   |   Password    |
-    
      */
 
     public Loging_de_Meseros() {
@@ -23,26 +18,6 @@ public class Loging_de_Meseros extends javax.swing.JFrame {
         Password_Text.setEditable(false);
 
     }
-
-    /*void Separacion_y_organizacion_del_contenido_del_Fichero_Empleados(String Texto, int i, int j, int fin) {//PRIMER PARAMETRO: VECTOR EN LA POSICION I; SEGUNDO PARAMETRO: PUNTERO QUE GUIARA Y SEPARARA EL CONTENIDO DEL VECTOR EN LA POSICION I PARA SU RESPECTIVA COMPARACIÓN; TERCER PARAMETRO: POSICION EN EL VECTOR AUXILIAR; CUARTO PARAMETRO: VARIABLE QUE INDICA EL LIMITE DE HASTA DONDE ES QUE DEBE LLEGAR PARA SEPARAR CADA PALABRA;  
-
-        if (i < Texto.length()) {
-
-            if (Texto.substring(i, i + 1).equals("|")) {
-
-                Vector_auxiliar[j] = Texto.substring(0, fin + 1);
-
-                Separacion_y_organizacion_del_contenido_del_Fichero_Empleados(Texto.substring(i + 1), 0, j + 1, 0);
-
-            } else {
-
-                Separacion_y_organizacion_del_contenido_del_Fichero_Empleados(Texto, i + 1, j, i);
-
-            }
-
-        }
-
-    }*/
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -66,8 +41,10 @@ public class Loging_de_Meseros extends javax.swing.JFrame {
             .addGap(0, 267, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Meseros");
+        setLocation(new java.awt.Point(500, 500));
+        setResizable(false);
 
         User_Text.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

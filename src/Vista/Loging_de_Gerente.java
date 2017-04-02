@@ -1,12 +1,9 @@
 package Vista;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 import Modelo.*;
-import Controlador.Lista;
 
 public class Loging_de_Gerente extends javax.swing.JFrame {
+
     /*
     
      Estructura Archivo_empleados
@@ -14,33 +11,11 @@ public class Loging_de_Gerente extends javax.swing.JFrame {
      Name    |   Phone   |   Address   |   Age   |   Cargo   |   Password    |
     
      */
-
     public Loging_de_Gerente() {
         initComponents();
 
         Password_Text.setEditable(false);
-
     }
-
-    /*void Separacion_y_organizacion_del_contenido_del_Fichero_Empleados(String Texto, int i, int j, int fin) {//PRIMER PARAMETRO: VECTOR EN LA POSICION I; SEGUNDO PARAMETRO: PUNTERO QUE GUIARA Y SEPARARA EL CONTENIDO DEL VECTOR EN LA POSICION I PARA SU RESPECTIVA COMPARACIÓN; TERCER PARAMETRO: POSICION EN EL VECTOR AUXILIAR; CUARTO PARAMETRO: VARIABLE QUE INDICA EL LIMITE DE HASTA DONDE ES QUE DEBE LLEGAR PARA SEPARAR CADA PALABRA;  
-
-        if (i < Texto.length()) {
-
-            if (Texto.substring(i, i + 1).equals("|")) {
-
-                Vector_auxiliar[j] = Texto.substring(0, fin + 1);
-
-                Separacion_y_organizacion_del_contenido_del_Fichero_Empleados(Texto.substring(i + 1), 0, j + 1, 0);
-
-            } else {
-
-                Separacion_y_organizacion_del_contenido_del_Fichero_Empleados(Texto, i + 1, j, i);
-
-            }
-
-        }
-
-    }*/
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -66,6 +41,10 @@ public class Loging_de_Gerente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerente");
+        setLocation(new java.awt.Point(20, 50));
+        setName("Login"); // NOI18N
+        setResizable(false);
+        setSize(new java.awt.Dimension(0, 0));
 
         User_Text.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,36 +119,41 @@ public class Loging_de_Gerente extends javax.swing.JFrame {
 
         } else {
 
-            System.out.println("u: " + Modelo.Gerente.Encontro_Usuario);
-            
-            Modelo.Gerente m = (Modelo.Gerente) Controlador.Restaurante.Lista_de_Gerentes.getPosicion(Modelo.Gerente.Indice_Lista).ObtenerInfo();
-            
-            if (Modelo.Gerente.Encontro_Usuario == true && m.getContraseña().equals(Password_Text.getText())) {//Me permite la comprobacion de que si un usuario existe y si la contraseña es correcta.
+            try {
 
-                Vista_Menu Frame_Menu = new Vista_Menu();
+                Gerente m = (Gerente) Controlador.Restaurante.Lista_de_Gerentes.getPosicion(Modelo.Gerente.Indice_Lista).ObtenerInfo();
 
-                Frame_Menu.setVisible(true);
+                if (Gerente.Encontro_Usuario == true) {//Me permite la comprobacion de que si un usuario existe y si la contraseña es correcta.
+
+                    if (m.getContraseña().equals(Password_Text.getText())) {
+
+                        this.dispose();
+                        new Vista_Menu_Gerente().setVisible(true);
+                        
+                    } else {
+
+                        javax.swing.JOptionPane.showMessageDialog(this, "Contraseña incorrecta.");
+                    }
+
+                }
                 
-            } else {
-
+            } catch (NullPointerException e) {
+                
                 javax.swing.JOptionPane.showMessageDialog(this, "Usuario inexistente");
-
             }
 
         }
 
     }//GEN-LAST:event_Acept_Button_For_loginActionPerformed
 
-    
-    
+
     private void User_TextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_User_TextKeyPressed
 
         Modelo.Gerente.Comprobacion(User_Text.getText() + evt.getKeyChar(), 0);
 
         if (true == Modelo.Gerente.Encontro_Usuario) {
 
-            System.out.println("Encontro el usuario");
-
+            Password_Text.setEditable(true);
         }
 
     }//GEN-LAST:event_User_TextKeyPressed
