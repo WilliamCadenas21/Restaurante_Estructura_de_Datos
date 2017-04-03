@@ -3,7 +3,7 @@ package Vista;
 import Controlador.Lista;
 import Controlador.Pedido;
 import Modelo.Bebidas;
-import Modelo.Comida_auxiliar;
+import Modelo.ComidaAuxiliar;
 import Modelo.Plato_principal;
 import Modelo.Postre;
 import static Vista.Vista_Cocina.Tabla_Cocina;
@@ -372,7 +372,7 @@ public class Vista_Menu extends javax.swing.JFrame {
                 Precio = Integer.parseInt(String.valueOf(modelo_tabla_postres.getValueAt(k, 1)) );
                 Cantidad = Integer.parseInt(String.valueOf(modelo_tabla_postres.getValueAt(k, 3)) );
                 
-                Lista_comida_auxiliar.Agregar(new Comida_auxiliar("Postre", Nombre_del_plato, Precio, Cantidad) );//Primero llenó una lista de objetos con los platos pedidos
+                Lista_comida_auxiliar.Agregar(new ComidaAuxiliar("Postre", Nombre_del_plato, Precio, Cantidad) );//Primero llenó una lista de objetos con los platos pedidos
                 Total = Total + Integer.parseInt(String.valueOf(modelo_tabla_postres.getValueAt(k, 1)));//Precio total del pedido, sirve para realizar la factura                                                                                                        //tipo Lista_comida_auxiliar para asi poder llenar la lista de pedidos, que me servira
             }                                                                                                                                                                                                    //despues para la creacion de la factura y el cambio de pedido durante los primeros 5 minutos
 
@@ -385,7 +385,7 @@ public class Vista_Menu extends javax.swing.JFrame {
                 Precio = Integer.parseInt(String.valueOf(modelo_platos.getValueAt(k, 1)) );
                 Cantidad = Integer.parseInt(String.valueOf(modelo_platos.getValueAt(k, 3)) );
                 
-                Lista_comida_auxiliar.Agregar(new Comida_auxiliar("Plato", Nombre_del_plato, Precio, Cantidad));
+                Lista_comida_auxiliar.Agregar(new ComidaAuxiliar("Plato", Nombre_del_plato, Precio, Cantidad));
                 Total = Total + Integer.parseInt(String.valueOf(modelo_platos.getValueAt(k, 1)));//Precio total del pedido, sirve para realizar la factura
             }
         }
@@ -398,7 +398,7 @@ public class Vista_Menu extends javax.swing.JFrame {
                 Precio = Integer.parseInt(String.valueOf(modelo_tabla_bebidas.getValueAt(k, 1)) );
                 Cantidad = Integer.parseInt(String.valueOf(modelo_tabla_bebidas.getValueAt(k, 3)) );
                 
-                Lista_comida_auxiliar.Agregar(new Comida_auxiliar("Bebida", Nombre_del_plato, Precio, Cantidad));
+                Lista_comida_auxiliar.Agregar(new ComidaAuxiliar("Bebida", Nombre_del_plato, Precio, Cantidad));
                 Total = Total + Integer.parseInt(String.valueOf(modelo_tabla_bebidas.getValueAt(k, 1))); //Precio total del pedido, sirve para realizar la factura
             }
         }
@@ -597,7 +597,7 @@ public class Vista_Menu extends javax.swing.JFrame {
         int inicial1 = Integer.parseInt(vec0[1])*60*1000 + Integer.parseInt(vec0[2])*1000;
         int final2 = Integer.parseInt(vec1[1])*60*1000 + Integer.parseInt(vec1[2])*1000;   
         
-        if ( final2 - inicial1 <= 5000 ) {         
+        if ( final2 - inicial1 <= 5000) {         
             return true;
         }else{
             return false;
