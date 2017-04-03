@@ -132,7 +132,7 @@ public class Vista_Menu_Gerente extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         this.dispose();
-        new Loging_de_Gerente().setVisible(true);
+        new LogingDeGerente().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {

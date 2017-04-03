@@ -1,12 +1,11 @@
 package Modelo;
 
 
-public class Mesas {
+public class Mesa {
    
     private int Numero_mesa, Total;
-    
-    
-    public Mesas(int numero_mesa, int Total){
+
+    public Mesa(int numero_mesa, int Total){
         
         this.Total = Total;
         Numero_mesa = numero_mesa;

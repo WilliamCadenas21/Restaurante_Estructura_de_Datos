@@ -2,7 +2,7 @@ package Vista;
 
 import Modelo.*;
 
-public class Loging_de_Gerente extends javax.swing.JFrame {
+public class LogingDeGerente extends javax.swing.JFrame {
 
     /*
     
@@ -11,7 +11,7 @@ public class Loging_de_Gerente extends javax.swing.JFrame {
      Name    |   Phone   |   Address   |   Age   |   Cargo   |   Password    |
     
      */
-    public Loging_de_Gerente() {
+    public LogingDeGerente() {
         initComponents();
 
         Password_Text.setEditable(false);
@@ -41,10 +41,8 @@ public class Loging_de_Gerente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerente");
-        setLocation(new java.awt.Point(20, 50));
         setName("Login"); // NOI18N
         setResizable(false);
-        setSize(new java.awt.Dimension(0, 0));
 
         User_Text.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,7 +164,7 @@ public class Loging_de_Gerente extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Loging_de_Gerente().setVisible(true);
+                new LogingDeGerente().setVisible(true);
             }
         });
     }

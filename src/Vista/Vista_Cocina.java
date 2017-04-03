@@ -100,7 +100,7 @@ public class Vista_Cocina extends javax.swing.JFrame {
     }//GEN-LAST:event_AceptarActionPerformed
 
     void Factura() {
-        DefaultTableModel Tabla_fact = (DefaultTableModel) Vista_Menu.Tabla_factura.getModel();
+        DefaultTableModel Tabla_fact = (DefaultTableModel) VistaMenu.tablaFactura.getModel();
 
         for (int i = 0; i < r.length; i++) {
             Tabla_fact.addRow(new Object[]{r[i]});
@@ -115,9 +115,9 @@ public class Vista_Cocina extends javax.swing.JFrame {
 
         for (int i = 0; i < Tabla_resultado.getRowCount(); i++) {
 
-            System.out.println("Resultado: " + Tabla_resultado.getValueAt(i, 2));
+            System.out.println("Resultado: " + Tabla_resultado.getValueAt(i, 1));
 
-            if (Tabla_resultado.getValueAt(i, 2).toString().equals("true")) {
+            if (Tabla_resultado.getValueAt(i, 1).toString().equals("true")) {
 
                 try {
 
@@ -142,7 +142,7 @@ public class Vista_Cocina extends javax.swing.JFrame {
             r[i] = lista.getPosicion(i).ObtenerInfo();
         }
 
-        DefaultTableModel Tabla_resultado_pedidos = (DefaultTableModel) Vista_Menu.Resultado_pedidos.getModel();
+        DefaultTableModel Tabla_resultado_pedidos = (DefaultTableModel) VistaMenu.resultadoPedidos.getModel();
 
         for (int i = 0; i < r.length; i++) {
 

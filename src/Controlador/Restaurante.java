@@ -26,6 +26,7 @@ public class Restaurante {
             e.printStackTrace();
         }
         new Reloj();
+        
         comprobarIngresosAnteriores();
     }
 
@@ -110,12 +111,13 @@ public class Restaurante {
 
             if (Resultado.getPosicion(0).ObtenerInfo().equals("Ya ha ingresado")) {//verificaciones de si por lo menos ya ha ingresado un gerente.
 
-                new Vista.Loging_de_Gerente().setVisible(true);
+                new Vista.LogingDeGerente().setVisible(true);
 
                 if (Resultado.getPosicion(1).ObtenerInfo().equals("Ya ingreso un mesero")) {
+ 
+                    new Vista.VistaMenu().setVisible(true);
 
-                    new Vista.Vista_Menu().setVisible(true);
-
+                    System.out.println("ESTOY EN VISTA MENU.");
                 } else {
 
                     new Vista.Vista_Agregar_Empleados().setVisible(true);

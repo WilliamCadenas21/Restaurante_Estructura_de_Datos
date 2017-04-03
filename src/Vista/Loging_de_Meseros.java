@@ -125,7 +125,7 @@ public class Loging_de_Meseros extends javax.swing.JFrame {
             
             if (Modelo.Mesero.Encontro_Usuario == true && m.getContraseña().equals(Password_Text.getText())) {//Me permite la comprobacion de que si un usuario existe y si la contraseña es correcta.
 
-                Vista_Menu Frame_Menu = new Vista_Menu();
+                VistaMenu Frame_Menu = new VistaMenu();
 
                 Frame_Menu.setVisible(true);
                 
