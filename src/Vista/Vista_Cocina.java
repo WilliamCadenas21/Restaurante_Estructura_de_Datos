@@ -27,7 +27,6 @@ public class Vista_Cocina extends javax.swing.JFrame {
         Comida_Combobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setLocation(new java.awt.Point(20, 500));
         setName("Cocina"); // NOI18N
         setResizable(false);
 
@@ -36,14 +35,14 @@ public class Vista_Cocina extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mesa", "Pedido", "Listo", "Tiempo Inicial "
+                "Mesa", "Listo", "Tiempo Inicial "
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true, false
+                false, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -59,7 +58,6 @@ public class Vista_Cocina extends javax.swing.JFrame {
             Tabla_Cocina.getColumnModel().getColumn(0).setResizable(false);
             Tabla_Cocina.getColumnModel().getColumn(1).setResizable(false);
             Tabla_Cocina.getColumnModel().getColumn(2).setResizable(false);
-            Tabla_Cocina.getColumnModel().getColumn(3).setResizable(false);
         }
 
         Aceptar.setText("Aceptar");
@@ -106,6 +104,7 @@ public class Vista_Cocina extends javax.swing.JFrame {
 
         for (int i = 0; i < r.length; i++) {
             Tabla_fact.addRow(new Object[]{r[i]});
+            System.out.println("R: " + r[i]);
         }
     }
 

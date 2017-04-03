@@ -502,7 +502,8 @@ public class Vista_Menu extends javax.swing.JFrame {
         DefaultTableModel modelo_tabla_postres = (DefaultTableModel) Tabla_Postre.getModel();
         DefaultTableModel modelo_tabla_bebidas = (DefaultTableModel) Tabla_Bebidas.getModel();
         DefaultTableModel modelo_pedidos = (DefaultTableModel) Tabla_Cocina.getModel();
-
+        
+        /*
         Lista Lista_Auxiliar = new Lista();//Funciona para poder agregar los nombres de los platos al combobox que se encuentran en la vista de cocina.
 
         for (int k = 0; k < modelo_tabla_postres.getRowCount(); k++) {
@@ -540,7 +541,7 @@ public class Vista_Menu extends javax.swing.JFrame {
         TableColumn Columna_a_cambiar = Tabla_Cocina.getColumnModel().getColumn(1);
         TableCellEditor Editor_celda = new DefaultCellEditor(Combo);
         Columna_a_cambiar.setCellEditor(Editor_celda);
-        
+        */
         String hora =  Reloj.lblReloj.getText();//Captura del tiempo actual en el que se ordena el pedido para cocina 
         
         try {
@@ -549,7 +550,7 @@ public class Vista_Menu extends javax.swing.JFrame {
 
             if (!(Lista_de_mesas.getSelectedValue() == null)) {
                 //Aqui se Llena la tabla cocina 
-                modelo_pedidos.addRow(new Object[]{Lista_de_mesas.getSelectedValue(), Vector[0], false,hora});
+                modelo_pedidos.addRow(new Object[]{Lista_de_mesas.getSelectedValue(), false, hora});
             } else {
 
                 javax.swing.JOptionPane.showMessageDialog(this, "Por favor indique una mesa a la cual se le asigne un pedido.");
