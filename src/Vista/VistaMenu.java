@@ -22,7 +22,7 @@ public class VistaMenu extends javax.swing.JFrame {
 
     String nombreDelPlato = "";
 
-    Pedido pedido = (Pedido) listaPedidos.getPosicion(0).ObtenerInfo();
+    Pedido pedido;
 
     public VistaMenu() {
         initComponents();
@@ -72,7 +72,6 @@ public class VistaMenu extends javax.swing.JFrame {
             this.wait(5000);
         } catch (Exception e) {
             System.out.println("Estoy en el frenado del programa.");
-            e.printStackTrace();
         }
     }
 

@@ -55,7 +55,7 @@ public class Restaurante {
         Mesero mesero = new Mesero(str1, str2, str3, str4, str5);
 
         Lista_de_Empleados.Agregar(mesero);
-        System.out.println("Tamaño 2: " + Lista_de_Empleados.getTamaño());
+        System.out.println("TamaÃ±o 2: " + Lista_de_Empleados.getTamaño());
     }
 
     private static void agregarPostre(Lista List) {
@@ -68,7 +68,7 @@ public class Restaurante {
         Postre postre = new Postre(str1, str2, str3, str4);
         Lista_de_Postres.Agregar(postre);
 
-        System.out.println("Tamaño 3: " + Lista_de_Postres.getTamaño());
+        System.out.println("TamaÃ±o 3: " + Lista_de_Postres.getTamaño());
 
         System.out.println("Postre agregado");
     }
