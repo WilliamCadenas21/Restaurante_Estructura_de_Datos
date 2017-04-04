@@ -80,7 +80,6 @@ public class VistaMenu extends javax.swing.JFrame {
         try {
             this.wait(5000);
         } catch (Exception e) {
-
         }
     }
 

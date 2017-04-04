@@ -55,6 +55,7 @@ public class Restaurante {
         Mesero mesero = new Mesero(str1, str2, str3, str4, str5);
 
         Lista_de_Empleados.Agregar(mesero);
+
     }
 
     private static void agregarPostre(Lista List) {
