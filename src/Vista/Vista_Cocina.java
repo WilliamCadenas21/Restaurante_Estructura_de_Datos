@@ -139,7 +139,7 @@ public class Vista_Cocina extends javax.swing.JFrame {
 
         for (int i = 0; i < lista.getTamaño(); i++) {
 
-            r[i] = lista.getPosicion(i).ObtenerInfo();
+            r[i] = lista.getPosicion(i).getInfo();
         }
 
         DefaultTableModel Tabla_resultado_pedidos = (DefaultTableModel) VistaMenu.resultadoPedidos.getModel();

@@ -121,7 +121,7 @@ public class Loging_de_Meseros extends javax.swing.JFrame {
 
             System.out.println("u: " + Modelo.Mesero.Encontro_Usuario);
             
-            Modelo.Mesero m = (Modelo.Mesero) Controlador.Restaurante.Lista_de_Empleados.getPosicion(Modelo.Mesero.Indice_Lista).ObtenerInfo();
+            Modelo.Mesero m = (Modelo.Mesero) Controlador.Restaurante.Lista_de_Empleados.getPosicion(Modelo.Mesero.Indice_Lista).getInfo();
             
             if (Modelo.Mesero.Encontro_Usuario == true && m.getContraseña().equals(Password_Text.getText())) {//Me permite la comprobacion de que si un usuario existe y si la contraseña es correcta.
 

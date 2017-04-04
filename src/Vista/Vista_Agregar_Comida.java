@@ -176,7 +176,7 @@ public class Vista_Agregar_Comida extends javax.swing.JFrame {
             FileWriter Escritor = new FileWriter(Comida, true);
             BufferedWriter Escritor_X = new BufferedWriter(Escritor);
             
-            Modelo.Plato_principal p = (Modelo.Plato_principal) Controlador.Restaurante.Lista_de_Platos.getPosicion(Controlador.Restaurante.Lista_de_Platos.getTamaño()).ObtenerInfo();
+            Modelo.Plato_principal p = (Modelo.Plato_principal) Controlador.Restaurante.Lista_de_Platos.getPosicion(Controlador.Restaurante.Lista_de_Platos.getTamaño()).getInfo();
             
             Escritor_X.write(p.getNombre());
             Escritor_X.write(String.valueOf(p.getprecio()));
@@ -184,7 +184,7 @@ public class Vista_Agregar_Comida extends javax.swing.JFrame {
             
             this.wait(500);
             
-                Postre po = (Postre) Controlador.Restaurante.Lista_de_Postres.getPosicion(Controlador.Restaurante.Lista_de_Postres.getTamaño()).ObtenerInfo();
+                Postre po = (Postre) Controlador.Restaurante.Lista_de_Postres.getPosicion(Controlador.Restaurante.Lista_de_Postres.getTamaño()).getInfo();
                 
                 Escritor_X.write(po.getNombre() + "|");
                 Escritor_X.write(String.valueOf(po.getPrecio()) + "|");
@@ -193,7 +193,7 @@ public class Vista_Agregar_Comida extends javax.swing.JFrame {
           
             this.wait(500);
    
-                Modelo.Bebidas b = (Modelo.Bebidas) Controlador.Restaurante.Lista_de_Bebidas.getPosicion(Controlador.Restaurante.Lista_de_Bebidas.getTamaño()).ObtenerInfo();
+                Modelo.Bebidas b = (Modelo.Bebidas) Controlador.Restaurante.Lista_de_Bebidas.getPosicion(Controlador.Restaurante.Lista_de_Bebidas.getTamaño()).getInfo();
                 
                 Escritor_X.write(b.getNombre() + "|");
                 Escritor_X.write(String.valueOf(b.getprecio()) + "|");

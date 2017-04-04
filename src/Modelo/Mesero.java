@@ -26,7 +26,7 @@ public class Mesero extends Empleado {
         
         if (i < Controlador.Restaurante.Lista_de_Empleados.getTamaño()) {
             
-            Modelo.Mesero m = (Modelo.Mesero) Controlador.Restaurante.Lista_de_Empleados.getPosicion(i).ObtenerInfo();
+            Modelo.Mesero m = (Modelo.Mesero) Controlador.Restaurante.Lista_de_Empleados.getPosicion(i).getInfo();
             
             if (Dato_a_comparar.equals(m.getNombre())) {//Comparacion con el usuario.
 
