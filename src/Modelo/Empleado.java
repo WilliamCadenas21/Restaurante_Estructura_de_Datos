@@ -12,8 +12,6 @@ public class Empleado {
         this.Edad = Edad;
     }
 
-
-
     public void setNombre(String Nombre) {
 
         this.Nombre = Nombre;

@@ -510,7 +510,7 @@ public class VistaMenu extends javax.swing.JFrame {
     }
 
     void AgregarPedido() {
-
+        
         DefaultTableModel modeloPlatos = (DefaultTableModel) tablaPlatoPrincipal.getModel();
         DefaultTableModel modeloTablaPostres = (DefaultTableModel) tablaPostre.getModel();
         DefaultTableModel modeloTablaBebidas = (DefaultTableModel) tablaBebidas.getModel();
@@ -698,6 +698,7 @@ public class VistaMenu extends javax.swing.JFrame {
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new VistaMenu().setVisible(true);
             }
@@ -726,11 +727,7 @@ public class VistaMenu extends javax.swing.JFrame {
         int inicial1 = Integer.parseInt(vec0[1]) * 60 * 1000 + Integer.parseInt(vec0[2]) * 1000;
         int final2 = Integer.parseInt(vec1[1]) * 60 * 1000 + Integer.parseInt(vec1[2]) * 1000;
         System.out.println("total: " + (final2 - inicial1));
-        if (Math.abs(final2 - inicial1) <= 8000) {
-            return true;
-        } else {
-            return false;
-        }
+        return Math.abs(final2 - inicial1) <= 8000; 
     }
 
     public static String calcularDiferenciaDeTiempos2(String inicial, String actual) {
