@@ -32,11 +32,11 @@ public class Restaurante {
 
     public static void agregarGerente(Lista List) {
 
-        String str1 = (String) List.getPosicion(0).ObtenerInfo();
-        int str2 = Integer.parseInt((String) List.getPosicion(1).ObtenerInfo());
-        String str3 = (String) List.getPosicion(2).ObtenerInfo();
-        String str4 = (String) List.getPosicion(3).ObtenerInfo();
-        String str5 = (String) List.getPosicion(4).ObtenerInfo();
+        String str1 = (String) List.getPosicion(0).getInfo();
+        int str2 = Integer.parseInt((String) List.getPosicion(1).getInfo());
+        String str3 = (String) List.getPosicion(2).getInfo();
+        String str4 = (String) List.getPosicion(3).getInfo();
+        String str5 = (String) List.getPosicion(4).getInfo();
 
         Gerente g = new Gerente(str1, str2, str3, str4, str5);
 
@@ -46,53 +46,44 @@ public class Restaurante {
 
     public static void agregarMesero(Lista List) {
 
-        String str1 = (String) List.getPosicion(0).ObtenerInfo();
-        int str2 = Integer.parseInt((String) List.getPosicion(1).ObtenerInfo());
-        String str3 = (String) List.getPosicion(2).ObtenerInfo();
-        String str4 = (String) List.getPosicion(3).ObtenerInfo();
-        String str5 = (String) List.getPosicion(4).ObtenerInfo();
+        String str1 = (String) List.getPosicion(0).getInfo();
+        int str2 = Integer.parseInt((String) List.getPosicion(1).getInfo());
+        String str3 = (String) List.getPosicion(2).getInfo();
+        String str4 = (String) List.getPosicion(3).getInfo();
+        String str5 = (String) List.getPosicion(4).getInfo();
 
         Mesero mesero = new Mesero(str1, str2, str3, str4, str5);
 
         Lista_de_Empleados.Agregar(mesero);
-        System.out.println("Tamaño 2: " + Lista_de_Empleados.getTamaño());
     }
 
     private static void agregarPostre(Lista List) {
 
-        String str1 = (String) List.getPosicion(0).ObtenerInfo();//Nombre
-        int str2 = Integer.parseInt(String.valueOf(List.getPosicion(1).ObtenerInfo()));//Precio
-        int str3 = Integer.parseInt(String.valueOf(List.getPosicion(2).ObtenerInfo()));//Carbohidratos
-        String str4 = (String) List.getPosicion(3).ObtenerInfo();//Tiempo
+        String str1 = (String) List.getPosicion(0).getInfo();//Nombre
+        int str2 = Integer.parseInt(String.valueOf(List.getPosicion(1).getInfo()));//Precio
+        int str3 = Integer.parseInt(String.valueOf(List.getPosicion(2).getInfo()));//Carbohidratos
+        String str4 = (String) List.getPosicion(3).getInfo();//Tiempo
 
         Postre postre = new Postre(str1, str2, str3, str4);
         Lista_de_Postres.Agregar(postre);
-
-        System.out.println("Tamaño 3: " + Lista_de_Postres.getTamaño());
-
-        System.out.println("Postre agregado");
     }
 
     private static void agregarBebida(Lista List) {
-        String str1 = (String) List.getPosicion(0).ObtenerInfo();
-        int str2 = Integer.parseInt(String.valueOf(List.getPosicion(1).ObtenerInfo()));
-        int str3 = Integer.parseInt(String.valueOf(List.getPosicion(2).ObtenerInfo()));
+        String str1 = (String) List.getPosicion(0).getInfo();
+        int str2 = Integer.parseInt(String.valueOf(List.getPosicion(1).getInfo()));
+        int str3 = Integer.parseInt(String.valueOf(List.getPosicion(2).getInfo()));
 
         Bebidas bebidas = new Bebidas(str1, str2, str3);
 
         Lista_de_Bebidas.Agregar(bebidas);
-
-        System.out.println("Bebida agregada");
     }
 
     private static void agregarPlato(Lista List) {
-        String str1 = (String) List.getPosicion(0).ObtenerInfo();
-        int str2 = Integer.parseInt(String.valueOf(List.getPosicion(1).ObtenerInfo()));
-        int str3 = Integer.parseInt(String.valueOf(List.getPosicion(2).ObtenerInfo()));
+        String str1 = (String) List.getPosicion(0).getInfo();
+        int str2 = Integer.parseInt(String.valueOf(List.getPosicion(1).getInfo()));
+        int str3 = Integer.parseInt(String.valueOf(List.getPosicion(2).getInfo()));
 
         Lista_de_Platos.Agregar(new Plato_principal(str1, str3, str3));
-
-        System.out.println("Plato principal agregado");
     }
 
     public static void comprobarIngresosAnteriores() {
@@ -109,21 +100,19 @@ public class Restaurante {
 
             Lector_X.close();
 
-            if (Resultado.getPosicion(0).ObtenerInfo().equals("Ya ha ingresado")) {//verificaciones de si por lo menos ya ha ingresado un gerente.
+            if (Resultado.getPosicion(0).getInfo().equals("Ya ha ingresado")) {//verificaciones de si por lo menos ya ha ingresado un gerente.
 
                 new Vista.LogingDeGerente().setVisible(true);
 
-                if (Resultado.getPosicion(1).ObtenerInfo().equals("Ya ingreso un mesero")) {
+                if (Resultado.getPosicion(1).getInfo().equals("Ya ingreso un mesero")) {
  
                     new Vista.VistaMenu().setVisible(true);
-
-                    System.out.println("ESTOY EN VISTA MENU.");
                 } else {
 
                     new Vista.Vista_Agregar_Empleados().setVisible(true);
                 }
 
-                if (Resultado.getPosicion(2).ObtenerInfo().equals("Ya existen tres platos")) {
+                if (Resultado.getPosicion(2).getInfo().equals("Ya existen tres platos")) {
 
                     new Vista.Vista_Cocina().setVisible(true);
 
@@ -157,7 +146,6 @@ public class Restaurante {
             while (br.ready()) {
                 i++;
                 line = br.readLine();
-                System.out.println(line);
                 separacionMejorada(line, Tipo_de_lista);
             }
             br.close();

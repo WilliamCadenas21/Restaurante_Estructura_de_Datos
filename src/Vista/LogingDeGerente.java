@@ -119,7 +119,7 @@ public class LogingDeGerente extends javax.swing.JFrame {
 
             try {
 
-                Gerente m = (Gerente) Controlador.Restaurante.Lista_de_Gerentes.getPosicion(Modelo.Gerente.Indice_Lista).ObtenerInfo();
+                Gerente m = (Gerente) Controlador.Restaurante.Lista_de_Gerentes.getPosicion(Modelo.Gerente.Indice_Lista).getInfo();
 
                 if (Gerente.Encontro_Usuario == true) {//Me permite la comprobacion de que si un usuario existe y si la contraseña es correcta.
 
