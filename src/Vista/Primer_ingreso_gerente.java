@@ -1,6 +1,5 @@
 package Vista;
 
-import Controlador.Coordinador;
 import java.io.File;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -8,7 +7,6 @@ import java.io.FileWriter;
 public class Primer_ingreso_gerente extends javax.swing.JFrame {
 
     public static File Archivo_Gerente = new File("Archivo_Gerente.txt");
-    private Coordinador miCoordinador;
 
     public Primer_ingreso_gerente() {
         initComponents();
@@ -229,9 +227,4 @@ public class Primer_ingreso_gerente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     // End of variables declaration//GEN-END:variables
-
-    public void setCoordinador(Coordinador miCoordinador) {
-        this.miCoordinador = miCoordinador;
-    }
-
 }

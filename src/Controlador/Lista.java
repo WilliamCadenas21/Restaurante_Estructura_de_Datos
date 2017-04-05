@@ -11,7 +11,7 @@ public class Lista {
         inicio = null;//Hago el inicio null porque solo creé la lista, más no he insertado aun nodos.
     }
 
-    public void Agregar(Object info) {//Sirve para agregar nodos a una lista
+    public void agregar(Object info) {//Sirve para agregar nodos a una lista
 
         if (inicio == null) {//Si aun no se han creado nodos
 

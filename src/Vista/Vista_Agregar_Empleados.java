@@ -278,7 +278,7 @@ public class Vista_Agregar_Empleados extends javax.swing.JFrame {
         }
 
         
-        Controlador.Restaurante.Lista_de_Empleados.Agregar(new Modelo.Mesero(Name_Text.getText(), Integer.parseInt(String.valueOf(Age_Spinner.getValue())), Phone_Text.getText(), Address_Text.getText(), String.valueOf(Password_Text.getPassword())));
+        Controlador.Restaurante.Lista_de_Empleados.agregar(new Modelo.Mesero(Name_Text.getText(), Integer.parseInt(String.valueOf(Age_Spinner.getValue())), Phone_Text.getText(), Address_Text.getText(), String.valueOf(Password_Text.getPassword())));
 
         try { 
 

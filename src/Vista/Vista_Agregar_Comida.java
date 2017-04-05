@@ -6,10 +6,6 @@ import Modelo.Plato_principal;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.List;
-import Controlador.Lista;
-import Controlador.Restaurante;
 
 public class Vista_Agregar_Comida extends javax.swing.JFrame {
 
@@ -154,19 +150,19 @@ public class Vista_Agregar_Comida extends javax.swing.JFrame {
         
             case 1:
 
-                Controlador.Restaurante.Lista_de_Platos.Agregar(new Plato_principal(Food_Text_Name.getText(), Integer.parseInt(Food_Text_Price.getText()), Integer.parseInt(Food_Text_Fat.getText())));
+                Controlador.Restaurante.Lista_de_Platos.agregar(new Plato_principal(Food_Text_Name.getText(), Integer.parseInt(Food_Text_Price.getText()), Integer.parseInt(Food_Text_Fat.getText())));
                 
                 break;
                 
             case 2:
                 
-                Controlador.Restaurante.Lista_de_Postres.Agregar(new Postre(Food_Text_Name.getText(), Integer.parseInt(Food_Text_Price.getText()), Integer.parseInt(Food_Text_Fat.getText()), (String.valueOf(Timer_minutos) + ":" + String.valueOf(Timer_segundos) )));
+                Controlador.Restaurante.Lista_de_Postres.agregar(new Postre(Food_Text_Name.getText(), Integer.parseInt(Food_Text_Price.getText()), Integer.parseInt(Food_Text_Fat.getText()), (String.valueOf(Timer_minutos) + ":" + String.valueOf(Timer_segundos) )));
                 
                 break;
         
             case 3:
                 
-                Controlador.Restaurante.Lista_de_Bebidas.Agregar(new Bebidas(Food_Text_Name.getText(), Integer.parseInt(Food_Text_Price.getText()), Integer.parseInt(Food_Text_Fat.getText())));
+                Controlador.Restaurante.Lista_de_Bebidas.agregar(new Bebidas(Food_Text_Name.getText(), Integer.parseInt(Food_Text_Price.getText()), Integer.parseInt(Food_Text_Fat.getText())));
                 
                 break;
         }

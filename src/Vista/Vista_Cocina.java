@@ -1,5 +1,6 @@
 package Vista;
 
+import Controlador.Lista;
 import javax.swing.table.DefaultTableModel;
 
 public class Vista_Cocina extends javax.swing.JFrame {
@@ -8,7 +9,7 @@ public class Vista_Cocina extends javax.swing.JFrame {
     
     La tabla de pedidos dependera de lo que se realize en Menu
      */
-    Object[] r = new Object[0];
+    Lista contenedorAuxiliar, contenedorAuxiliar2;
 
     public Vista_Cocina() {
         initComponents();
@@ -94,22 +95,22 @@ public class Vista_Cocina extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarActionPerformed
-
-        Resultado_de_pedidos();
-        Factura();
+       Resultado_de_pedidos();
+       Factura();
     }//GEN-LAST:event_AceptarActionPerformed
 
     void Factura() {
         DefaultTableModel Tabla_fact = (DefaultTableModel) VistaMenu.tablaFactura.getModel();
 
-        for (int i = 0; i < r.length; i++) {
-            Tabla_fact.addRow(new Object[]{r[i]});
-            System.out.println("R: " + r[i]);
+        for (int i = 0; i < contenedorAuxiliar.getTamaño(); i++) {
+            Tabla_fact.addRow(new Object[]{contenedorAuxiliar.getPosicion(i).getInfo()});
+            System.out.println("R: " + contenedorAuxiliar.getPosicion(i).getInfo());
         }
     }
 
     void Resultado_de_pedidos() {
-
+        contenedorAuxiliar = new Lista();
+        contenedorAuxiliar2 = new Lista();
         DefaultTableModel Tabla_resultado = (DefaultTableModel) Tabla_Cocina.getModel();
         Controlador.Lista lista = new Controlador.Lista();
 
@@ -124,8 +125,9 @@ public class Vista_Cocina extends javax.swing.JFrame {
                     Object t = javax.swing.JOptionPane.showConfirmDialog(this, "Esta seguro?");
 
                     if (t.toString().equals("0")) {
-                        
-                        lista.Agregar(Tabla_resultado.getValueAt(i, 0));
+                       
+                        contenedorAuxiliar.agregar(Tabla_resultado.getValueAt(i, 0));
+                        contenedorAuxiliar2.agregar(Tabla_resultado.getValueAt(i, 2));
                         Tabla_resultado.removeRow(i);
                     }
 
@@ -133,24 +135,20 @@ public class Vista_Cocina extends javax.swing.JFrame {
 
                 }
             }
-        }
-
-        r = new Object[lista.getTamaño()];
-
-        for (int i = 0; i < lista.getTamaño(); i++) {
-
-            r[i] = lista.getPosicion(i).getInfo();
-        }
+        }       
 
         DefaultTableModel Tabla_resultado_pedidos = (DefaultTableModel) VistaMenu.resultadoPedidos.getModel();
-
-        for (int i = 0; i < r.length; i++) {
+        
+        String horaTerminada = Reloj.lblReloj.getText();
+        
+        for (int i = 0; i < contenedorAuxiliar.getTamaño(); i++) {
 
             for (int j = 0; j < Tabla_resultado_pedidos.getRowCount(); j++) {
 
-                if (r[i].toString().equals(Tabla_resultado_pedidos.getValueAt(j, 0).toString())) {
-
+                if (contenedorAuxiliar.getPosicion(i).getInfo().toString().equals(Tabla_resultado_pedidos.getValueAt(j, 0).toString())) {
+                    
                     Tabla_resultado_pedidos.setValueAt("Listo", j, 2);
+                    Tabla_resultado_pedidos.setValueAt(Vista.VistaMenu.calcularDiferenciaDeTiempos2(String.valueOf(contenedorAuxiliar2.getPosicion(i).getInfo()),horaTerminada), j, 1);
                 }
             }
         }

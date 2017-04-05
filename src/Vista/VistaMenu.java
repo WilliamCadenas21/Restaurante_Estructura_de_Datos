@@ -332,7 +332,7 @@ public class VistaMenu extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mesa", "Tiempo", "Resultado"
+                "Mesa", "Duracion", "Resultado"
             }
         ) {
             Class[] types = new Class [] {
@@ -479,21 +479,21 @@ public class VistaMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaFacturaMouseClicked
 
     private void botonPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPagarActionPerformed
-        
+
         DefaultTableModel modeloTablaFactura = (DefaultTableModel) tablaFactura.getModel();
-        
+
         modeloTablaFactura.removeRow(tablaFactura.getSelectedRow());
-        
+
         mostrarFactura.dispose();
     }//GEN-LAST:event_botonPagarActionPerformed
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
-        
+
         mostrarFactura.dispose();
     }//GEN-LAST:event_botonCancelarActionPerformed
 
-    void prueba(DefaultTableModel modelo, String tipo){
-    
+    void prueba(DefaultTableModel modelo, String tipo) {
+
         for (int k = 0; k < modelo.getRowCount(); k++) {
 
             if (Integer.parseInt(String.valueOf(modelo.getValueAt(k, 3))) > 0) {
@@ -502,13 +502,13 @@ public class VistaMenu extends javax.swing.JFrame {
                 precio = Integer.parseInt(String.valueOf(modelo.getValueAt(k, 1)));
                 cantidad = Integer.parseInt(String.valueOf(modelo.getValueAt(k, 3)));
 
-                listaComidaAuxiliar.Agregar(new ComidaAuxiliar(tipo, nombreDelPlato, precio, cantidad));//Primero llenó una lista de objetos con los platos pedidos
+                listaComidaAuxiliar.agregar(new ComidaAuxiliar(tipo, nombreDelPlato, precio, cantidad));//Primero llenó una lista de objetos con los platos pedidos
                 total = total + Integer.parseInt(String.valueOf(modelo.getValueAt(k, 1)));//Precio total del pedido, sirve para realizar la factura                                                                                                        //tipo Lista_comida_auxiliar para asi poder llenar la lista de pedidos, que me servira
             }                                                                                                                                                                                                    //despues para la creacion de la factura y el cambio de pedido durante los primeros 5 minutos
 
         }
     }
-    
+
     void AgregarPedido() {
 
         DefaultTableModel modeloPlatos = (DefaultTableModel) tablaPlatoPrincipal.getModel();
@@ -518,8 +518,8 @@ public class VistaMenu extends javax.swing.JFrame {
         prueba(modeloPlatos, "Plato");
         prueba(modeloTablaPostres, "Postre");
         prueba(modeloTablaBebidas, "Bebida");
- 
-        listaPedidos.Agregar(new Pedido(mesasJList.getSelectedValue(), listaComidaAuxiliar, total));
+
+        listaPedidos.agregar(new Pedido(mesasJList.getSelectedValue(), listaComidaAuxiliar, total));
         listaComidaAuxiliar = new Lista();//Reinicio esta lista, porque de lo contrario me guadaria informacion de los platos antes pedidos.
     }
 
@@ -555,7 +555,7 @@ public class VistaMenu extends javax.swing.JFrame {
         }
 
         variableBooleanaGlobal = true;
-
+        
         while (numeroDeLaMesaACambiarElPedido < listaPedidos.getTamaño() && variableBooleanaGlobal) {
 
             try {
@@ -579,7 +579,7 @@ public class VistaMenu extends javax.swing.JFrame {
     }
 
     void Cambiar_pedido(String mesa) {
-
+        System.out.println("Entro a cambiar el pedido");
         DefaultTableModel modelo_tabla_cocina = (DefaultTableModel) Tabla_Cocina.getModel();
         DefaultTableModel modelo_tabla_resultado_pedidos = (DefaultTableModel) resultadoPedidos.getModel();
 
@@ -711,7 +711,7 @@ public class VistaMenu extends javax.swing.JFrame {
      * @param actual tiempo en el que se pidio cambiar el pedido
      * @return
      */
-    private boolean calcularDiferenciaDeTiempos(String inicial, String actual) {
+    public boolean calcularDiferenciaDeTiempos(String inicial, String actual) {
 
         System.out.println("Inicial: " + inicial);
         System.out.println("Final: " + actual);
@@ -726,11 +726,37 @@ public class VistaMenu extends javax.swing.JFrame {
         int inicial1 = Integer.parseInt(vec0[1]) * 60 * 1000 + Integer.parseInt(vec0[2]) * 1000;
         int final2 = Integer.parseInt(vec1[1]) * 60 * 1000 + Integer.parseInt(vec1[2]) * 1000;
         System.out.println("total: " + (final2 - inicial1));
-        if (final2 - inicial1 <= 10000) {
+        if (Math.abs(final2 - inicial1) <= 8000) {
             return true;
         } else {
             return false;
         }
+    }
+
+    public static String calcularDiferenciaDeTiempos2(String inicial, String actual) {
+
+        System.out.println("Inicial: " + inicial); 
+        System.out.println("Final: " + actual);
+        System.out.println("Estoy en el cambio del pedido de una mesa.");
+
+        String ini = inicial.substring(0, inicial.length() - 3);
+        String fin = actual.substring(0, actual.length() - 3);
+
+        String[] vec0 = ini.split(":");
+        String[] vec1 = fin.split(":");
+
+        int inicial1 = Integer.parseInt(vec0[1]) * 60 * 1000 + Integer.parseInt(vec0[2]) * 1000;
+        int final2 = Integer.parseInt(vec1[1]) * 60 * 1000 + Integer.parseInt(vec1[2]) * 1000;
+        System.out.println("total: " + (final2 - inicial1));
+        String res = String.valueOf(Math.abs(final2 - inicial1));
+        float Resultado = Integer.parseInt(res)/1000;
+        if (Resultado < 59) {
+            return Resultado+" segundos";
+        }else{
+            Resultado = Resultado/60;
+            return Resultado+" minutos";
+        }
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

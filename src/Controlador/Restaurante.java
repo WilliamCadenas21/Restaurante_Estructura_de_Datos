@@ -40,7 +40,7 @@ public class Restaurante {
 
         Gerente g = new Gerente(str1, str2, str3, str4, str5);
 
-        Lista_de_Gerentes.Agregar(g);
+        Lista_de_Gerentes.agregar(g);
 
     }
 
@@ -54,7 +54,7 @@ public class Restaurante {
 
         Mesero mesero = new Mesero(str1, str2, str3, str4, str5);
 
-        Lista_de_Empleados.Agregar(mesero);
+        Lista_de_Empleados.agregar(mesero);
 
     }
 
@@ -66,7 +66,7 @@ public class Restaurante {
         String str4 = (String) List.getPosicion(3).getInfo();//Tiempo
 
         Postre postre = new Postre(str1, str2, str3, str4);
-        Lista_de_Postres.Agregar(postre);
+        Lista_de_Postres.agregar(postre);
     }
 
     private static void agregarBebida(Lista List) {
@@ -76,7 +76,7 @@ public class Restaurante {
 
         Bebidas bebidas = new Bebidas(str1, str2, str3);
 
-        Lista_de_Bebidas.Agregar(bebidas);
+        Lista_de_Bebidas.agregar(bebidas);
     }
 
     private static void agregarPlato(Lista List) {
@@ -84,7 +84,7 @@ public class Restaurante {
         int str2 = Integer.parseInt(String.valueOf(List.getPosicion(1).getInfo()));
         int str3 = Integer.parseInt(String.valueOf(List.getPosicion(2).getInfo()));
 
-        Lista_de_Platos.Agregar(new Plato_principal(str1, str3, str3));
+        Lista_de_Platos.agregar(new Plato_principal(str1, str3, str3));
     }
 
     public static void comprobarIngresosAnteriores() {
@@ -95,9 +95,9 @@ public class Restaurante {
             FileReader Lector = new FileReader(Primer_Ingreso);
             BufferedReader Lector_X = new BufferedReader(Lector);
 
-            Resultado.Agregar(Lector_X.readLine());
-            Resultado.Agregar(Lector_X.readLine());
-            Resultado.Agregar(Lector_X.readLine());
+            Resultado.agregar(Lector_X.readLine());
+            Resultado.agregar(Lector_X.readLine());
+            Resultado.agregar(Lector_X.readLine());
 
             Lector_X.close();
 
@@ -164,7 +164,7 @@ public class Restaurante {
 
             if (Registro.substring(j, j + 1).equals("|")) {
 
-                Lista.Agregar(Registro.substring(inicio, fin));
+                Lista.agregar(Registro.substring(inicio, fin));
 
                 inicio = fin + 1;
                 fin = fin + 1;
