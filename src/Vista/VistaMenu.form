@@ -148,7 +148,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="Aceptar" linkSize="4" min="-2" pref="279" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="Cambiar_pedido" linkSize="4" min="-2" pref="167" max="-2" attributes="0"/>
+                              <Component id="cambiarPedido" linkSize="4" min="-2" pref="167" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -171,7 +171,7 @@
                               <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="Aceptar" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="Cambiar_pedido" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cambiarPedido" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
@@ -413,12 +413,12 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="Cambiar_pedido">
+            <Component class="javax.swing.JButton" name="cambiarPedido">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cambiar pedido"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Cambiar_pedidoActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cambiarPedidoActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

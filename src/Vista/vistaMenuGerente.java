@@ -1,8 +1,8 @@
 package Vista;
 
-public class Vista_Menu_Gerente extends javax.swing.JFrame {
+public class vistaMenuGerente extends javax.swing.JFrame {
 
-    public Vista_Menu_Gerente() {
+    public vistaMenuGerente() {
         initComponents();
     }
 
@@ -117,14 +117,14 @@ public class Vista_Menu_Gerente extends javax.swing.JFrame {
 
     private void Add_Employ_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Add_Employ_ButtonActionPerformed
 
-        Vista.Vista_Agregar_Empleados Empleados = new Vista.Vista_Agregar_Empleados();
+        Vista.vistaAgregarEmpleados Empleados = new Vista.vistaAgregarEmpleados();
 
         Empleados.setVisible(true);
     }//GEN-LAST:event_Add_Employ_ButtonActionPerformed
 
     private void Add_Food_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Add_Food_ButtonActionPerformed
 
-        Vista.Vista_Agregar_Comida Comida = new Vista.Vista_Agregar_Comida();
+        Vista.vistaAgregarComida Comida = new Vista.vistaAgregarComida();
 
         Comida.setVisible(true);
     }//GEN-LAST:event_Add_Food_ButtonActionPerformed
@@ -139,7 +139,7 @@ public class Vista_Menu_Gerente extends javax.swing.JFrame {
       
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Vista_Menu_Gerente().setVisible(true);
+                new vistaMenuGerente().setVisible(true);
             }
         });
     }

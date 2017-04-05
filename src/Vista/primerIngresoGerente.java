@@ -1,24 +1,20 @@
-package Controlador;
+package Vista;
 
+import Controlador.Coordinador;
 import java.io.File;
-import Controlador.Primer_Ingreso;
-import Vista.Vista_Menu_Gerente;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.List;
 
-public class Primer_Ingreso extends javax.swing.JFrame {
+public class primerIngresoGerente extends javax.swing.JFrame {
 
     public static File Archivo_Gerente = new File("Archivo_Gerente.txt");
+    private Coordinador miCoordinador;
 
-    public Primer_Ingreso() {
+    public primerIngresoGerente() {
         initComponents();
         /*
-        
-            Esta clase me permite obtener la informacion del gerente, en cual es el que administrará todo los procesos   
-        */
-        
+            Esta clase me permite obtener la informacion del gerente,el cual administrará todo los procesos   
+         */
     }
 
     @SuppressWarnings("unchecked")
@@ -40,21 +36,35 @@ public class Primer_Ingreso extends javax.swing.JFrame {
         Address_Text = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setResizable(false);
+
+        Name_Text.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Name_TextKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                Name_TextKeyReleased(evt);
+            }
+        });
 
         jLabel1.setText("Nombre:");
 
         jLabel3.setText("Telefono:");
 
-        jLabel4.setText("Gerente");
+        Phone_Text.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Phone_TextActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 255));
+        jLabel4.setText("Nuevo Gerente");
 
         jLabel5.setText("Contraseña:");
 
-        Password_Text.setText("jPasswordField1");
-
         jLabel6.setText("Contraseña:");
-
-        Password_Text_Confirmation.setText("jPasswordField1");
 
         Boton_Aceptar.setText("Aceptar");
         Boton_Aceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -74,27 +84,6 @@ public class Primer_Ingreso extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(137, 137, 137)
-                                .addComponent(jLabel4))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addGap(125, 125, 125))
-                                    .addComponent(Name_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3)
-                                    .addComponent(Phone_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(122, 122, 122)
-                                .addComponent(Boton_Aceptar))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(Age_Spinner, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Password_Text_Confirmation, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -106,14 +95,34 @@ public class Primer_Ingreso extends javax.swing.JFrame {
                                     .addComponent(Address_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel6))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(Name_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(Phone_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(Age_Spinner, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(131, 131, 131)
+                                .addComponent(Boton_Aceptar)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(115, 115, 115)
+                .addComponent(jLabel4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -150,42 +159,56 @@ public class Primer_Ingreso extends javax.swing.JFrame {
 
         if (Password_Text.getText().equals(Password_Text_Confirmation.getText())) {
 
-            try{
-            
-                FileWriter Escritor = new FileWriter(Archivo_Gerente);
+            try {
+
+                FileWriter Escritor = new FileWriter(Archivo_Gerente, true);
                 BufferedWriter Escritor_X = new BufferedWriter(Escritor);
-            
+
                 Escritor_X.write(Name_Text.getText() + "|");
                 Escritor_X.write(Age_Spinner.getValue() + "|");
                 Escritor_X.write(Phone_Text.getText() + "|");
                 Escritor_X.write(Address_Text.getText() + "|");
-                Escritor_X.write("Gerente|");
                 Escritor_X.write(Password_Text.getText() + "|");
-                
+
                 Escritor_X.flush();
                 Escritor_X.close();
-                
-            }catch(Exception e){
-            
+
+            } catch (Exception e) {
+
                 e.printStackTrace();
             }
-            
-            Vista.Vista_Menu_Gerente menu_gerente = new Vista.Vista_Menu_Gerente();
-                 
+
+            Vista.vistaMenuGerente menu_gerente = new Vista.vistaMenuGerente();
+            this.dispose();
             menu_gerente.setVisible(true);
-            
-        }else{
-        
+
+        } else {
+
             javax.swing.JOptionPane.showMessageDialog(this, "Las contraseñas no son iguales, por favor verifique.");
         }
-        
+        this.setVisible(false);
     }//GEN-LAST:event_Boton_AceptarActionPerformed
+
+    private void Phone_TextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Phone_TextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Phone_TextActionPerformed
+
+    private void Name_TextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Name_TextKeyPressed
+        System.out.println(evt.getKeyCode());
+
+
+    }//GEN-LAST:event_Name_TextKeyPressed
+
+    private void Name_TextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Name_TextKeyReleased
+
+
+    }//GEN-LAST:event_Name_TextKeyReleased
 
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Primer_Ingreso().setVisible(true);
+                new primerIngresoGerente().setVisible(true);
             }
         });
     }
@@ -206,4 +229,9 @@ public class Primer_Ingreso extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     // End of variables declaration//GEN-END:variables
+
+    public void setCoordinador(Coordinador miCoordinador) {
+        this.miCoordinador = miCoordinador;
+    }
+
 }

@@ -31,7 +31,7 @@ public class Bebidas {
     
     //Carbohidratos
        
-       public int getCarboidratos(){
+       public int getCarbohidratos(){
        
            return Carbohidratos;
        

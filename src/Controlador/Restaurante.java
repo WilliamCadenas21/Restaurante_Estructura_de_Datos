@@ -1,27 +1,27 @@
 package Controlador;
 
 import Vista.Reloj;
-import Vista.Primer_ingreso_gerente;
+import Vista.primerIngresoGerente;
 import Modelo.Bebidas;
 import Modelo.Gerente;
 import Modelo.Mesero;
-import Modelo.Plato_principal;
+import Modelo.platoPrincipal;
 import Modelo.Postre;
 import java.io.*;
 
 public class Restaurante {
 
-    public static Lista Lista_de_Platos = new Lista(), Lista_de_Postres = new Lista(), Lista_de_Bebidas = new Lista(), Lista_de_Empleados = new Lista(), Lista_de_Gerentes = new Lista();
+    public static Lista listaDePlatos = new Lista(), listaDePostres = new Lista(), listaDeBebidas = new Lista(), listaDeEmpleados = new Lista(), listaDeGerentes = new Lista();
 
     public static void main(String[] args) {
         
         try {
             
-            llenarListas(Lista_de_Gerentes, new File("Archivo_Gerente.txt"), "Gerente");
-            llenarListas(Lista_de_Empleados, new File("Mesero.txt"), "Mesero");
-            llenarListas(Lista_de_Platos, new File("Platos principales.txt"), "Plato");
-            llenarListas(Lista_de_Postres, new File("Postres.txt"), "Postre");
-            llenarListas(Lista_de_Bebidas, new File("Bebidas.txt"), "Bebida");
+            llenarListas(listaDeGerentes, new File("Archivo_Gerente.txt"), "Gerente");
+            llenarListas(listaDeEmpleados, new File("Mesero.txt"), "Mesero");
+            llenarListas(listaDePlatos, new File("Platos principales.txt"), "Plato");
+            llenarListas(listaDePostres, new File("Postres.txt"), "Postre");
+            llenarListas(listaDeBebidas, new File("Bebidas.txt"), "Bebida");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -40,7 +40,7 @@ public class Restaurante {
 
         Gerente g = new Gerente(str1, str2, str3, str4, str5);
 
-        Lista_de_Gerentes.Agregar(g);
+        listaDeGerentes.Agregar(g);
 
     }
 
@@ -54,7 +54,7 @@ public class Restaurante {
 
         Mesero mesero = new Mesero(str1, str2, str3, str4, str5);
 
-        Lista_de_Empleados.Agregar(mesero);
+        listaDeEmpleados.Agregar(mesero);
     }
 
     private static void agregarPostre(Lista List) {
@@ -65,7 +65,7 @@ public class Restaurante {
         String str4 = (String) List.getPosicion(3).getInfo();//Tiempo
 
         Postre postre = new Postre(str1, str2, str3, str4);
-        Lista_de_Postres.Agregar(postre);
+        listaDePostres.Agregar(postre);
     }
 
     private static void agregarBebida(Lista List) {
@@ -75,7 +75,7 @@ public class Restaurante {
 
         Bebidas bebidas = new Bebidas(str1, str2, str3);
 
-        Lista_de_Bebidas.Agregar(bebidas);
+        listaDeBebidas.Agregar(bebidas);
     }
 
     private static void agregarPlato(Lista List) {
@@ -83,7 +83,7 @@ public class Restaurante {
         int str2 = Integer.parseInt(String.valueOf(List.getPosicion(1).getInfo()));
         int str3 = Integer.parseInt(String.valueOf(List.getPosicion(2).getInfo()));
 
-        Lista_de_Platos.Agregar(new Plato_principal(str1, str3, str3));
+        listaDePlatos.Agregar(new platoPrincipal(str1, str3, str3));
     }
 
     public static void comprobarIngresosAnteriores() {
@@ -109,16 +109,16 @@ public class Restaurante {
                     new Vista.VistaMenu().setVisible(true);
                 } else {
 
-                    new Vista.Vista_Agregar_Empleados().setVisible(true);
+                    new Vista.vistaAgregarEmpleados().setVisible(true);
                 }
 
                 if (Resultado.getPosicion(2).getInfo().equals("Ya existen tres platos")) {
 
-                    new Vista.Vista_Cocina().setVisible(true);
+                    new Vista.vistaCocina().setVisible(true);
 
                 }else{
                     
-                    new Vista.Vista_Agregar_Comida().setVisible(true);
+                    new Vista.vistaAgregarComida().setVisible(true);
                 }
 
             } else {//Esto es encaso de que el gerente no ha sido contratado
@@ -128,7 +128,7 @@ public class Restaurante {
                 Escritor_X.flush();
                 Escritor_X.close();
 
-                Primer_ingreso_gerente ventana = new Primer_ingreso_gerente();
+                primerIngresoGerente ventana = new primerIngresoGerente();
                 ventana.setVisible(true);
             }
         } catch (Exception e) {

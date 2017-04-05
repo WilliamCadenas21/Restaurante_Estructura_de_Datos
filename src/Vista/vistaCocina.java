@@ -1,16 +1,17 @@
 package Vista;
 
+import Controlador.Lista;
 import javax.swing.table.DefaultTableModel;
 
-public class Vista_Cocina extends javax.swing.JFrame {
+public class vistaCocina extends javax.swing.JFrame {
 
     /*
     
     La tabla de pedidos dependera de lo que se realize en Menu
      */
-    Object[] r = new Object[0];
+    Lista contenedorAuxiliar = new Lista();
 
-    public Vista_Cocina() {
+    public vistaCocina() {
         initComponents();
 
     }
@@ -100,33 +101,33 @@ public class Vista_Cocina extends javax.swing.JFrame {
     }//GEN-LAST:event_AceptarActionPerformed
 
     void Factura() {
-        DefaultTableModel Tabla_fact = (DefaultTableModel) VistaMenu.tablaFactura.getModel();
+        DefaultTableModel tablaFactura = (DefaultTableModel) VistaMenu.tablaFactura.getModel();
 
-        for (int i = 0; i < r.length; i++) {
-            Tabla_fact.addRow(new Object[]{r[i]});
-            System.out.println("R: " + r[i]);
+        for (int i = 0; i < this.contenedorAuxiliar.getTamaño(); i++) {
+            tablaFactura.addRow(new Object[]{ this.contenedorAuxiliar.getPosicion(i).getInfo()});//Esto me funciona para poder mostrar el nombre de la mesa a la cual ya se le ha terminado de preparar el pedido, para que asi la factura se genere mostrandose cuando el usuario necesite.
         }
     }
 
     void Resultado_de_pedidos() {
 
-        DefaultTableModel Tabla_resultado = (DefaultTableModel) Tabla_Cocina.getModel();
-        Controlador.Lista lista = new Controlador.Lista();
+        DefaultTableModel tablaResultado = (DefaultTableModel) Tabla_Cocina.getModel();
+        
+        this.contenedorAuxiliar = new Lista();//Borra toda la informacion de la lista, para que asi no me guarde informacion correspodiente de los procesos anteriores.
 
-        for (int i = 0; i < Tabla_resultado.getRowCount(); i++) {
+        for (int i = 0; i < tablaResultado.getRowCount(); i++) {
 
-            System.out.println("Resultado: " + Tabla_resultado.getValueAt(i, 1));
+            System.out.println("Resultado: " + tablaResultado.getValueAt(i, 1));
 
-            if (Tabla_resultado.getValueAt(i, 1).toString().equals("true")) {
+            if (tablaResultado.getValueAt(i, 1).toString().equals("true")) {
 
-                try {
+                try {//Se utiliza un try-catch para evitar se salga por consola el error producido cuando el usurio presiona cancelar o cierra el showImputMessage.
 
                     Object t = javax.swing.JOptionPane.showConfirmDialog(this, "Esta seguro?");
 
-                    if (t.toString().equals("0")) {
-                        
-                        lista.Agregar(Tabla_resultado.getValueAt(i, 0));
-                        Tabla_resultado.removeRow(i);
+                    if (t.toString().equals("0")) {//Si la opcion seleccionada es "SI".
+
+                        this.contenedorAuxiliar.Agregar(tablaResultado.getValueAt(i, 0));//Me permite recolectar las filas de las cuales se ha seleccionado para poder mostrar que el plato ya esta listo.
+                        tablaResultado.removeRow(i);
                     }
 
                 } catch (Exception e) {
@@ -135,22 +136,15 @@ public class Vista_Cocina extends javax.swing.JFrame {
             }
         }
 
-        r = new Object[lista.getTamaño()];
+        DefaultTableModel tablaResultadoPedidos = (DefaultTableModel) VistaMenu.resultadoPedidos.getModel();
 
-        for (int i = 0; i < lista.getTamaño(); i++) {
+        for (int i = 0; i < this.contenedorAuxiliar.getTamaño(); i++) {
 
-            r[i] = lista.getPosicion(i).getInfo();
-        }
-
-        DefaultTableModel Tabla_resultado_pedidos = (DefaultTableModel) VistaMenu.resultadoPedidos.getModel();
-
-        for (int i = 0; i < r.length; i++) {
-
-            for (int j = 0; j < Tabla_resultado_pedidos.getRowCount(); j++) {
-
-                if (r[i].toString().equals(Tabla_resultado_pedidos.getValueAt(j, 0).toString())) {
-
-                    Tabla_resultado_pedidos.setValueAt("Listo", j, 2);
+            for (int j = 0; j < tablaResultadoPedidos.getRowCount(); j++) {
+                                    
+                if (this.contenedorAuxiliar.getPosicion(i).getInfo().toString().equals(tablaResultadoPedidos.getValueAt(j, 0).toString())) {//Para encontrar la mesa que se ha seleccionado en cocina y poder cambiarle el valor de "Preparando" a "Listo"
+                    //Obtengo la posicion y la informacion, para luego convertirla a String y poder compararla despues//                                         
+                    tablaResultadoPedidos.setValueAt("Listo", j, 2);
                 }
             }
         }
@@ -160,7 +154,7 @@ public class Vista_Cocina extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Vista_Cocina().setVisible(true);
+                new vistaCocina().setVisible(true);
             }
         });
     }

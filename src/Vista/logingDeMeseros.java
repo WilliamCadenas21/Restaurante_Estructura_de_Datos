@@ -3,16 +3,16 @@ package Vista;
 import java.io.*;
 import Controlador.Lista;
 
-public class Loging_de_Meseros extends javax.swing.JFrame {
+public class logingDeMeseros extends javax.swing.JFrame {
 
-    File Archivo_Meseros = Vista.Vista_Agregar_Empleados.Archivo_Meseros;
+    File Archivo_Meseros = Vista.vistaAgregarEmpleados.Archivo_Meseros;
     /*
      Estructura Archivo_empleados
     
      Name    |   Phone   |   Address   |   Age   |   Cargo   |   Password    |
      */
 
-    public Loging_de_Meseros() {
+    public logingDeMeseros() {
         initComponents();
 
         Password_Text.setEditable(false);
@@ -43,7 +43,6 @@ public class Loging_de_Meseros extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Meseros");
-        setLocation(new java.awt.Point(500, 500));
         setResizable(false);
 
         User_Text.addActionListener(new java.awt.event.ActionListener() {
@@ -121,7 +120,7 @@ public class Loging_de_Meseros extends javax.swing.JFrame {
 
             System.out.println("u: " + Modelo.Mesero.Encontro_Usuario);
             
-            Modelo.Mesero m = (Modelo.Mesero) Controlador.Restaurante.Lista_de_Empleados.getPosicion(Modelo.Mesero.Indice_Lista).getInfo();
+            Modelo.Mesero m = (Modelo.Mesero) Controlador.Restaurante.listaDeEmpleados.getPosicion(Modelo.Mesero.Indice_Lista).getInfo();
             
             if (Modelo.Mesero.Encontro_Usuario == true && m.getContraseña().equals(Password_Text.getText())) {//Me permite la comprobacion de que si un usuario existe y si la contraseña es correcta.
 
@@ -161,7 +160,7 @@ public class Loging_de_Meseros extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Loging_de_Meseros().setVisible(true);
+                new logingDeMeseros().setVisible(true);
             }
         });
     }
