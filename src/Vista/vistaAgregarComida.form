@@ -38,22 +38,22 @@
                       <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                          <Component id="Food_Text_Price" alignment="0" min="-2" pref="324" max="-2" attributes="0"/>
+                          <Component id="foodTextPrice" alignment="0" min="-2" pref="324" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="Food_Text_Name" alignment="0" min="-2" pref="324" max="-2" attributes="0"/>
-                          <Component id="Food_Text_Fat" alignment="0" min="-2" pref="324" max="-2" attributes="0"/>
+                          <Component id="foodTextName" alignment="0" min="-2" pref="324" max="-2" attributes="0"/>
+                          <Component id="foodTextFat" alignment="0" min="-2" pref="324" max="-2" attributes="0"/>
                           <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="Food_Type_Combobox" alignment="0" min="-2" pref="146" max="-2" attributes="0"/>
+                          <Component id="foodTypeCombobox" alignment="0" min="-2" pref="146" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="Timer_minutos" alignment="0" min="-2" pref="51" max="-2" attributes="0"/>
+                                  <Component id="timerMinutos" alignment="0" min="-2" pref="51" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="Timer_segundos" alignment="0" min="-2" pref="51" max="-2" attributes="0"/>
+                                  <Component id="timerSegundos" alignment="0" min="-2" pref="51" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -64,11 +64,11 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
-                      <Component id="Add_Imagen_Button" min="-2" max="-2" attributes="0"/>
+                      <Component id="addImagenButton" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="145" max="-2" attributes="0"/>
-                      <Component id="Acept_Button" min="-2" pref="109" max="-2" attributes="0"/>
+                      <Component id="aceptButton" min="-2" pref="109" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="51" max="32767" attributes="0"/>
@@ -81,38 +81,38 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" pref="128" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="Add_Imagen_Button" min="-2" max="-2" attributes="0"/>
+              <Component id="addImagenButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="Food_Text_Name" min="-2" max="-2" attributes="0"/>
+              <Component id="foodTextName" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="Food_Text_Price" min="-2" max="-2" attributes="0"/>
+                      <Component id="foodTextPrice" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="Food_Text_Fat" min="-2" max="-2" attributes="0"/>
+                      <Component id="foodTextFat" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="Timer_minutos" min="-2" max="-2" attributes="0"/>
+                      <Component id="timerMinutos" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="Timer_segundos" min="-2" max="-2" attributes="0"/>
+                      <Component id="timerSegundos" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="14" max="32767" attributes="0"/>
               <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="Food_Type_Combobox" min="-2" max="-2" attributes="0"/>
+              <Component id="foodTypeCombobox" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="Acept_Button" min="-2" max="-2" attributes="0"/>
+              <Component id="aceptButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -127,7 +127,7 @@
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="Add_Imagen_Button">
+    <Component class="javax.swing.JButton" name="addImagenButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Agregar foto"/>
       </Properties>
@@ -137,31 +137,31 @@
         <Property name="text" type="java.lang.String" value="Nombre:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="Food_Text_Name">
+    <Component class="javax.swing.JTextField" name="foodTextName">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
         <Property name="text" type="java.lang.String" value="Precio:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="Food_Text_Price">
+    <Component class="javax.swing.JTextField" name="foodTextPrice">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
         <Property name="text" type="java.lang.String" value="Carbohidratos:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="Food_Text_Fat">
+    <Component class="javax.swing.JTextField" name="foodTextFat">
     </Component>
-    <Component class="javax.swing.JButton" name="Acept_Button">
+    <Component class="javax.swing.JButton" name="aceptButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Aceptar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Acept_ButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="aceptButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JComboBox" name="Food_Type_Combobox">
+    <Component class="javax.swing.JComboBox" name="foodTypeCombobox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="3">
@@ -182,14 +182,14 @@
         <Property name="text" type="java.lang.String" value="Minutos:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JSpinner" name="Timer_minutos">
+    <Component class="javax.swing.JSpinner" name="timerMinutos">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>
         <Property name="text" type="java.lang.String" value="Segundos: "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JSpinner" name="Timer_segundos">
+    <Component class="javax.swing.JSpinner" name="timerSegundos">
     </Component>
   </SubComponents>
 </Form>

@@ -1,6 +1,6 @@
 package Vista;
 
-import Controlador.Primer_Ingreso;
+import Controlador.primerIngreso;
 import Modelo.Mesero;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -11,11 +11,11 @@ import java.io.*;
 import javax.swing.ComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
-import Vista.Loging_de_Meseros;
+import Vista.logingDeMeseros;
 import java.util.List;
 import Controlador.Lista;
 
-public class Vista_Agregar_Empleados extends javax.swing.JFrame {
+public class vistaAgregarEmpleados extends javax.swing.JFrame {
 
     public static Lista Lista_De_Objetos_Tipo_Mesero = new Lista();//Lista de objetos de tipo mesero  
     public static Lista Lista_De_Objetos_Tipo_Cocineros = new Lista(); //Lista de objetos de tipo cocina.
@@ -29,7 +29,7 @@ public class Vista_Agregar_Empleados extends javax.swing.JFrame {
 
     int i = 0;
 
-    Primer_Ingreso primer_ingreso = new Primer_Ingreso();
+    primerIngreso primer_ingreso = new primerIngreso();
 
     /*
     
@@ -38,7 +38,7 @@ public class Vista_Agregar_Empleados extends javax.swing.JFrame {
      Name    |   Age   |   Phone   |   Address   |   Employ   |   Password    |
     
      */
-    public Vista_Agregar_Empleados() {
+    public vistaAgregarEmpleados() {
         initComponents();
 
         Vector_Mesas[0] = Mesa1_Text;
@@ -269,7 +269,7 @@ public class Vista_Agregar_Empleados extends javax.swing.JFrame {
         try {
             if (new BufferedReader(new FileReader(new File("C:\\Users\\Jesus Mercado\\Documents\\NetBeansProjects\\Laboratorio_1\\Mesero.txt"))).readLine() != null) {
                 
-                 Loging_de_Meseros login = new Loging_de_Meseros();
+                 logingDeMeseros login = new logingDeMeseros();
                  login.setVisible(true);
             }
             
@@ -278,7 +278,7 @@ public class Vista_Agregar_Empleados extends javax.swing.JFrame {
         }
 
         
-        Controlador.Restaurante.Lista_de_Empleados.Agregar(new Modelo.Mesero(Name_Text.getText(), Integer.parseInt(String.valueOf(Age_Spinner.getValue())), Phone_Text.getText(), Address_Text.getText(), String.valueOf(Password_Text.getPassword())));
+        Controlador.Restaurante.listaDeEmpleados.Agregar(new Modelo.Mesero(Name_Text.getText(), Integer.parseInt(String.valueOf(Age_Spinner.getValue())), Phone_Text.getText(), Address_Text.getText(), String.valueOf(Password_Text.getPassword())));
 
         try { 
 
@@ -291,7 +291,7 @@ public class Vista_Agregar_Empleados extends javax.swing.JFrame {
 
                 System.out.println("Respondiendo");
 
-                Mesero m = (Mesero) Vista.Loging_de_Meseros.Lista_De_Registros_De_Meseros.getPosicion(i).ObtenerInfo();
+                Mesero m = (Mesero) Vista.logingDeMeseros.Lista_De_Registros_De_Meseros.getPosicion(i).ObtenerInfo();
                 
                 Escritor_S.write(m.getNombre());
                 Escritor_S.write(m.getEdad());
@@ -303,7 +303,7 @@ public class Vista_Agregar_Empleados extends javax.swing.JFrame {
 
                 i++;
 
-            } while (i < Vista.Loging_de_Meseros.Lista_De_Registros_De_Meseros.getTamaño());*/
+            } while (i < Vista.logingDeMeseros.Lista_De_Registros_De_Meseros.getTamaño());*/
 
             Escritor_S.write(Name_Text.getText() + "|");
             Escritor_S.write(String.valueOf(Age_Spinner.getValue()) + "|");
@@ -363,7 +363,7 @@ public class Vista_Agregar_Empleados extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Vista_Agregar_Empleados().setVisible(true);
+                new vistaAgregarEmpleados().setVisible(true);
             }
         });
     }

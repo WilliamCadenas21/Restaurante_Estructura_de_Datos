@@ -7,7 +7,7 @@ package Controlador;
 
 import Modelo.Gerente;
 import Modelo.Logica;
-import Vista.Primer_ingreso_gerente;
+import Vista.primerIngresoGerente;
 
 /**
  *
@@ -15,11 +15,11 @@ import Vista.Primer_ingreso_gerente;
  */
 public class Coordinador {
 
-    private Primer_ingreso_gerente primeraVentana;
+    private primerIngresoGerente primeraVentana;
     private Logica miLogica;
     private Gerente gerente;
 
-    void setLogin_de_Gerente(Primer_ingreso_gerente primeraVentana) {
+    void setLogin_de_Gerente(primerIngresoGerente primeraVentana) {
         this.primeraVentana = primeraVentana;
     }
 

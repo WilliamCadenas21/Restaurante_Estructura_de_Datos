@@ -20,15 +20,15 @@ public class Gerente extends Empleado {
 
         Indice_Lista = i;
 
-        if (i < Controlador.Restaurante.Lista_de_Gerentes.getTamaño()) {
+        if (i < Controlador.Restaurante.listaDeGerentes.getTamaño()) {
 
-            for (int j = 0; j < Controlador.Restaurante.Lista_de_Gerentes.getTamaño(); j++) {
-                System.out.println("info: " + Controlador.Restaurante.Lista_de_Gerentes.getPosicion(j).ObtenerInfo());
+            for (int j = 0; j < Controlador.Restaurante.listaDeGerentes.getTamaño(); j++) {
+                System.out.println("info: " + Controlador.Restaurante.listaDeGerentes.getPosicion(j).getInfo());
             }
             
-            Gerente m = (Gerente) (Controlador.Restaurante.Lista_de_Gerentes.getPosicion(Indice_Lista).ObtenerInfo());
+            Gerente m = (Gerente) (Controlador.Restaurante.listaDeGerentes.getPosicion(Indice_Lista).getInfo());
             
-            System.out.println("m: " + Controlador.Restaurante.Lista_de_Gerentes.getPosicion(Indice_Lista).ObtenerInfo());
+            System.out.println("m: " + Controlador.Restaurante.listaDeGerentes.getPosicion(Indice_Lista).getInfo());
 
             if (Dato_a_comparar.equals(m.getNombre())) {//Comparacion con el usuario.
 

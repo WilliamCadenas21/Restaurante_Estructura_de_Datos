@@ -18,10 +18,14 @@ public class Nodo {
         return link;
     }
 
-    public Object ObtenerInfo(){   
+    public Object getInfo(){   
         return info;
     }
 
+    public void eliminarNodo(){
+        this.link = null;
+    }
+    
     public void CambiarInfo(Object info){   
         this.info = info;
     }
