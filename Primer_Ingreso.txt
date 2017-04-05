@@ -1,3 +1,9 @@
 Ya ha ingresado
 Ya ingreso un mesero
 Ya existen tres platos
+Ya ingreso un plato
+Ya ingreso un plato
+Ya ingreso un plato
+Ya ingreso un plato
+Ya ingreso un plato
+Ya ingreso un plato

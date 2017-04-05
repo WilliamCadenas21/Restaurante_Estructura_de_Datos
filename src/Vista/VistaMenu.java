@@ -292,8 +292,8 @@ public class VistaMenu extends javax.swing.JFrame {
                     .addComponent(jTabbedPane2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(Aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cambiarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(cambiarPedido)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -482,15 +482,14 @@ public class VistaMenu extends javax.swing.JFrame {
         DefaultTableModel modeloTablaFactura = (DefaultTableModel) tablaFactura.getModel();
         DefaultTableModel modeloTablaResultadoPedidos = (DefaultTableModel) resultadoPedidos.getModel();
 
-        modeloTablaFactura.removeRow(tablaFactura.getSelectedRow());
-
         mostrarFactura.dispose();
 
-        int cantidadRegistrosFactura = modeloTablaFactura.getRowCount(), posicionMesaFactura = Integer.valueOf(String.valueOf(tablaFactura.getSelectedRow())) +  1;
-        
+        int cantidadRegistrosFactura = modeloTablaFactura.getRowCount(), posicionMesaFactura = tablaFactura.getSelectedRow();
+        System.out.println("PosicionMesaFactura: " + posicionMesaFactura);
         String mesaEnResultadoPedido = "", mesaFactura = "";
+        System.out.println("Cantidad de cosas en factura 2:" + modeloTablaFactura.getRowCount());
+        System.out.println("Mesa factura: " + modeloTablaFactura.getValueAt(posicionMesaFactura, 0));
         mesaFactura = String.valueOf(modeloTablaFactura.getValueAt(posicionMesaFactura, 0));
-        System.out.println("Mesa factura: " + mesaFactura);
         for (int k = 0; k < cantidadRegistrosFactura; k++) {
 
             mesaEnResultadoPedido = String.valueOf(modeloTablaResultadoPedidos.getValueAt(k, 0));//Me obtiene el nombre de la mesa de la tabla resultadoPedido
@@ -499,6 +498,8 @@ public class VistaMenu extends javax.swing.JFrame {
                 modeloTablaResultadoPedidos.removeRow(k);
             }
         }
+
+        modeloTablaFactura.removeRow(tablaFactura.getSelectedRow());
     }//GEN-LAST:event_botonPagarActionPerformed
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
@@ -506,38 +507,7 @@ public class VistaMenu extends javax.swing.JFrame {
         mostrarFactura.dispose();
     }//GEN-LAST:event_botonCancelarActionPerformed
 
-    void prueba(DefaultTableModel modelo, String tipo) {
-
-        for (int k = 0; k < modelo.getRowCount(); k++) {
-
-            if (Integer.parseInt(String.valueOf(modelo.getValueAt(k, 3))) > 0) {
-
-                nombreDelPlato = String.valueOf(modelo.getValueAt(k, 0));
-                precio = Integer.parseInt(String.valueOf(modelo.getValueAt(k, 1)));
-                cantidad = Integer.parseInt(String.valueOf(modelo.getValueAt(k, 3)));
-
-                listaComidaAuxiliar.Agregar(new ComidaAuxiliar(tipo, nombreDelPlato, precio, cantidad));//Primero llenó una lista de objetos con los platos pedidos
-                total = total + Integer.parseInt(String.valueOf(modelo.getValueAt(k, 1)));//Precio total del pedido, sirve para realizar la factura.                                                                                                        //tipo Lista_comida_auxiliar para asi poder llenar la lista de pedidos, que me servira
-            }                                                                                                                                                                                                    //despues para la creacion de la factura y el cambio de pedido durante los primeros 5 minutos
-
-        }
-    }
-
-    void AgregarPedido() {
-
-        DefaultTableModel modeloPlatos = (DefaultTableModel) tablaPlatoPrincipal.getModel();
-        DefaultTableModel modeloTablaPostres = (DefaultTableModel) tablaPostre.getModel();
-        DefaultTableModel modeloTablaBebidas = (DefaultTableModel) tablaBebidas.getModel();
-
-        prueba(modeloPlatos, "Plato");
-        prueba(modeloTablaPostres, "Postre");
-        prueba(modeloTablaBebidas, "Bebida");
-
-        listaPedidos.Agregar(new Pedido(mesasJList.getSelectedValue(), listaComidaAuxiliar, total));
-        listaComidaAuxiliar = new Lista();//Reinicio esta lista, porque de lo contrario me guadaria informacion de los platos antes pedidos.
-    }
-
-    private void cambiarPedidoActionPerformed(java.awt.event.ActionEvent evt) {
+    private void cambiarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarPedidoActionPerformed
 
         DefaultTableModel modeloTablaCocina = (DefaultTableModel) Tabla_Cocina.getModel();
 
@@ -591,6 +561,37 @@ public class VistaMenu extends javax.swing.JFrame {
             numeroDeLaMesaACambiarElPedido++;
         }
 
+    }//GEN-LAST:event_cambiarPedidoActionPerformed
+
+    void prueba(DefaultTableModel modelo, String tipo) {
+
+        for (int k = 0; k < modelo.getRowCount(); k++) {
+
+            if (Integer.parseInt(String.valueOf(modelo.getValueAt(k, 3))) > 0) {
+
+                nombreDelPlato = String.valueOf(modelo.getValueAt(k, 0));
+                precio = Integer.parseInt(String.valueOf(modelo.getValueAt(k, 1)));
+                cantidad = Integer.parseInt(String.valueOf(modelo.getValueAt(k, 3)));
+
+                listaComidaAuxiliar.Agregar(new ComidaAuxiliar(tipo, nombreDelPlato, precio, cantidad));//Primero llenó una lista de objetos con los platos pedidos
+                total = total + Integer.parseInt(String.valueOf(modelo.getValueAt(k, 1)));//Precio total del pedido, sirve para realizar la factura.                                                                                                        //tipo Lista_comida_auxiliar para asi poder llenar la lista de pedidos, que me servira
+            }                                                                                                                                                                                                    //despues para la creacion de la factura y el cambio de pedido durante los primeros 5 minutos
+
+        }
+    }
+
+    void AgregarPedido() {
+
+        DefaultTableModel modeloPlatos = (DefaultTableModel) tablaPlatoPrincipal.getModel();
+        DefaultTableModel modeloTablaPostres = (DefaultTableModel) tablaPostre.getModel();
+        DefaultTableModel modeloTablaBebidas = (DefaultTableModel) tablaBebidas.getModel();
+
+        prueba(modeloPlatos, "Plato");
+        prueba(modeloTablaPostres, "Postre");
+        prueba(modeloTablaBebidas, "Bebida");
+
+        listaPedidos.Agregar(new Pedido(mesasJList.getSelectedValue(), listaComidaAuxiliar, total));
+        listaComidaAuxiliar = new Lista();//Reinicio esta lista, porque de lo contrario me guadaria informacion de los platos antes pedidos.
     }
 
     void Cambiar_pedido(String mesa) {

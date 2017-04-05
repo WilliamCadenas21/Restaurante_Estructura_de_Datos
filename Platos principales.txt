@@ -1,3 +1,4 @@
 Zaragosa con paticas de cerdo|5000|500|
 Arroz con pollo|6000|200|
 Arroz chino|5000|300|
+Frijoles|2000|50|
