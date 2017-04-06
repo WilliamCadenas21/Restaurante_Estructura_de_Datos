@@ -2,13 +2,16 @@ package Vista;
 
 import Controlador.Lista;
 import Controlador.Pedido;
-import Modelo.Bebidas;
+import static Controlador.Restaurante.listaDeBebidas;
+import static Controlador.Restaurante.listaDePlatos;
+import static Controlador.Restaurante.listaDePostres;
+import Modelo.Bebida;
 import Modelo.ComidaAuxiliar;
-import Modelo.platoPrincipal;
+import Modelo.PlatoPrincipal;
 import Modelo.Postre;
-import static Vista.vistaCocina.Tabla_Cocina;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import static Vista.vistaCocina.tablaCocina;
 
 public class VistaMenu extends javax.swing.JFrame {
 
@@ -16,13 +19,13 @@ public class VistaMenu extends javax.swing.JFrame {
 
     boolean variableBooleanaGlobal = true;
 
-    Lista listaComidaAuxiliar = new Lista(), listaPedidos = new Lista();
+    Lista listaDePlatosDeUnPedido = new Lista(), listaPedidos = new Lista();
 
-    Object[] v = new Object[0];
-
-    String nombreDelPlato = "", factura = "", inicioFactura = "", finFactura = "";//Las variables inicioFactura y finFactura me sirven para poder mostrar los datos en el area de texto.
+    String nombreDelPlato = "", factura = "", inicioFactura = "", finFactura = "", horaActual = "";//Las variables inicioFactura y finFactura me sirven para poder mostrar los datos en el area de texto.
 
     Pedido pedido;
+
+    DefaultTableModel modeloTablaPlatoPrincipal, modeloTablaPostres, modeloTablaBebidas, tablaResultados;
 
     public VistaMenu() {
         initComponents();
@@ -31,44 +34,44 @@ public class VistaMenu extends javax.swing.JFrame {
 
         mostrarFactura.setSize(500, 700);//Establesco el tamaño del frame emergente.
 
-        ///////////////////Comienzo a agregar los datos estaticos en el area de texto que muestra la factura ////////////////////////////////////
-        inicioFactura = "\t\t\t Restaurante La Prosperidad\n"
-                + "\t\t\t\tCalle Viva N° 123\n"
-                + Reloj.lblReloj.getText();
+        modeloTablaPlatoPrincipal = (DefaultTableModel) tablaPlatoPrincipal.getModel();
+        modeloTablaPostres = (DefaultTableModel) tablaPostre.getModel();
+        modeloTablaBebidas = (DefaultTableModel) tablaBebidas.getModel();
 
-        finFactura = "\n\n\t\t\tGracias por su visita\n"
-                + "\t\tPara mayor informacion: 3123456789";
-        /////////////////////////////////////////////
+        mostrarPlatosEnTablas(modeloTablaPlatoPrincipal, "Plato", listaDePlatos);
+        mostrarPlatosEnTablas(modeloTablaPostres, "Postre", listaDePostres);
+        mostrarPlatosEnTablas(modeloTablaBebidas, "Bebida", listaDeBebidas);
+    }
 
-        DefaultTableModel modelo_tabla_plato_principal = (DefaultTableModel) tablaPlatoPrincipal.getModel();
-        DefaultTableModel modelo_tabla_postres = (DefaultTableModel) tablaPostre.getModel();
-        DefaultTableModel modelo_tabla_bebidas = (DefaultTableModel) tablaBebidas.getModel();
+    void mostrarPlatosEnTablas(DefaultTableModel modelo, String TipoDeObjeto, Lista lista) {
 
-        while (i < Controlador.Restaurante.listaDePlatos.getTamaño()) {
+        int i = 0;
 
-            platoPrincipal p = (platoPrincipal) Controlador.Restaurante.listaDePlatos.getPosicion(i).getInfo();
-            modelo_tabla_plato_principal.addRow(new Object[]{p.getNombre(), p.getprecio(), p.getCarboidratos(), 0});
+        while (i < lista.getTamaño()) {
+
+            switch (TipoDeObjeto) {
+                case "Plato":
+
+                    PlatoPrincipal algo0 = (PlatoPrincipal) lista.getPosicion(i).getInfo();
+
+                    modelo.addRow(new Object[]{algo0.getNombre(), algo0.getPrecio(), algo0.getCarbohidratos(), 0});
+                    break;
+                case "Postre":
+
+                    Postre algo1 = (Postre) lista.getPosicion(i).getInfo();
+
+                    modelo.addRow(new Object[]{algo1.getNombre(), algo1.getPrecio(), algo1.getCarbohidratos(), 0});
+                    break;
+                case "Bebida":
+
+                    Bebida algo2 = (Bebida) lista.getPosicion(i).getInfo();
+
+                    modelo.addRow(new Object[]{algo2.getNombre(), algo2.getPrecio(), algo2.getCarbohidratos(), 0});
+                    break;
+            }
+
             i++;
-        }
 
-        Tiempo();
-
-        while (i < Controlador.Restaurante.listaDePostres.getTamaño()) {
-
-            Postre p = (Postre) Controlador.Restaurante.listaDePostres.getPosicion(i).getInfo();
-            modelo_tabla_postres.addRow(new Object[]{p.getNombre(), p.getPrecio(), p.getCarboidratos(), 0});
-
-            i++;
-        }
-
-        Tiempo();
-
-        while (i < Controlador.Restaurante.listaDeBebidas.getTamaño()) {
-
-            Bebidas b = (Bebidas) Controlador.Restaurante.listaDeBebidas.getPosicion(i).getInfo();
-            modelo_tabla_bebidas.addRow(new Object[]{b.getNombre(), b.getprecio(), b.getCarbohidratos(), 0});
-
-            i++;
         }
     }
 
@@ -421,13 +424,9 @@ public class VistaMenu extends javax.swing.JFrame {
 
         AgregarPedido();
 
-        DefaultTableModel tablaResultados = (DefaultTableModel) resultadoPedidos.getModel();
+        agregarFilaATablaResultadoDePedidos();
 
-        tablaResultados.addRow(new Object[]{mesasJList.getSelectedValue(), "0:00", "Esperando cambio"});
-
-        Llenar_tabla_de_resultado_de_pedidos();
-
-        Llenar_tabla_de_cocina();
+        llenarTablaDeCocina();
     }//GEN-LAST:event_AceptarActionPerformed
 
     private void tablaFacturaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaFacturaKeyPressed
@@ -452,15 +451,24 @@ public class VistaMenu extends javax.swing.JFrame {
 
                 if (pedido.getMesa().equals(mesa)) {
 
-                    listaComidaAuxiliar = pedido.getListaComida();
+                    listaDePlatosDeUnPedido = pedido.getListaComida();
 
                     ComidaAuxiliar comidaAuxiliar;
 
-                    for (int k = 0; k < listaComidaAuxiliar.getTamaño(); k++) {
+                    inicioFactura = "\t\t\t Restaurante La Prosperidad\n"
+                            + "\t\t\t\tCalle Viva N° 123\n"
+                            + Reloj.lblReloj.getText();
 
-                        comidaAuxiliar = (ComidaAuxiliar) listaComidaAuxiliar.getPosicion(k).getInfo();
+                    finFactura = "\n\n\t\t\tGracias por su visita\n"
+                            + "\t\tPara mayor informacion: 3123456789";
+
+                    for (int k = 0; k < listaDePlatosDeUnPedido.getTamaño(); k++) {
+
+                        comidaAuxiliar = (ComidaAuxiliar) listaDePlatosDeUnPedido.getPosicion(k).getInfo();
                         factura = factura + "\n" + comidaAuxiliar.getCantidad() + "  " + comidaAuxiliar.getNombrePlato() + "..........$" + comidaAuxiliar.getPrecio();
                     }
+
+                    factura = factura + "\n\n\t\t\t\tTotal: $" + pedido.getPrecio();
 
                     paraMostrarFactura.setText(inicioFactura + factura + finFactura);
 
@@ -480,26 +488,15 @@ public class VistaMenu extends javax.swing.JFrame {
     private void botonPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPagarActionPerformed
 
         DefaultTableModel modeloTablaFactura = (DefaultTableModel) tablaFactura.getModel();
-        DefaultTableModel modeloTablaResultadoPedidos = (DefaultTableModel) resultadoPedidos.getModel();
+        tablaResultados = (DefaultTableModel) resultadoPedidos.getModel();
 
         mostrarFactura.dispose();
 
-        int cantidadRegistrosFactura = modeloTablaFactura.getRowCount(), posicionMesaFactura = tablaFactura.getSelectedRow();
-        System.out.println("PosicionMesaFactura: " + posicionMesaFactura);
-        String mesaEnResultadoPedido = "", mesaFactura = "";
-        System.out.println("Cantidad de cosas en factura 2:" + modeloTablaFactura.getRowCount());
-        System.out.println("Mesa factura: " + modeloTablaFactura.getValueAt(posicionMesaFactura, 0));
-        mesaFactura = String.valueOf(modeloTablaFactura.getValueAt(posicionMesaFactura, 0));
-        for (int k = 0; k < cantidadRegistrosFactura; k++) {
+        int posicionMesaFactura = tablaFactura.getSelectedRow();
+        String mesaFactura = String.valueOf(modeloTablaFactura.getValueAt(posicionMesaFactura, 0));
 
-            mesaEnResultadoPedido = String.valueOf(modeloTablaResultadoPedidos.getValueAt(k, 0));//Me obtiene el nombre de la mesa de la tabla resultadoPedido
-            System.out.println("Mesa factura: " + mesaEnResultadoPedido);
-            if (mesaEnResultadoPedido.equals(mesaFactura)) {
-                modeloTablaResultadoPedidos.removeRow(k);
-            }
-        }
-
-        modeloTablaFactura.removeRow(tablaFactura.getSelectedRow());
+        eliminarFilaDeUnaTabla(tablaResultados, mesaFactura, posicionMesaFactura);
+        eliminarFilaDeUnaTabla(modeloTablaFactura, mesaFactura, tablaFactura.getSelectedRow());
     }//GEN-LAST:event_botonPagarActionPerformed
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
@@ -509,61 +506,53 @@ public class VistaMenu extends javax.swing.JFrame {
 
     private void cambiarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarPedidoActionPerformed
 
-        DefaultTableModel modeloTablaCocina = (DefaultTableModel) Tabla_Cocina.getModel();
+        DefaultTableModel modeloTablaCocina = (DefaultTableModel) tablaCocina.getModel();
 
-        v = new Object[modeloTablaCocina.getRowCount()];
-
+        Object[] v = new Object[modeloTablaCocina.getRowCount()];
         for (int k = 0; k < modeloTablaCocina.getRowCount(); k++) {//Reinicio el vector, para que no se copien los pedidos que ya han sido realizados.
             v[k] = modeloTablaCocina.getValueAt(k, 0);
         }
 
-        String horaInicial = "";//Esta variable me sirve para capturar la hora con la cual se ha realizado el pedido.
+        Object j = JOptionPane.showInputDialog(this, "Pedidos:", "Seleccion de mesa", 1, null, v, 3);//Me permite seleccionar la mesa a la cual se le vá a realizar el cambio de pedido.
+        int numeroDeLaFilaAElminar = 0;
+        String horaInicial = "";//Esta variable me sirve para capturar la hora con la cual se ha realizado el pedido.        
+        for (int k = 0; k < modeloTablaCocina.getRowCount(); k++) {
 
-        Object j = "";//Esta variable me funciona para poder obtener la mesa que se ha seleccionado en la ventana emergente (JOptionPane.showInputDialog)
+            if (j.equals(String.valueOf(modeloTablaCocina.getValueAt(k, 0)))) {
 
-        String horaCapturada = Reloj.lblReloj.getText();
-
-        try {
-
-            j = JOptionPane.showInputDialog(this, "Pedidos:", "Seleccion de mesa", 1, null, v, 3);//Me permite seleccionar la mesa a la cual se le vá a realizar el cambio de pedido.
-
-            for (int k = 0; k < modeloTablaCocina.getRowCount(); k++) {
-
-                if (j.equals(String.valueOf(modeloTablaCocina.getValueAt(k, 0)))) {
-
-                    modeloTablaCocina.removeRow(k);
-                    horaInicial = (String) modeloTablaCocina.getValueAt(k, 2);
-                }
+                horaInicial = (String) modeloTablaCocina.getValueAt(k, 2);
+                numeroDeLaFilaAElminar = k;
             }
-
-        } catch (Exception e) {
         }
 
         variableBooleanaGlobal = true;
-
+        horaActual = Reloj.lblReloj.getText();
         while (numeroDeLaMesaACambiarElPedido < listaPedidos.getTamaño() && variableBooleanaGlobal) {
+
+            pedido = (Pedido) listaPedidos.getPosicion(numeroDeLaMesaACambiarElPedido).getInfo();
 
             try {
 
                 if (j.equals(pedido.getMesa()) && !(j == null)) {//Busco la mesa  que ha sido seleccionada para realizar el cambio de pedido de dicha mesa.
 
                     variableBooleanaGlobal = false; // para salirse del mientrasQ
-                    if (calcularDiferenciaDeTiempos(horaInicial, horaCapturada)) {
-                        Cambiar_pedido(pedido.getMesa());
+                    if (calcularDiferenciaDeTiempos(horaInicial, horaActual)) {
 
+                        cambiarPedido(pedido.getMesa());
+                        modeloTablaCocina.removeRow(numeroDeLaFilaAElminar);
                     } else {
 
                         JOptionPane.showMessageDialog(this, "El tiempo necesario para cambiar el pedido de la " + pedido.getMesa() + " ya ha pasado, por lo que este proceso no se puede realizar.");
                     }
                 }
             } catch (NullPointerException e) {
+
             }
             numeroDeLaMesaACambiarElPedido++;
         }
-
     }//GEN-LAST:event_cambiarPedidoActionPerformed
 
-    void prueba(DefaultTableModel modelo, String tipo) {
+    void AgregarPlatosAUnPedido(DefaultTableModel modelo, String tipo) {
 
         for (int k = 0; k < modelo.getRowCount(); k++) {
 
@@ -573,10 +562,12 @@ public class VistaMenu extends javax.swing.JFrame {
                 precio = Integer.parseInt(String.valueOf(modelo.getValueAt(k, 1)));
                 cantidad = Integer.parseInt(String.valueOf(modelo.getValueAt(k, 3)));
 
-                listaComidaAuxiliar.Agregar(new ComidaAuxiliar(tipo, nombreDelPlato, precio, cantidad));//Primero llenó una lista de objetos con los platos pedidos
-                total = total + Integer.parseInt(String.valueOf(modelo.getValueAt(k, 1)));//Precio total del pedido, sirve para realizar la factura.                                                                                                        //tipo Lista_comida_auxiliar para asi poder llenar la lista de pedidos, que me servira
-            }                                                                                                                                                                                                    //despues para la creacion de la factura y el cambio de pedido durante los primeros 5 minutos
-
+                listaDePlatosDeUnPedido.Agregar(new ComidaAuxiliar(tipo, nombreDelPlato, precio, cantidad));//Primero llenó una lista de objetos con los platos pedidos
+                //Precio total del pedido, sirve para realizar la factura.
+                //tipo Lista_comida_auxiliar para asi poder llenar la lista de pedidos, que me servira
+                //despues para la creacion de la factura y el cambio de pedido durante los primeros 5 minutos.    
+                total = total + Integer.parseInt(String.valueOf(modelo.getValueAt(k, 1)));
+            }
         }
     }
 
@@ -586,30 +577,25 @@ public class VistaMenu extends javax.swing.JFrame {
         DefaultTableModel modeloTablaPostres = (DefaultTableModel) tablaPostre.getModel();
         DefaultTableModel modeloTablaBebidas = (DefaultTableModel) tablaBebidas.getModel();
 
-        prueba(modeloPlatos, "Plato");
-        prueba(modeloTablaPostres, "Postre");
-        prueba(modeloTablaBebidas, "Bebida");
+        AgregarPlatosAUnPedido(modeloPlatos, "Plato");
+        AgregarPlatosAUnPedido(modeloTablaPostres, "Postre");
+        AgregarPlatosAUnPedido(modeloTablaBebidas, "Bebida");
 
-        listaPedidos.Agregar(new Pedido(mesasJList.getSelectedValue(), listaComidaAuxiliar, total));
-        listaComidaAuxiliar = new Lista();//Reinicio esta lista, porque de lo contrario me guadaria informacion de los platos antes pedidos.
+        listaPedidos.Agregar(new Pedido(mesasJList.getSelectedValue(), listaDePlatosDeUnPedido, total));
+        listaDePlatosDeUnPedido = new Lista();//Reinicio esta lista, porque de lo contrario me guadaria informacion de los platos antes pedidos.
     }
 
-    void Cambiar_pedido(String mesa) {
+    void cambiarPedido(String mesa) {
 
-        DefaultTableModel modelo_tabla_cocina = (DefaultTableModel) Tabla_Cocina.getModel();
-        DefaultTableModel modelo_tabla_resultado_pedidos = (DefaultTableModel) resultadoPedidos.getModel();
+        DefaultTableModel modeloTablaCocina = (DefaultTableModel) tablaCocina.getModel();
+        DefaultTableModel modeloTablaResultadoPedidos = (DefaultTableModel) resultadoPedidos.getModel();
 
-        for (int k = 0; k < modelo_tabla_cocina.getRowCount(); k++) {
-
-            if (mesa.equals(String.valueOf(modelo_tabla_cocina.getValueAt(k, 0)))) {
-                modelo_tabla_resultado_pedidos.removeRow(k);
-                modelo_tabla_cocina.removeRow(k);
-            }
-        }
+        eliminarFilaDeUnaTabla(modeloTablaResultadoPedidos, mesa, 0);
+        eliminarFilaDeUnaTabla(modeloTablaCocina, mesa, 0);
 
         /*DefaultTableModel modelo_platos = (DefaultTableModel) Tabla_Plato_principal.getModel();
-        DefaultTableModel modelo_tabla_postres = (DefaultTableModel) Tabla_Postre.getModel();
-        DefaultTableModel modelo_tabla_bebidas = (DefaultTableModel) Tabla_Bebidas.getModel();
+        DefaultTableModel modeloTablaPostres = (DefaultTableModel) Tabla_Postre.getModel();
+        DefaultTableModel modeloTablaBebidas = (DefaultTableModel) Tabla_Bebidas.getModel();
 
         Lista Lista_de_los_platos_del_pedido = ((Pedido) listaPedidos.getPosicion(Numero_de_la_mesa_a_cambiar_el_pedido).getInfo()).getListaComida();
 
@@ -637,39 +623,12 @@ public class VistaMenu extends javax.swing.JFrame {
         }*/
     }
 
-    void Llenar_tabla_de_cocina() {
+    void llenarTablaDeCocina() {
 
-        DefaultTableModel modelo_platos = (DefaultTableModel) tablaPlatoPrincipal.getModel();
-        DefaultTableModel modelo_tabla_postres = (DefaultTableModel) tablaPostre.getModel();
-        DefaultTableModel modelo_tabla_bebidas = (DefaultTableModel) tablaBebidas.getModel();
-        DefaultTableModel modelo_pedidos = (DefaultTableModel) Tabla_Cocina.getModel();
-
-        /*
-        Lista Lista_Auxiliar = new Lista();//Funciona para poder agregar los nombres de los platos al combobox que se encuentran en la vista de cocina.
-         */
-        for (int k = 0; k < modelo_tabla_postres.getRowCount(); k++) {
-            /*if (Integer.parseInt(String.valueOf(modelo_tabla_postres.getValueAt(k, 3))) > 0) {
-
-                Lista_Auxiliar.Agregar(modelo_tabla_postres.getValueAt(k, 0));
-            }*/
-            modelo_tabla_postres.setValueAt(0, k, 3);//Me reinicia el valor de la cantidad de alimentos seleccionados, para poder escojer nuevamente.
-        }
-
-        for (int k = 0; k < modelo_platos.getRowCount(); k++) {
-            /*if (Integer.parseInt(String.valueOf(modelo_platos.getValueAt(k, 3))) > 0) {
-
-                Lista_Auxiliar.Agregar(modelo_platos.getValueAt(k, 0));
-            }*/
-            modelo_platos.setValueAt(0, k, 3);
-        }
-
-        for (int k = 0; k < modelo_tabla_bebidas.getRowCount(); k++) {
-            /*if (Integer.parseInt(String.valueOf(modelo_tabla_bebidas.getValueAt(k, 3))) > 0) {
-
-                Lista_Auxiliar.Agregar(modelo_tabla_bebidas.getValueAt(k, 0));
-            }*/
-            modelo_tabla_bebidas.setValueAt(0, k, 3);
-        }
+        modeloTablaPlatoPrincipal = (DefaultTableModel) tablaPlatoPrincipal.getModel();
+        modeloTablaPostres = (DefaultTableModel) tablaPostre.getModel();
+        modeloTablaBebidas = (DefaultTableModel) tablaBebidas.getModel();
+        DefaultTableModel modelo_pedidos = (DefaultTableModel) tablaCocina.getModel();
 
         //int Tamaño = Lista_Auxiliar.getTamaño();
         //Object[] Vector = new String[Tamaño];
@@ -678,46 +637,47 @@ public class VistaMenu extends javax.swing.JFrame {
             Vector[k] = Lista_Auxiliar.getPosicion(k).getInfo();
         }
 
-        JComboBox Combo = new JComboBox(Vector);
+        /*JComboBox Combo = new JComboBox(Vector);
         TableColumn Columna_a_cambiar = Tabla_Cocina.getColumnModel().getColumn(1);
         TableCellEditor Editor_celda = new DefaultCellEditor(Combo);
         Columna_a_cambiar.setCellEditor(Editor_celda);
          */
-        String hora = Reloj.lblReloj.getText();//Captura del tiempo actual en el que se ordena el pedido para cocina 
+        horaActual = Reloj.lblReloj.getText();//Captura del tiempo actual en el que se ordena el pedido para cocina 
 
         try {
 
-            System.out.println("V: " + mesasJList.getSelectedValue());
-
-            if (!(mesasJList.getSelectedValue() == null)) {
+            if (mesasJList.getSelectedValue() != null) {
                 //Aqui se Llena la tabla cocina 
-                modelo_pedidos.addRow(new Object[]{mesasJList.getSelectedValue(), false, hora});
+                modelo_pedidos.addRow(new Object[]{mesasJList.getSelectedValue(), false, horaActual});
+
+                reinciarValoresDeLasTablas(modeloTablaPlatoPrincipal);//Lo coloco aqui para que solo se reinicien los valores de las tablas para cuando se cumplan todas las condiciones de realizar un pedido.
+                reinciarValoresDeLasTablas(modeloTablaPostres);
+                reinciarValoresDeLasTablas(modeloTablaBebidas);
             } else {
 
                 JOptionPane.showMessageDialog(this, "Por favor indique una mesa a la cual se le asigne un pedido.");
             }
-
         } catch (ArrayIndexOutOfBoundsException e) {
 
             JOptionPane.showMessageDialog(this, "Por favor indique un plato o una bebida para realizar el pedido.");
         }
-
     }
 
-    private void Llenar_tabla_de_resultado_de_pedidos() {
+    void reinciarValoresDeLasTablas(DefaultTableModel modelo) {
 
-        DefaultTableModel tabla_resultados = (DefaultTableModel) resultadoPedidos.getModel();
+        for (int k = 0; k < modelo.getRowCount(); k++) {
 
-        tabla_resultados.setValueAt("Preparando", tabla_resultados.getRowCount() - 1, 2);
+            //Aca debo colocar la creacion y llenado de la lista auxiliar, que me servira para poder colocar el JComboBox en la tabla cocina.
+            modelo.setValueAt(0, k, 3);
+        }
     }
 
-    public static void main(String args[]) {
+    void agregarFilaATablaResultadoDePedidos() {
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VistaMenu().setVisible(true);
-            }
-        });
+        tablaResultados = (DefaultTableModel) resultadoPedidos.getModel();
+
+        tablaResultados.addRow(new Object[]{mesasJList.getSelectedValue(), "0:00", "Preparando"});
+        tablaResultados.addRow(new Object[]{mesasJList.getSelectedValue(), "0:00", "Preparando"});
     }
 
     /**
@@ -729,10 +689,6 @@ public class VistaMenu extends javax.swing.JFrame {
      */
     private boolean calcularDiferenciaDeTiempos(String inicial, String actual) {
 
-        System.out.println("Inicial: " + inicial);
-        System.out.println("Final: " + actual);
-        System.out.println("Estoy en el cambio del pedido de una mesa.");
-
         String ini = inicial.substring(0, inicial.length() - 3);
         String fin = actual.substring(0, actual.length() - 3);
 
@@ -741,7 +697,6 @@ public class VistaMenu extends javax.swing.JFrame {
 
         int inicial1 = Integer.parseInt(vec0[1]) * 60 * 1000 + Integer.parseInt(vec0[2]) * 1000;
         int final2 = Integer.parseInt(vec1[1]) * 60 * 1000 + Integer.parseInt(vec1[2]) * 1000;
-        System.out.println("total: " + (final2 - inicial1));
         if (final2 - inicial1 <= 10000) {
             return true;
         } else {
@@ -749,6 +704,25 @@ public class VistaMenu extends javax.swing.JFrame {
         }
     }
 
+    void eliminarFilaDeUnaTabla(DefaultTableModel modelo, String datoACompar, int columna) {
+
+        for (int k = 0; k < modelo.getRowCount(); k++) {
+
+            if (modelo.getValueAt(k, columna).equals(datoACompar)) {
+
+                modelo.removeRow(k);
+            }
+        }
+    }
+
+    public static void main(String args[]) {
+
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new VistaMenu().setVisible(true);
+            }
+        });
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Aceptar;
     private javax.swing.JButton botonCancelar;

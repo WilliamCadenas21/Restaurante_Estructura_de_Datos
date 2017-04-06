@@ -2,10 +2,10 @@ package Controlador;
 
 import Vista.Reloj;
 import Vista.primerIngresoGerente;
-import Modelo.Bebidas;
+import Modelo.Bebida;
 import Modelo.Gerente;
 import Modelo.Mesero;
-import Modelo.platoPrincipal;
+import Modelo.PlatoPrincipal;
 import Modelo.Postre;
 import java.io.*;
 
@@ -73,7 +73,7 @@ public class Restaurante {
         int str2 = Integer.parseInt(String.valueOf(List.getPosicion(1).getInfo()));
         int str3 = Integer.parseInt(String.valueOf(List.getPosicion(2).getInfo()));
 
-        Bebidas bebidas = new Bebidas(str1, str2, str3);
+        Bebida bebidas = new Bebida(str1, str2, str3);
 
         listaDeBebidas.Agregar(bebidas);
     }
@@ -83,7 +83,7 @@ public class Restaurante {
         int str2 = Integer.parseInt(String.valueOf(List.getPosicion(1).getInfo()));
         int str3 = Integer.parseInt(String.valueOf(List.getPosicion(2).getInfo()));
 
-        listaDePlatos.Agregar(new platoPrincipal(str1, str3, str3));
+        listaDePlatos.Agregar(new PlatoPrincipal(str1, str3, str3));
     }
 
     public static void comprobarIngresosAnteriores() {
@@ -106,7 +106,7 @@ public class Restaurante {
 
                 if (Resultado.getPosicion(1).getInfo().equals("Ya ingreso un mesero")) {
  
-                    new Vista.VistaMenu().setVisible(true);
+                    new Vista.logingDeMeseros().setVisible(true);
                 } else {
 
                     new Vista.vistaAgregarEmpleados().setVisible(true);

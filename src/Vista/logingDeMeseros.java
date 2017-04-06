@@ -1,7 +1,7 @@
 package Vista;
 
 import java.io.*;
-import Controlador.Lista;
+import Modelo.Mesero;
 
 public class logingDeMeseros extends javax.swing.JFrame {
 
@@ -115,39 +115,31 @@ public class logingDeMeseros extends javax.swing.JFrame {
         if (User_Text.getText().equals("")) {
 
             javax.swing.JOptionPane.showMessageDialog(this, "Ingrese su usuario antes de proceder.");
-
         } else {
-
-            System.out.println("u: " + Modelo.Mesero.Encontro_Usuario);
             
-            Modelo.Mesero m = (Modelo.Mesero) Controlador.Restaurante.listaDeEmpleados.getPosicion(Modelo.Mesero.Indice_Lista).getInfo();
+            Mesero mesero = (Mesero) Controlador.Restaurante.listaDeEmpleados.getPosicion(Mesero.indiceLista).getInfo();
             
-            if (Modelo.Mesero.Encontro_Usuario == true && m.getContraseña().equals(Password_Text.getText())) {//Me permite la comprobacion de que si un usuario existe y si la contraseña es correcta.
+            if (Mesero.encontroUsuario == true && mesero.getContraseña().equals(Password_Text.getText())) {//Me permite la comprobacion de que si un usuario existe y si la contraseña es correcta.
 
-                VistaMenu Frame_Menu = new VistaMenu();
-
-                Frame_Menu.setVisible(true);
+                new VistaMenu().setVisible(true);    
                 
+                new VistaMenu().setTitle(mesero.getNombre());
             } else {
 
                 javax.swing.JOptionPane.showMessageDialog(this, "Usuario inexistente");
-
             }
-
         }
-
     }//GEN-LAST:event_Acept_Button_For_loginActionPerformed
 
     
     
     private void User_TextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_User_TextKeyPressed
 
-        Modelo.Mesero.Comprobacion(User_Text.getText() + evt.getKeyChar(), 0);
+        Modelo.Mesero.comprobacion(User_Text.getText() + evt.getKeyChar(), 0);
 
-        if (true == Modelo.Mesero.Encontro_Usuario) {
+        if (true == Mesero.encontroUsuario) {
 
-            System.out.println("Encontro el usuario");
-
+            Password_Text.setEditable(true);
         }
 
     }//GEN-LAST:event_User_TextKeyPressed

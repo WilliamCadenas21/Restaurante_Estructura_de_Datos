@@ -37,7 +37,7 @@ public class Postre {
        
     //Carbohidratos
        
-       public int getCarboidratos(){
+       public int getCarbohidratos(){
        
            return Carbohidratos;
        

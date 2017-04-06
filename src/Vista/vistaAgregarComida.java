@@ -1,8 +1,8 @@
 package Vista;
 
 import Modelo.Postre;
-import Modelo.Bebidas;
-import Modelo.platoPrincipal;
+import Modelo.Bebida;
+import Modelo.PlatoPrincipal;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -168,14 +168,14 @@ public class vistaAgregarComida extends javax.swing.JFrame {
 
                     System.out.println("ESTOY EN PLATOS PRINCIPALES");
                     
-                    listaDePlatos.Agregar(new platoPrincipal(foodTextName.getText(), Integer.parseInt(foodTextPrice.getText()), Integer.parseInt(foodTextFat.getText())));
+                    listaDePlatos.Agregar(new PlatoPrincipal(foodTextName.getText(), Integer.parseInt(foodTextPrice.getText()), Integer.parseInt(foodTextFat.getText())));
 
-                    platoPrincipal p = (platoPrincipal) listaDePlatos.getPosicion(listaDePlatos.getTamaño() - 1).getInfo();
+                    PlatoPrincipal p = (PlatoPrincipal) listaDePlatos.getPosicion(listaDePlatos.getTamaño() - 1).getInfo();
                     
                     escritorX.newLine();
                     escritorX.write(p.getNombre() + "|");
-                    escritorX.write(String.valueOf(p.getprecio()) + "|");
-                    escritorX.write(String.valueOf(p.getCarboidratos()) + "|");
+                    escritorX.write(String.valueOf(p.getPrecio()) + "|");
+                    escritorX.write(String.valueOf(p.getCarbohidratos()) + "|");
 
                     escritorX.close();
 
@@ -195,7 +195,7 @@ public class vistaAgregarComida extends javax.swing.JFrame {
                     escritorX.newLine();
                     escritorX.write(po.getNombre() + "|");
                     escritorX.write(String.valueOf(po.getPrecio()) + "|");
-                    escritorX.write(String.valueOf(po.getCarboidratos()) + "|");
+                    escritorX.write(String.valueOf(po.getCarbohidratos()) + "|");
  
                     escritorX.close();
                     break;
@@ -204,16 +204,16 @@ public class vistaAgregarComida extends javax.swing.JFrame {
                     
                     System.out.println("ESTOY EN PLATOS PRINCIPALES");
                     
-                    listaDeBebidas.Agregar(new Bebidas(foodTextName.getText(), Integer.parseInt(foodTextPrice.getText()), Integer.parseInt(foodTextFat.getText())));
+                    listaDeBebidas.Agregar(new Bebida(foodTextName.getText(), Integer.parseInt(foodTextPrice.getText()), Integer.parseInt(foodTextFat.getText())));
 
                     escritor = new FileWriter(archivoBebidas, true);
                     escritorX = new BufferedWriter(escritor);
 
-                    Bebidas b = (Bebidas) listaDeBebidas.getPosicion(listaDeBebidas.getTamaño() - 1).getInfo();
+                    Bebida b = (Bebida) listaDeBebidas.getPosicion(listaDeBebidas.getTamaño() - 1).getInfo();
 
                     escritorX.newLine();
                     escritorX.write(b.getNombre() + "|");
-                    escritorX.write(String.valueOf(b.getprecio()) + "|");
+                    escritorX.write(String.valueOf(b.getPrecio()) + "|");
                     escritorX.write(String.valueOf(b.getCarbohidratos()) + "|");
                     
                     escritorX.close();

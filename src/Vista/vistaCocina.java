@@ -1,6 +1,7 @@
 package Vista;
 
 import Controlador.Lista;
+import static Vista.VistaMenu.resultadoPedidos;
 import javax.swing.table.DefaultTableModel;
 
 public class vistaCocina extends javax.swing.JFrame {
@@ -22,7 +23,7 @@ public class vistaCocina extends javax.swing.JFrame {
 
         Comida_Combobox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Tabla_Cocina = new javax.swing.JTable();
+        tablaCocina = new javax.swing.JTable();
         Aceptar = new javax.swing.JButton();
 
         Comida_Combobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -31,7 +32,7 @@ public class vistaCocina extends javax.swing.JFrame {
         setName("Cocina"); // NOI18N
         setResizable(false);
 
-        Tabla_Cocina.setModel(new javax.swing.table.DefaultTableModel(
+        tablaCocina.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -54,11 +55,11 @@ public class vistaCocina extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(Tabla_Cocina);
-        if (Tabla_Cocina.getColumnModel().getColumnCount() > 0) {
-            Tabla_Cocina.getColumnModel().getColumn(0).setResizable(false);
-            Tabla_Cocina.getColumnModel().getColumn(1).setResizable(false);
-            Tabla_Cocina.getColumnModel().getColumn(2).setResizable(false);
+        jScrollPane1.setViewportView(tablaCocina);
+        if (tablaCocina.getColumnModel().getColumnCount() > 0) {
+            tablaCocina.getColumnModel().getColumn(0).setResizable(false);
+            tablaCocina.getColumnModel().getColumn(1).setResizable(false);
+            tablaCocina.getColumnModel().getColumn(2).setResizable(false);
         }
 
         Aceptar.setText("Aceptar");
@@ -95,8 +96,7 @@ public class vistaCocina extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarActionPerformed
-
-        Resultado_de_pedidos();
+        resultadoDePedidos();
         Factura();
     }//GEN-LAST:event_AceptarActionPerformed
 
@@ -108,26 +108,25 @@ public class vistaCocina extends javax.swing.JFrame {
         }
     }
 
-    void Resultado_de_pedidos() {
+    void resultadoDePedidos() {
 
-        DefaultTableModel tablaResultado = (DefaultTableModel) Tabla_Cocina.getModel();
+        DefaultTableModel tablaResultadoPedidoCocina = (DefaultTableModel) tablaCocina.getModel();
         
         this.contenedorAuxiliar = new Lista();//Borra toda la informacion de la lista, para que asi no me guarde informacion correspodiente de los procesos anteriores.
+        int prueba = 0;
+        for (int i = 0; i < tablaResultadoPedidoCocina.getRowCount(); i++) {
 
-        for (int i = 0; i < tablaResultado.getRowCount(); i++) {
+            if (tablaResultadoPedidoCocina.getValueAt(i, 1).toString().equals("true")) {
 
-            System.out.println("Resultado: " + tablaResultado.getValueAt(i, 1));
-
-            if (tablaResultado.getValueAt(i, 1).toString().equals("true")) {
-
-                try {//Se utiliza un try-catch para evitar se salga por consola el error producido cuando el usurio presiona cancelar o cierra el showImputMessage.
+                try {//Se utiliza un try-catch para evitar se salga por consola el error producido cuando el usurio presiona cancelar o cierra el showImputDialog.
 
                     Object t = javax.swing.JOptionPane.showConfirmDialog(this, "Esta seguro?");
 
                     if (t.toString().equals("0")) {//Si la opcion seleccionada es "SI".
-
-                        this.contenedorAuxiliar.Agregar(tablaResultado.getValueAt(i, 0));//Me permite recolectar las filas de las cuales se ha seleccionado para poder mostrar que el plato ya esta listo.
-                        tablaResultado.removeRow(i);
+                        
+                        this.contenedorAuxiliar.Agregar(tablaResultadoPedidoCocina.getValueAt(i, 0));//Me permite recolectar las filas de las cuales se ha seleccionado para poder mostrar que el plato ya esta listo.
+                        tablaResultadoPedidoCocina.removeRow(i);
+                        prueba++;
                     }
 
                 } catch (Exception e) {
@@ -136,7 +135,7 @@ public class vistaCocina extends javax.swing.JFrame {
             }
         }
 
-        DefaultTableModel tablaResultadoPedidos = (DefaultTableModel) VistaMenu.resultadoPedidos.getModel();
+        DefaultTableModel tablaResultadoPedidos = (DefaultTableModel) resultadoPedidos.getModel();
 
         for (int i = 0; i < this.contenedorAuxiliar.getTamaño(); i++) {
 
@@ -162,7 +161,7 @@ public class vistaCocina extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Aceptar;
     public static javax.swing.JComboBox<String> Comida_Combobox;
-    public static javax.swing.JTable Tabla_Cocina;
     private javax.swing.JScrollPane jScrollPane1;
+    public static javax.swing.JTable tablaCocina;
     // End of variables declaration//GEN-END:variables
 }
