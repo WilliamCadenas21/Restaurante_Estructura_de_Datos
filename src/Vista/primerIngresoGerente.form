@@ -29,13 +29,13 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="Password_Text_Confirmation" alignment="1" max="32767" attributes="0"/>
-                          <Component id="Password_Text" alignment="1" max="32767" attributes="0"/>
+                          <Component id="passwordTextConfirmation" alignment="1" max="32767" attributes="0"/>
+                          <Component id="passwordText" alignment="1" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="Address_Text" alignment="0" min="-2" pref="322" max="-2" attributes="0"/>
+                                  <Component id="addressText" alignment="0" min="-2" pref="322" max="-2" attributes="0"/>
                                   <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -49,18 +49,18 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="Name_Text" min="-2" pref="322" max="-2" attributes="0"/>
+                                  <Component id="nameText" min="-2" pref="322" max="-2" attributes="0"/>
                                   <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="Phone_Text" alignment="0" min="-2" pref="322" max="-2" attributes="0"/>
+                                  <Component id="phoneText" alignment="0" min="-2" pref="322" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="Age_Spinner" min="-2" pref="46" max="-2" attributes="0"/>
+                              <Component id="ageSpinner" min="-2" pref="46" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="131" max="-2" attributes="0"/>
-                              <Component id="Boton_Aceptar" min="-2" max="-2" attributes="0"/>
+                              <Component id="botonAceptar" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -83,39 +83,39 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="Name_Text" min="-2" max="-2" attributes="0"/>
+              <Component id="nameText" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-              <Component id="Age_Spinner" min="-2" max="-2" attributes="0"/>
+              <Component id="ageSpinner" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="Phone_Text" min="-2" max="-2" attributes="0"/>
+              <Component id="phoneText" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="Address_Text" min="-2" max="-2" attributes="0"/>
+              <Component id="addressText" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="Password_Text" min="-2" max="-2" attributes="0"/>
+              <Component id="passwordText" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="Password_Text_Confirmation" min="-2" max="-2" attributes="0"/>
+              <Component id="passwordTextConfirmation" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="26" max="32767" attributes="0"/>
-              <Component id="Boton_Aceptar" min="-2" max="-2" attributes="0"/>
+              <Component id="botonAceptar" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="Name_Text">
+    <Component class="javax.swing.JTextField" name="nameText">
       <Events>
-        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="Name_TextKeyPressed"/>
-        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="Name_TextKeyReleased"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="nameTextKeyPressed"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="nameTextKeyReleased"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
@@ -128,9 +128,9 @@
         <Property name="text" type="java.lang.String" value="Telefono:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="Phone_Text">
+    <Component class="javax.swing.JTextField" name="phoneText">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Phone_TextActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="phoneTextActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
@@ -149,31 +149,31 @@
         <Property name="text" type="java.lang.String" value="Contrase&#xf1;a:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JPasswordField" name="Password_Text">
+    <Component class="javax.swing.JPasswordField" name="passwordText">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
         <Property name="text" type="java.lang.String" value="Contrase&#xf1;a:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JPasswordField" name="Password_Text_Confirmation">
+    <Component class="javax.swing.JPasswordField" name="passwordTextConfirmation">
     </Component>
-    <Component class="javax.swing.JButton" name="Boton_Aceptar">
+    <Component class="javax.swing.JButton" name="botonAceptar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Aceptar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Boton_AceptarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonAceptarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JSpinner" name="Age_Spinner">
+    <Component class="javax.swing.JSpinner" name="ageSpinner">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
         <Property name="text" type="java.lang.String" value="Edad:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="Address_Text">
+    <Component class="javax.swing.JTextField" name="addressText">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>

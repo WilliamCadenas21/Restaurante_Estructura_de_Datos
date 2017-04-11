@@ -1,11 +1,10 @@
 package Modelo;
 
-public class Postre {
-
+public class PlatoPrincipal {
     private String nombre, tiempo;
     private int precio, carbohidratos;
 
-    public Postre(String nombre, int precio, int carbohidratos, String Tiempo) {
+    public PlatoPrincipal(String nombre, int precio, int carbohidratos, String Tiempo) {
 
         this.nombre = nombre;
         this.precio = precio;

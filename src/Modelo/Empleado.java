@@ -12,12 +12,8 @@ public class Empleado {
         this.Edad = Edad;
     }
 
-
-
     public void setNombre(String Nombre) {
-
         this.Nombre = Nombre;
-
     }
 
     public void setDireccion(String Direccion) {
@@ -27,8 +23,6 @@ public class Empleado {
     public void setTelefono(String Telefono) {
         this.Telefono = Telefono;
     }
-
- 
 
     //Nombre
     public void setEdad(int Edad) {
@@ -41,24 +35,16 @@ public class Empleado {
 
     //Edad
     public int getEdad() {
-
         return Edad;
-
     }
 
     //Telefono
     public String getTelefono() {
-
         return Telefono;
-
     }
 
     //Direccion
     public String getDireccion() {
-
         return Direccion;
-
     }
-
- 
 }

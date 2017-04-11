@@ -1,22 +1,21 @@
 package Vista;
 
-import java.io.*;
-import Controlador.Lista;
+import Modelo.Mesero;
+import javax.swing.JOptionPane;
 
 public class logingDeMeseros extends javax.swing.JFrame {
-
-    File Archivo_Meseros = Vista.vistaAgregarEmpleados.Archivo_Meseros;
     /*
      Estructura Archivo_empleados
     
      Name    |   Phone   |   Address   |   Age   |   Cargo   |   Password    |
      */
 
+    boolean comprobacion;
+
     public logingDeMeseros() {
         initComponents();
 
-        Password_Text.setEditable(false);
-
+        passwordText.setEditable(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -24,11 +23,11 @@ public class logingDeMeseros extends javax.swing.JFrame {
     private void initComponents() {
 
         Menu_Gerente = new javax.swing.JFrame();
-        User_Text = new javax.swing.JTextField();
+        userText = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         Acept_Button_For_login = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        Password_Text = new javax.swing.JPasswordField();
+        passwordText = new javax.swing.JPasswordField();
 
         javax.swing.GroupLayout Menu_GerenteLayout = new javax.swing.GroupLayout(Menu_Gerente.getContentPane());
         Menu_Gerente.getContentPane().setLayout(Menu_GerenteLayout);
@@ -45,14 +44,14 @@ public class logingDeMeseros extends javax.swing.JFrame {
         setTitle("Meseros");
         setResizable(false);
 
-        User_Text.addActionListener(new java.awt.event.ActionListener() {
+        userText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                User_TextActionPerformed(evt);
+                userTextActionPerformed(evt);
             }
         });
-        User_Text.addKeyListener(new java.awt.event.KeyAdapter() {
+        userText.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                User_TextKeyPressed(evt);
+                userTextKeyPressed(evt);
             }
         });
 
@@ -76,7 +75,7 @@ public class logingDeMeseros extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(User_Text)
+                            .addComponent(userText)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
@@ -88,7 +87,7 @@ public class logingDeMeseros extends javax.swing.JFrame {
                         .addGap(0, 131, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(Password_Text)))
+                        .addComponent(passwordText)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -97,11 +96,11 @@ public class logingDeMeseros extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(User_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(userText, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Password_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(passwordText, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Acept_Button_For_login)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -112,49 +111,46 @@ public class logingDeMeseros extends javax.swing.JFrame {
 
     private void Acept_Button_For_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Acept_Button_For_loginActionPerformed
 
-        if (User_Text.getText().equals("")) {
+        if (userText.getText().equals("")) {
 
-            javax.swing.JOptionPane.showMessageDialog(this, "Ingrese su usuario antes de proceder.");
-
+            JOptionPane.showMessageDialog(this, "Ingrese su usuario antes de proceder.");
         } else {
 
-            System.out.println("u: " + Modelo.Mesero.Encontro_Usuario);
-            
-            Modelo.Mesero m = (Modelo.Mesero) Controlador.Restaurante.listaDeEmpleados.getPosicion(Modelo.Mesero.Indice_Lista).getInfo();
-            
-            if (Modelo.Mesero.Encontro_Usuario == true && m.getContraseña().equals(Password_Text.getText())) {//Me permite la comprobacion de que si un usuario existe y si la contraseña es correcta.
+            Mesero mesero = (Mesero) Controlador.Restaurante.listaDeEmpleados.getPosicion(Mesero.indiceLista).getInfo();
+            if (this.comprobacion == true) {//Me permite la comprobacion de que si un usuario existe y si la contraseña es correcta.
 
-                VistaMenu Frame_Menu = new VistaMenu();
+                if (mesero.getContraseña().equals(passwordText.getText())) {
 
-                Frame_Menu.setVisible(true);
+                    VistaMenu vistaMenu = new VistaMenu();
+                    vistaMenu.setTitle(mesero.getNombre());
+                    vistaMenu.setVisible(true);
+                    this.dispose();
+                }else{
                 
+                    JOptionPane.showMessageDialog(this, "Contraseña incorrecta.");
+                }
             } else {
 
-                javax.swing.JOptionPane.showMessageDialog(this, "Usuario inexistente");
-
+                JOptionPane.showMessageDialog(this, "Usuario inexistente");
             }
-
         }
-
     }//GEN-LAST:event_Acept_Button_For_loginActionPerformed
 
-    
-    
-    private void User_TextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_User_TextKeyPressed
 
-        Modelo.Mesero.Comprobacion(User_Text.getText() + evt.getKeyChar(), 0);
+    private void userTextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_userTextKeyPressed
 
-        if (true == Modelo.Mesero.Encontro_Usuario) {
+        this.comprobacion = Modelo.Mesero.comprobacion(userText.getText() + evt.getKeyChar(), 0);
 
-            System.out.println("Encontro el usuario");
+        if (this.comprobacion == true) {
 
+            passwordText.setEditable(true);
         }
 
-    }//GEN-LAST:event_User_TextKeyPressed
+    }//GEN-LAST:event_userTextKeyPressed
 
-    private void User_TextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_User_TextActionPerformed
+    private void userTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userTextActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_User_TextActionPerformed
+    }//GEN-LAST:event_userTextActionPerformed
 
     public static void main(String args[]) {
 
@@ -168,9 +164,9 @@ public class logingDeMeseros extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Acept_Button_For_login;
     public static javax.swing.JFrame Menu_Gerente;
-    private javax.swing.JPasswordField Password_Text;
-    private javax.swing.JTextField User_Text;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPasswordField passwordText;
+    private javax.swing.JTextField userText;
     // End of variables declaration//GEN-END:variables
 }

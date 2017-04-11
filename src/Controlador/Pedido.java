@@ -3,27 +3,27 @@ package Controlador;
 
 public class Pedido {
 
-    private String Mesa;    
-    private int Precio;
-    private Lista Lista_comida = new Lista();
+    private String mesa;    
+    private int precio;
+    private Lista listaComida = new Lista();
     
-    public Pedido(String Mesa, Lista Lista_comida, int Precio){
+    public Pedido(String mesa, Lista listaCcomida, int precio){
         
-        this.Lista_comida = Lista_comida;
-        this.Mesa = Mesa;
-        this.Precio = Precio;
+        this.listaComida = listaCcomida;
+        this.mesa = mesa;
+        this.precio = precio;
     }
 
     public String getMesa() {
-        return Mesa;
+        return mesa;
     }
 
     public int getPrecio() {
-        return Precio;
+        return precio;
     }
 
     public Lista getListaComida(){
     
-        return this.Lista_comida;
+        return this.listaComida;
     }
 }

@@ -1,26 +1,24 @@
 package Modelo;
-
-
 public class Mesa {
-   
-    private int Numero_mesa, Total;
 
-    public Mesa(int numero_mesa, int Total){
-        
-        this.Total = Total;
-        Numero_mesa = numero_mesa;
-    
+    private int numeroMesa, total;
+
+    public Mesa(int numeroMesa, int total) {
+        this.total = total;
+        this.numeroMesa = numeroMesa;
     }
-    
+
     //Numero de mesa
-    
-    public int getNumeroMesa(){
-        return this.Numero_mesa;
+    public int getNumeroMesa() {
+        return this.numeroMesa;
     }
-    
+
     //Total recaudado de la mesa
-    
-    public int getTotalRecaudado(){
-        return this.Total;
+    public int getTotal() {
+        return this.total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
     }
 }
