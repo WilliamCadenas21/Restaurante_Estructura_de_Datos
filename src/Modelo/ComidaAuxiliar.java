@@ -1,11 +1,8 @@
 package Modelo;
-
-
 public class ComidaAuxiliar {
     
-    private String tipo, nombrePlato;
-    private int precio, cantidad;
-    
+    private final String tipo, nombrePlato;
+    private int precio, cantidad;   
     public ComidaAuxiliar(String Tipo, String NombrePlato, int Precio, int Cantidad){       
         this.cantidad = Cantidad;
         this.tipo = Tipo;
@@ -28,6 +25,4 @@ public class ComidaAuxiliar {
     public int getPrecio() {
         return this.precio;
     }
-    
-    
 }

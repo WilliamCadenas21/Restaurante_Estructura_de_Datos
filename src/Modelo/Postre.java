@@ -1,57 +1,43 @@
 package Modelo;
 
-
 public class Postre {
-    
-    private String Nombre, Tiempo;
-    private int Precio, Carbohidratos;
-    
-    public Postre(String nombre, int precio, int carbohidratos, String Tiempo){
-    
-        Nombre = nombre;
-        Precio = precio;
-        Carbohidratos = carbohidratos;
-        this.Tiempo = Tiempo;
+
+    private String nombre, tiempo;
+    private int precio, carbohidratos;
+
+    public Postre(String nombre, int precio, int carbohidratos, String Tiempo) {
+
+        this.nombre = nombre;
+        this.precio = precio;
+        this.carbohidratos = carbohidratos;
+        this.tiempo = Tiempo;
     }
-    
-   //Nombre
-    
-       public String getNombre(){
-       
-           return Nombre;
-           
-       }
-       
+
+    //Nombre
+    public String getNombre() {
+        return this.nombre;
+    }
+
     //Precio
-       
-       public int getPrecio(){
-       
-           return Precio;
-       
-       }
-    
-       public void setPrecio(int precio){
-       
-           this.Precio = precio;
-       }
-       
+    public int getPrecio() {
+        return this.precio;
+    }
+
+    public void setPrecio(int precio) {
+        this.precio = precio;
+    }
+
     //Carbohidratos
-       
-       public int getCarbohidratos(){
-       
-           return Carbohidratos;
-       
-       } 
-       
+    public int getCarbohidratos() {
+        return carbohidratos;
+    }
+
     //Tiempo
-       
-       public String getTiempo(){
-           
-           return this.Tiempo;
-       }
-       
-       public void setTiempo(String tiempo){
-           
-           this.Tiempo = tiempo;
-       }
+    public String getTiempo() {
+        return this.tiempo;
+    }
+
+    public void setTiempo(String tiempo) {
+        this.tiempo = tiempo;
+    }
 }

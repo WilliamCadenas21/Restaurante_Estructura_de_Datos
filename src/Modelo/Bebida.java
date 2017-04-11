@@ -1,40 +1,26 @@
 package Modelo;
+public class Bebida {
 
-
-public class Bebida{
-    
-    private String Nombre;
-    private int Precio, Carbohidratos;
-    
-    public Bebida( String nombre, int precio, int carbohidratos){
-    
-        Nombre = nombre;
-        Precio = precio;
-        Carbohidratos = carbohidratos;
-        
+    private String nombre;
+    private int precio, carbohidratos;
+    public Bebida(String nombre, int precio, int carbohidratos) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.carbohidratos = carbohidratos;
     }
-    
+
     //Nombre
-    
-       public String getNombre(){
-       
-           return Nombre; 
-           
-       }
-       
+    public String getNombre() {
+        return this.nombre;
+    }
+
     //Precio
-       
-       public int getPrecio(){
-       
-           return Precio;
-       }
-    
+    public int getPrecio() {
+        return this.precio;
+    }
+
     //Carbohidratos
-       
-       public int getCarbohidratos(){
-       
-           return Carbohidratos;
-       
-       }
-    
+    public int getCarbohidratos() {
+        return this.carbohidratos;
+    }
 }
