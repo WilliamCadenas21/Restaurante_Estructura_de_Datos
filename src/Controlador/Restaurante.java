@@ -80,7 +80,7 @@ public class Restaurante {
         int str2 = Integer.parseInt(String.valueOf(List.getPosicion(1).getInfo()));
         int str3 = Integer.parseInt(String.valueOf(List.getPosicion(2).getInfo()));
 
-        listaDePlatos.Agregar(new PlatoPrincipal(str1, str2, str3));
+        listaDePlatos.Agregar(new PlatoPrincipal(str1, str2, str3, "0:00"));
     }
 
     static void comprobarIngresosAnteriores() {

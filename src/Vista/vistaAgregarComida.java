@@ -168,7 +168,7 @@ public class vistaAgregarComida extends javax.swing.JFrame {
 
                     System.out.println("ESTOY EN PLATOS PRINCIPALES");
                     
-                    listaDePlatos.Agregar(new PlatoPrincipal(foodTextName.getText(), Integer.parseInt(foodTextPrice.getText()), Integer.parseInt(foodTextFat.getText())));
+                    listaDePlatos.Agregar(new PlatoPrincipal(foodTextName.getText(), Integer.parseInt(foodTextPrice.getText()), Integer.parseInt(foodTextFat.getText()), (String.valueOf(timerMinutos) + ":" + String.valueOf(timerSegundos))));
 
                     PlatoPrincipal p = (PlatoPrincipal) listaDePlatos.getPosicion(listaDePlatos.getTamaño() - 1).getInfo();
                     
