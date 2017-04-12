@@ -9,9 +9,6 @@ public class logingDeMeseros extends javax.swing.JFrame {
     
      Name    |   Phone   |   Address   |   Age   |   Cargo   |   Password    |
      */
-
-    boolean comprobacion;
-
     public logingDeMeseros() {
         initComponents();
 
@@ -117,7 +114,7 @@ public class logingDeMeseros extends javax.swing.JFrame {
         } else {
 
             Mesero mesero = (Mesero) Controlador.Restaurante.listaDeEmpleados.getPosicion(Mesero.indiceLista).getInfo();
-            if (this.comprobacion == true) {//Me permite la comprobacion de que si un usuario existe y si la contraseña es correcta.
+            if (Mesero.variableComprobacionUsuario.equals("true")) {//Me permite la comprobacionUsuario de que si un usuario existe y si la contraseña es correcta.
 
                 if (mesero.getContraseña().equals(passwordText.getText())) {
 
@@ -132,18 +129,17 @@ public class logingDeMeseros extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Usuario inexistente.");
             }
         }
+        
+        Mesero.variableComprobacionUsuario = "false";
     }//GEN-LAST:event_Acept_Button_For_loginActionPerformed
-
 
     private void userTextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_userTextKeyPressed
 
-        this.comprobacion = Modelo.Mesero.comprobacion(userText.getText() + evt.getKeyChar(), 0);
-
-        if (this.comprobacion == true) {
+        Mesero.comprobacionUsuario(userText.getText() + evt.getKeyChar(), 0);
+        if (Mesero.variableComprobacionUsuario.equals("true")) {
 
             passwordText.setEditable(true);
         }
-
     }//GEN-LAST:event_userTextKeyPressed
 
     private void userTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userTextActionPerformed
