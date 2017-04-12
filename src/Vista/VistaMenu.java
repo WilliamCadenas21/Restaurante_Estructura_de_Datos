@@ -628,15 +628,15 @@ public class VistaMenu extends javax.swing.JFrame {
                 System.out.println("Valor: " + valor);
                 if (valor > 0) {
 
-                    this.nombreDelPlato = String.valueOf(modelo.getValueAt(k, 0));
-                    this.precio = Integer.parseInt(String.valueOf(modelo.getValueAt(k, 1)));
-                    this.cantidad = Integer.parseInt(String.valueOf(modelo.getValueAt(k, 3)));
+                    nombreDelPlato = String.valueOf(modelo.getValueAt(k, 0));
+                    precio = Integer.parseInt(String.valueOf(modelo.getValueAt(k, 1)));
+                    cantidad = Integer.parseInt(String.valueOf(modelo.getValueAt(k, 3)));
 
-                    this.listaDePlatosDeUnPedido.Agregar(new ComidaAuxiliar(tipo, this.nombreDelPlato, this.precio, this.cantidad));//Primero llenó una lista de objetos con los platos pedidos
+                    listaDePlatosDeUnPedido.Agregar(new ComidaAuxiliar(tipo, nombreDelPlato, precio, cantidad));//Primero llenó una lista de objetos con los platos pedidos
                     //Precio total del visualizarPedido, sirve para realizar la factura.
                     //tipo Lista_comida_auxiliar para asi poder llenar la lista de pedidos, que me servira
                     //despues para la creacion de la factura y el cambio de visualizarPedido durante los primeros 5 minutos.    
-                    this.total = this.total + this.precio * this.cantidad;
+                    total = total + precio * cantidad;
                 }
             }
         } catch (Exception e) {
@@ -645,15 +645,16 @@ public class VistaMenu extends javax.swing.JFrame {
 
     void AgregarPedido() {
 
-        this.modeloTablaPlatoPrincipal = (DefaultTableModel) this.tablaPlatoPrincipal.getModel();
-        this.modeloTablaPostres = (DefaultTableModel) this.tablaPostre.getModel();
-        this.modeloTablaBebidas = (DefaultTableModel) this.tablaBebidas.getModel();
+        modeloTablaPlatoPrincipal = (DefaultTableModel) tablaPlatoPrincipal.getModel();
+        modeloTablaPostres = (DefaultTableModel) tablaPostre.getModel();
+        modeloTablaBebidas = (DefaultTableModel) tablaBebidas.getModel();
 
         AgregarPlatosAUnPedido(this.modeloTablaPlatoPrincipal, "Plato");
         AgregarPlatosAUnPedido(this.modeloTablaPostres, "Postre");
         AgregarPlatosAUnPedido(this.modeloTablaBebidas, "Bebida");
 
-        listaPedidos.Agregar(new Pedido(this.mesasJList.getSelectedValue(), listaDePlatosDeUnPedido, total));
+        listaPedidos.Agregar(new Pedido(this.mesasJList.getSelectedValue(), listaDePlatosDeUnPedido, total,horaActual,jLabelUsuario.getText()));
+        
         listaDePlatosDeUnPedido = new Lista();//Reinicio esta lista, porque de lo contrario me guadaria informacion de los platos antes pedidos.
     }
 
@@ -703,9 +704,9 @@ public class VistaMenu extends javax.swing.JFrame {
 
     void agregarFilaATablaResultadoDePedidos() {
 
-        this.modeloTablaResultadoPedido = (DefaultTableModel) this.resultadoPedidos.getModel();
-        this.modeloTablaResultadoPedido.addRow(new Object[]{this.mesasJList.getSelectedValue(), "Preparando", "Preparando"});
-
+        modeloTablaResultadoPedido = (DefaultTableModel) resultadoPedidos.getModel();
+        modeloTablaResultadoPedido.addRow(new Object[]{mesasJList.getSelectedValue(), "Preparando", "Preparando"});
+        System.out.println(mesasJList.getSelectedValue());
         llenarTablaDeCocina();
     }
 

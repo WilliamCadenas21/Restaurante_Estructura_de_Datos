@@ -1,24 +1,37 @@
 package Modelo;
+
+import Controlador.Lista;
+
 public class Mesa {
 
-    private int numeroMesa, total;
+    private Lista pedidos;
+    private String nuemroDeMesa;
+    private double totalGancias;
+    
+    
+    public Mesa(Lista pedidos, String nuemroDeMesa, double totalGancias) {
+        this.pedidos = pedidos;
+        this.nuemroDeMesa = nuemroDeMesa;
+        this.totalGancias = totalGancias;
+    } 
 
-    public Mesa(int numeroMesa, int total) {
-        this.total = total;
-        this.numeroMesa = numeroMesa;
+    public Lista getPedidos() {
+        return pedidos;
     }
 
-    //Numero de mesa
-    public int getNumeroMesa() {
-        return this.numeroMesa;
+    public void setPedidos(Lista pedidos) {
+        this.pedidos = pedidos;
     }
 
-    //Total recaudado de la mesa
-    public int getTotal() {
-        return this.total;
+    public String getNuemroDeMesa() {
+        return nuemroDeMesa;
     }
 
-    public void setTotal(int total) {
-        this.total = total;
+    public double getTotalGancias() {
+        return totalGancias;
     }
+
+    public void setTotalGancias(double totalGancias) {
+        this.totalGancias = totalGancias;
+    } 
 }

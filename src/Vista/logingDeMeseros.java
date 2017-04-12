@@ -4,6 +4,7 @@ import Modelo.Mesero;
 import javax.swing.JOptionPane;
 
 public class logingDeMeseros extends javax.swing.JFrame {
+
     /*
      Estructura Archivo_empleados
     
@@ -112,24 +113,28 @@ public class logingDeMeseros extends javax.swing.JFrame {
         if (userText.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Ingrese su usuario antes de proceder.");
         } else {
+            try {
+                Mesero mesero = (Mesero) Controlador.Restaurante.listaDeEmpleados.getPosicion(Mesero.indiceLista).getInfo();
+                if (Mesero.variableComprobacionUsuario.equals("true")) {//Me permite la comprobacionUsuario de que si un usuario existe y si la contraseña es correcta.
 
-            Mesero mesero = (Mesero) Controlador.Restaurante.listaDeEmpleados.getPosicion(Mesero.indiceLista).getInfo();
-            if (Mesero.variableComprobacionUsuario.equals("true")) {//Me permite la comprobacionUsuario de que si un usuario existe y si la contraseña es correcta.
+                    if (mesero.getContraseña().equals(passwordText.getText())) {
 
-                if (mesero.getContraseña().equals(passwordText.getText())) {
-
-                    VistaMenu vistaMenu = new VistaMenu();
-                    vistaMenu.setTitle(mesero.getNombre());
-                    vistaMenu.setVisible(true);
-                    this.dispose();
-                }else{
-                    JOptionPane.showMessageDialog(this, "Contraseña incorrecta.");
+                        VistaMenu vistaMenu = new VistaMenu();
+                        vistaMenu.setTitle(mesero.getNombre());
+                        vistaMenu.setVisible(true);
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Contraseña incorrecta.");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Usuario inexistente.");
                 }
-            } else {
-                JOptionPane.showMessageDialog(this, "Usuario inexistente.");
+            } catch (Exception e) {
+                System.out.println(e);
             }
+
         }
-        
+
         Mesero.variableComprobacionUsuario = "false";
     }//GEN-LAST:event_Acept_Button_For_loginActionPerformed
 
