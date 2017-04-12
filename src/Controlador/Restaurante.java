@@ -156,13 +156,11 @@ public class Restaurante {
 
         Lista Lista = new Lista();
         int inicio = 0, fin = 0;
-
         for (int j = 0; j < Registro.length(); j++) {
 
             if (Registro.substring(j, j + 1).equals("|")) {
 
                 Lista.Agregar(Registro.substring(inicio, fin));
-
                 inicio = fin + 1;
                 fin = fin + 1;
             } else {
@@ -172,19 +170,14 @@ public class Restaurante {
         }
         
         if (Tipo_de_lista.equals("Mesero")) {
-            
             agregarMesero(Lista);
         } else if (Tipo_de_lista.equals("Postre")) {
-            
             agregarPostre(Lista);
         } else if (Tipo_de_lista.equals("Bebida")) {
-            
             agregarBebida(Lista);
         } else if (Tipo_de_lista.equals("Plato")) {
-            
             agregarPlatoPrincipal(Lista);
         } else if (Tipo_de_lista.equals("Gerente")) {
-            
             agregarGerente(Lista);
         }
     }
