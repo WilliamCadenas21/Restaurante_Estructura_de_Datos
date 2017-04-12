@@ -5,6 +5,7 @@ import Controlador.Pedido;
 import Controlador.Restaurante;
 import Modelo.Bebida;
 import Modelo.ComidaAuxiliar;
+import Modelo.Mesero;
 import Modelo.PlatoPrincipal;
 import Modelo.Postre;
 import javax.swing.DefaultCellEditor;
@@ -28,7 +29,7 @@ public class VistaMenu extends javax.swing.JFrame {
 
     public VistaMenu() {
         initComponents();
-
+        jLabelUsuario.setText(((Mesero) Controlador.Restaurante.listaDeEmpleados.getPosicion(Mesero.indiceLista).getInfo()).getNombre());
         inicioFactura = "\t\t\t Restaurante La Prosperidad\n"
                 + "\t\t\tCalle Viva N° 123\n"
                 + Reloj.lblReloj.getText();
@@ -73,6 +74,8 @@ public class VistaMenu extends javax.swing.JFrame {
         resultadoPedidos = new javax.swing.JTable();
         jScrollPane7 = new javax.swing.JScrollPane();
         tablaFactura = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jLabelUsuario = new javax.swing.JLabel();
 
         mostrarFactura.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -380,21 +383,33 @@ public class VistaMenu extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Factura", jScrollPane7);
 
+        jLabel2.setText("Usuario:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelUsuario)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(13, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabelUsuario))
+                .addGap(18, 18, 18)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -757,6 +772,8 @@ public class VistaMenu extends javax.swing.JFrame {
     private javax.swing.JButton botonPagar;
     private javax.swing.JButton cambiarPedido;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabelUsuario;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

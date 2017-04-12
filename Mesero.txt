@@ -1,2 +1,2 @@
-Juan|20|3157567254|NO SE|n|
-roberto|2|23|45|123|
+Pedro|20|3157567254|Calle 23 No: 52-33|pedro|
+Roberto|21|3003808281|Calle 43 No: 51-31|roberto|

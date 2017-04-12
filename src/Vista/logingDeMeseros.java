@@ -113,7 +113,6 @@ public class logingDeMeseros extends javax.swing.JFrame {
     private void Acept_Button_For_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Acept_Button_For_loginActionPerformed
 
         if (userText.getText().equals("")) {
-
             JOptionPane.showMessageDialog(this, "Ingrese su usuario antes de proceder.");
         } else {
 
@@ -127,12 +126,10 @@ public class logingDeMeseros extends javax.swing.JFrame {
                     vistaMenu.setVisible(true);
                     this.dispose();
                 }else{
-                
                     JOptionPane.showMessageDialog(this, "Contraseña incorrecta.");
                 }
             } else {
-
-                JOptionPane.showMessageDialog(this, "Usuario inexistente");
+                JOptionPane.showMessageDialog(this, "Usuario inexistente.");
             }
         }
     }//GEN-LAST:event_Acept_Button_For_loginActionPerformed
@@ -150,7 +147,6 @@ public class logingDeMeseros extends javax.swing.JFrame {
     }//GEN-LAST:event_userTextKeyPressed
 
     private void userTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userTextActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_userTextActionPerformed
 
     public static void main(String args[]) {
