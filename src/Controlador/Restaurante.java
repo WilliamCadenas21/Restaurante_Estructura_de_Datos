@@ -18,20 +18,20 @@ public class Restaurante {
     public static Lista listaDePlatos = new Lista(), listaDePostres = new Lista(), listaDeBebidas = new Lista(), listaDeEmpleados = new Lista(), listaDeGerentes = new Lista();
 
     public static void main(String[] args) {
-        
+
         try {
-            
+
             llenarListas(listaDeGerentes, new File("Archivo_Gerente.txt"), "Gerente");
             llenarListas(listaDeEmpleados, new File("Mesero.txt"), "Mesero");
             llenarListas(listaDePlatos, new File("Platos principales.txt"), "Plato");
             llenarListas(listaDePostres, new File("Postres.txt"), "Postre");
             llenarListas(listaDeBebidas, new File("Bebidas.txt"), "Bebida");
         } catch (Exception e) {
-            
+
             e.printStackTrace();
         }
-        
-        new Reloj();        
+
+        new Reloj();
         comprobarIngresosAnteriores();
     }
 
@@ -80,7 +80,7 @@ public class Restaurante {
         int str2 = Integer.parseInt(String.valueOf(List.getPosicion(1).getInfo()));
         int str3 = Integer.parseInt(String.valueOf(List.getPosicion(2).getInfo()));
 
-        listaDePlatos.Agregar(new PlatoPrincipal(str1, str2, str3, "0:00"));
+        listaDePlatos.Agregar(new PlatoPrincipal(str1, str2, str3, "0:00", new Lista()));
     }
 
     static void comprobarIngresosAnteriores() {
@@ -101,7 +101,7 @@ public class Restaurante {
 
                 new Vista.LogingDeGerente().setVisible(true);
                 if (Resultado.getPosicion(1).getInfo().equals("Ya ingreso un mesero")) {
- 
+
                     new Vista.logingDeMeseros().setVisible(true);
                 } else {
 
@@ -111,8 +111,8 @@ public class Restaurante {
                 if (Resultado.getPosicion(2).getInfo().equals("Ya existen tres platos")) {
 
                     new Vista.vistaCocina().setVisible(true);
-                }else{
-                    
+                } else {
+
                     new Vista.vistaAgregarComida().setVisible(true);
                 }
 
@@ -127,40 +127,38 @@ public class Restaurante {
                 ventana.setVisible(true);
             }
         } catch (Exception e) {
-            
+
         }
     }
 
-    static void llenarListas(Lista lista, File archivo, String Tipo_de_lista) {
+    static void llenarListas(Lista lista, File archivo, String tipoDeLista) {
 
         try {
             FileReader fr = new FileReader(archivo);
             BufferedReader br = new BufferedReader(fr);
-            String line;
+            String linea;
+
             int i = 1;
-            
             while (br.ready()) {
                 i++;
-                line = br.readLine();
-                separacionMejorada(line, Tipo_de_lista);
+                linea = br.readLine();
+                separacionMejorada(linea, tipoDeLista, "|", 0);
             }
-            
             br.close();
         } catch (Exception e) {
-            
             e.printStackTrace();
         }
     }
 
-    static void separacionMejorada(String Registro, String Tipo_de_lista) {
+    static void separacionMejorada(String registro, String tipoDeLista, String datoParaSeparar, int listaOString) {
 
-        Lista Lista = new Lista();
+        Lista lista = new Lista();
         int inicio = 0, fin = 0;
-        for (int j = 0; j < Registro.length(); j++) {
+        for (int j = 0; j < registro.length(); j++) {
 
-            if (Registro.substring(j, j + 1).equals("|")) {
+            if (registro.substring(j, j + 1).equals(datoParaSeparar)) {
 
-                Lista.Agregar(Registro.substring(inicio, fin));
+                lista.Agregar(registro.substring(inicio, fin));
                 inicio = fin + 1;
                 fin = fin + 1;
             } else {
@@ -168,17 +166,24 @@ public class Restaurante {
                 fin = fin + 1;
             }
         }
-        
-        if (Tipo_de_lista.equals("Mesero")) {
-            agregarMesero(Lista);
-        } else if (Tipo_de_lista.equals("Postre")) {
-            agregarPostre(Lista);
-        } else if (Tipo_de_lista.equals("Bebida")) {
-            agregarBebida(Lista);
-        } else if (Tipo_de_lista.equals("Plato")) {
-            agregarPlatoPrincipal(Lista);
-        } else if (Tipo_de_lista.equals("Gerente")) {
-            agregarGerente(Lista);
+
+        if (listaOString == 0) {
+            pedido(tipoDeLista, lista);
+        }
+    }
+
+    static void pedido(String tipoDeLista, Lista lista) {
+
+        if (tipoDeLista.equals("Mesero")) {
+            agregarMesero(lista);
+        } else if (tipoDeLista.equals("Postre")) {
+            agregarPostre(lista);
+        } else if (tipoDeLista.equals("Bebida")) {
+            agregarBebida(lista);
+        } else if (tipoDeLista.equals("Plato")) {
+            agregarPlatoPrincipal(lista);
+        } else if (tipoDeLista.equals("Gerente")) {
+            agregarGerente(lista);
         }
     }
 }

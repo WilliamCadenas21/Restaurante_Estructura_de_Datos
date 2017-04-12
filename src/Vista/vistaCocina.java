@@ -115,48 +115,48 @@ public class vistaCocina extends javax.swing.JFrame {
 
     void mostrarPedido() {//Busca la mesa seleccionada, me permite mostrar el pedido de una mesa.Solo muestra, no representa incoveniente alguno.
 
-        String mesa = String.valueOf(this.tablaCocina.getValueAt(this.tablaCocina.getSelectedRow(), 0));//Nombre de la mesa de la fila seleccionada
+        String mesa = String.valueOf(tablaCocina.getValueAt(tablaCocina.getSelectedRow(), 0));//Nombre de la mesa de la fila seleccionada
 
         int posicionEnLaLista = VistaMenu.listaPedidos.getTamaño() - 1;
-        this.pedido = (Pedido) VistaMenu.listaPedidos.getPosicion(posicionEnLaLista).getInfo();
-        this.variableBooleanaGlobal = true;
+        pedido = (Pedido) VistaMenu.listaPedidos.getPosicion(posicionEnLaLista).getInfo();
+        variableBooleanaGlobal = true;
 
         do {//Este ciclo va de atras para adelante, porque los valores que se le ingresan a la listaPedidos, los nuevos, se agregan al final y al buscar desde el inicio se econtrarán antiguos pedidos.
 
-            this.pedido = (Pedido) VistaMenu.listaPedidos.getPosicion(posicionEnLaLista).getInfo();
-            if (this.pedido.getMesa().equals(mesa)) {
+            pedido = (Pedido) VistaMenu.listaPedidos.getPosicion(posicionEnLaLista).getInfo();
+            if (pedido.getMesa().equals(mesa)) {
 
                 resultadoBusqueda();
-                this.variableBooleanaGlobal = false;
+                variableBooleanaGlobal = false;
             }
 
             posicionEnLaLista--;
-        } while (posicionEnLaLista >= 0 && this.variableBooleanaGlobal);
+        } while (posicionEnLaLista >= 0 && variableBooleanaGlobal);
     }
 
     void resultadoBusqueda() {//Una vez a encontrado la mesa comienza la concatenacion de lo que se mostrará. Funciona de la mano con mostrarPedido.
 
-        this.listaDePlatosDeUnPedido = this.pedido.getListaComida();
+        listaDePlatosDeUnPedido = pedido.getListaComida();
         ComidaAuxiliar comidaAuxiliar;
 
-        for (int k = 0; k < this.listaDePlatosDeUnPedido.getTamaño(); k++) {
+        for (int k = 0; k < listaDePlatosDeUnPedido.getTamaño(); k++) {
 
-            comidaAuxiliar = (ComidaAuxiliar) this.listaDePlatosDeUnPedido.getPosicion(k).getInfo();
+            comidaAuxiliar = (ComidaAuxiliar) listaDePlatosDeUnPedido.getPosicion(k).getInfo();
             String nombre = comidaAuxiliar.getNombrePlato();
             int cantidad = Integer.parseInt(String.valueOf(comidaAuxiliar.getCantidad()));
-            this.visualizarPedido = this.visualizarPedido + "\n" + cantidad + "....................." + nombre;
-            System.out.println(this.visualizarPedido + "\n");
+            visualizarPedido = visualizarPedido + "\n" + cantidad + "....................." + nombre;
+            System.out.println(visualizarPedido + "\n");
         }
 
-        JOptionPane.showMessageDialog(this, "Pedido: \n" + this.visualizarPedido, this.pedido.getMesa(), JOptionPane.INFORMATION_MESSAGE);
-        this.visualizarPedido = "";//Reiniciar para que no se concatenen los datos anteriores.
+        JOptionPane.showMessageDialog(this, "Pedido: \n" + visualizarPedido, pedido.getMesa(), JOptionPane.INFORMATION_MESSAGE);
+        visualizarPedido = "";//Reiniciar para que no se concatenen los datos anteriores.
     }
 
     void Factura() {//Me permite llenar la tabla factura que se encuentra en mesero para poder mostrarla.
         DefaultTableModel tablaFactura = (DefaultTableModel) VistaMenu.tablaFactura.getModel();
 
-        for (int i = 0; i < this.listaResultadoDePedidosCocina.getTamaño(); i++) {
-            tablaFactura.addRow(new Object[]{this.listaResultadoDePedidosCocina.getPosicion(i).getInfo()});//Esto me funciona para poder mostrar el nombre de la mesa a la cual ya se le ha terminado de preparar el visualizarPedido, para que asi la factura se genere mostrandose cuando el usuario necesite.
+        for (int i = 0; i < listaResultadoDePedidosCocina.getTamaño(); i++) {
+            tablaFactura.addRow(new Object[]{listaResultadoDePedidosCocina.getPosicion(i).getInfo()});//Esto me funciona para poder mostrar el nombre de la mesa a la cual ya se le ha terminado de preparar el visualizarPedido, para que asi la factura se genere mostrandose cuando el usuario necesite.
         }
     }
 
@@ -164,31 +164,31 @@ public class vistaCocina extends javax.swing.JFrame {
 
         DefaultTableModel tablaResultadoPedidoCocina = (DefaultTableModel) tablaCocina.getModel();
         Lista numeroFilaHaEliminar = new Lista();//Guarda las posiciones en la tabla de las filas ha eliminar
-        this.listaResultadoDePedidosCocina = new Lista();//Borra toda la informacion de la lista, para que asi no me guarde informacion correspodiente de los procesos anteriores.
+        listaResultadoDePedidosCocina = new Lista();//Borra toda la informacion de la lista, para que asi no me guarde informacion correspodiente de los procesos anteriores.
         for (int i = 0; i < tablaResultadoPedidoCocina.getRowCount(); i++) {
 
             if (tablaResultadoPedidoCocina.getValueAt(i, 1).toString().equals("true")) {
 
-                this.listaResultadoDePedidosCocina.Agregar(tablaResultadoPedidoCocina.getValueAt(i, 0));//Guarda el nombre de la mesa que se ha seleccionado para poder cambiar el valor el resultadoPedido.
+                listaResultadoDePedidosCocina.Agregar(tablaResultadoPedidoCocina.getValueAt(i, 0));//Guarda el nombre de la mesa que se ha seleccionado para poder cambiar el valor el resultadoPedido.
                 numeroFilaHaEliminar.Agregar(i);
             }
         }
-            Object desicion = JOptionPane.showConfirmDialog(this, "Esta seguro(a)?");
-            System.out.println(desicion);
-            if (desicion.toString().equals("0")) {
-                filasHaEliminar(numeroFilaHaEliminar, 0, tablaResultadoPedidoCocina);
-            }
+        Object desicion = JOptionPane.showConfirmDialog(this, "Esta seguro(a)?");
+        System.out.println(desicion);
+        if (desicion.toString().equals("0")) {
+            filasHaEliminar(numeroFilaHaEliminar, 0, tablaResultadoPedidoCocina);
+        }
         cambiarResultadoPedido();
     }
 
     void filasHaEliminar(Lista filasHaEliminar, int i, DefaultTableModel modelo) {
         if (i < filasHaEliminar.getTamaño()) {
-            
+
             String numeroFila = String.valueOf(filasHaEliminar.getPosicion(i).getInfo());
             modelo.removeRow(Integer.parseInt(numeroFila));
             for (int j = 0; j < filasHaEliminar.getTamaño(); j++) {
                 int r = Integer.parseInt(String.valueOf(filasHaEliminar.getPosicion(j).getInfo()));
-                filasHaEliminar.getPosicion(j).CambiarInfo(r-1);
+                filasHaEliminar.getPosicion(j).CambiarInfo(r - 1);
             }
             filasHaEliminar(filasHaEliminar, i + 1, modelo);
         }
@@ -198,13 +198,13 @@ public class vistaCocina extends javax.swing.JFrame {
     void cambiarResultadoPedido() {
 
         DefaultTableModel tablaResultadoPedidos = (DefaultTableModel) VistaMenu.resultadoPedidos.getModel();
-        for (int i = 0; i < this.listaResultadoDePedidosCocina.getTamaño(); i++) {
+        for (int i = 0; i < listaResultadoDePedidosCocina.getTamaño(); i++) {
 
-            String mesaTablaCocina = String.valueOf(this.listaResultadoDePedidosCocina.getPosicion(i).getInfo());
+            String mesaTablaCocina = String.valueOf(listaResultadoDePedidosCocina.getPosicion(i).getInfo());
             for (int j = 0; j < tablaResultadoPedidos.getRowCount(); j++) {
 
                 String mesaTablaResultadoPedido = tablaResultadoPedidos.getValueAt(j, 0).toString();//Obtengo la posicion y la informacion, para luego convertirla a String y poder compararla despues
-                
+
                 if (mesaTablaCocina.equals(mesaTablaResultadoPedido)) {//Para encontrar la mesa que se ha seleccionado en cocina y poder cambiarle el valor de "Preparando" a "Listo"                                                                                             
                     tablaResultadoPedidos.setValueAt("Listo", j, 2);
                 }
