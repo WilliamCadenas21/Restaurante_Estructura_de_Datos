@@ -19,6 +19,6 @@ public class Mesa {
     }
 
     public void setTotal(int total) {
-        this.total = total;
+        this.total = this.total + total;
     }
 }

@@ -160,18 +160,19 @@ public class vistaAgregarComida extends javax.swing.JFrame {
             FileWriter escritor = new FileWriter(archivoPlatosPrincipales, true);
             BufferedWriter escritorX = new BufferedWriter(escritor);
 
-            System.out.println("Seleccion: " + foodTypeCombobox.getSelectedIndex());
-            
+            String nombre = foodTextName.getText();
+            int precio = Integer.parseInt(foodTextPrice.getText());
+            int carbohidratos = Integer.parseInt(foodTextFat.getText());
+            String tiempo = (String.valueOf(timerMinutos) + ":" + String.valueOf(timerSegundos));
+
             switch (foodTypeCombobox.getSelectedIndex()) {
 
                 case 0:
 
-                    System.out.println("ESTOY EN PLATOS PRINCIPALES");
-                    
-                    listaDePlatos.Agregar(new PlatoPrincipal(foodTextName.getText(), Integer.parseInt(foodTextPrice.getText()), Integer.parseInt(foodTextFat.getText()), (String.valueOf(timerMinutos) + ":" + String.valueOf(timerSegundos))));
+                    listaDePlatos.Agregar(new PlatoPrincipal(nombre, precio, carbohidratos, tiempo, new Lista()));
 
                     PlatoPrincipal p = (PlatoPrincipal) listaDePlatos.getPosicion(listaDePlatos.getTamaño() - 1).getInfo();
-                    
+
                     escritorX.newLine();
                     escritorX.write(p.getNombre() + "|");
                     escritorX.write(String.valueOf(p.getPrecio()) + "|");
@@ -183,28 +184,24 @@ public class vistaAgregarComida extends javax.swing.JFrame {
 
                 case 1:
 
-                    System.out.println("ESTOY EN PLATOS POSTRES");
-                    
-                    listaDePostres.Agregar(new Postre(foodTextName.getText(), Integer.parseInt(foodTextPrice.getText()), Integer.parseInt(foodTextFat.getText()), (String.valueOf(timerMinutos) + ":" + String.valueOf(timerSegundos))));
+                    listaDePostres.Agregar(new Postre(nombre, precio, carbohidratos, tiempo));
 
                     escritor = new FileWriter(archivoPostres, true);
                     escritorX = new BufferedWriter(escritor);
 
                     Postre po = (Postre) listaDePostres.getPosicion(listaDePostres.getTamaño() - 1).getInfo();
-                    
+
                     escritorX.newLine();
                     escritorX.write(po.getNombre() + "|");
                     escritorX.write(String.valueOf(po.getPrecio()) + "|");
                     escritorX.write(String.valueOf(po.getCarbohidratos()) + "|");
- 
+
                     escritorX.close();
                     break;
 
                 case 2:
-                    
-                    System.out.println("ESTOY EN PLATOS PRINCIPALES");
-                    
-                    listaDeBebidas.Agregar(new Bebida(foodTextName.getText(), Integer.parseInt(foodTextPrice.getText()), Integer.parseInt(foodTextFat.getText())));
+
+                    listaDeBebidas.Agregar(new Bebida(nombre, precio, carbohidratos));
 
                     escritor = new FileWriter(archivoBebidas, true);
                     escritorX = new BufferedWriter(escritor);
@@ -215,7 +212,7 @@ public class vistaAgregarComida extends javax.swing.JFrame {
                     escritorX.write(b.getNombre() + "|");
                     escritorX.write(String.valueOf(b.getPrecio()) + "|");
                     escritorX.write(String.valueOf(b.getCarbohidratos()) + "|");
-                    
+
                     escritorX.close();
 
                     break;
@@ -223,10 +220,8 @@ public class vistaAgregarComida extends javax.swing.JFrame {
 
             escritor = new FileWriter(new File("Primer_ingreso.txt"), true);
             escritorX = new BufferedWriter(escritor);
-            
             escritorX.newLine();
             escritorX.write("Ya ingreso un plato");//Cambio lo que se encuentra en el archivo primer ingreso.
-
             escritorX.close();
         } catch (Exception e) {
             e.printStackTrace();
