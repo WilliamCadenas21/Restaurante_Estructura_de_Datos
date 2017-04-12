@@ -2,12 +2,12 @@ package Modelo;
 
 public class PlatoPrincipal{
 
-    private String nombre;
+    private String nombre, tiempo;
     private int precio, carbohidratos;
         
     
-    public PlatoPrincipal(String nombre, int precio, int carbohidratos) {
-        
+    public PlatoPrincipal(String nombre, int precio, int carbohidratos, String tiempo) {
+        this.tiempo = tiempo;
         this.nombre = nombre;
         this.precio = precio;
         this.carbohidratos = carbohidratos;
@@ -24,14 +24,14 @@ public class PlatoPrincipal{
        
     //Precio
        
-       public int getprecio(){
+       public int getPrecio(){
        
            return precio;
        }
     
     //Carbohidratos
        
-       public int getCarboidratos(){
+       public int getCarbohidratos(){
        
            return carbohidratos;
        
