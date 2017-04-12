@@ -37,15 +37,13 @@ public class VistaMenu extends javax.swing.JFrame {
         agregarJComboBox(this.tablaPostre);
         agregarJComboBox(this.tablaBebidas);
 
-        setLocationRelativeTo(null);
-
         this.modeloTablaPlatoPrincipal = (DefaultTableModel) this.tablaPlatoPrincipal.getModel();
         this.modeloTablaPostres = (DefaultTableModel) this.tablaPostre.getModel();
         this.modeloTablaBebidas = (DefaultTableModel) this.tablaBebidas.getModel();
 
-        mostrarPlatosEnTablas(this.modeloTablaPlatoPrincipal, "Plato", Restaurante.listaDePlatos);
-        mostrarPlatosEnTablas(this.modeloTablaPostres, "Postre", Restaurante.listaDePostres);
-        mostrarPlatosEnTablas(this.modeloTablaBebidas, "Bebida", Restaurante.listaDeBebidas);
+        mostrarPlatosEnTablas(modeloTablaPlatoPrincipal, "Plato", Restaurante.listaDePlatos);
+        mostrarPlatosEnTablas(modeloTablaPostres, "Postre", Restaurante.listaDePostres);
+        mostrarPlatosEnTablas(modeloTablaBebidas, "Bebida", Restaurante.listaDeBebidas);
     }
 
     @SuppressWarnings("unchecked")
@@ -400,11 +398,12 @@ public class VistaMenu extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarActionPerformed
-        AgregarPedido();
-        agregarFilaATablaResultadoDePedidos();
+        validarPedidoRepetido();
+
     }//GEN-LAST:event_AceptarActionPerformed
 
     private void tablaFacturaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaFacturaKeyPressed
@@ -446,7 +445,6 @@ public class VistaMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_botonPagarActionPerformed
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
-
         this.mostrarFactura.dispose();
     }//GEN-LAST:event_botonCancelarActionPerformed
 
@@ -458,6 +456,26 @@ public class VistaMenu extends javax.swing.JFrame {
         seleccionDeHoraInicial();
         desicionCambioPedido();
     }//GEN-LAST:event_cambiarPedidoActionPerformed
+
+    private void validarPedidoRepetido() {
+        modeloTablaCocina = (DefaultTableModel) vistaCocina.tablaCocina.getModel();
+        boolean mesaYaSelecionada = false;
+        for (int k = 0; k < modeloTablaCocina.getRowCount(); k++) {
+            if (mesasJList.getSelectedValue() == modeloTablaCocina.getValueAt(k, 0)) {
+                mesaYaSelecionada = true;
+            }
+        }
+        if (mesaYaSelecionada == false) {
+            AgregarPedido();
+            agregarFilaATablaResultadoDePedidos();
+        } else {
+            JOptionPane.showMessageDialog(this, "Lo sentimos pero la " + mesasJList.getSelectedValue() + " ya se encuentra con un pedido pendiente");
+            reinciarValoresDeLasTablas(this.modeloTablaPlatoPrincipal);//Reinicia los valores para que este listo para una nueva seleccion
+            reinciarValoresDeLasTablas(this.modeloTablaPostres);
+            reinciarValoresDeLasTablas(this.modeloTablaBebidas);
+        }
+
+    }
 
     void mostrarFacturaPedido(int alturaFrame) {
 
@@ -585,9 +603,8 @@ public class VistaMenu extends javax.swing.JFrame {
             for (int k = 0; k < modelo.getRowCount(); k++) {
 
                 int valor = Integer.parseInt(String.valueOf(modelo.getValueAt(k, 3)));
-                String cosa = String.valueOf(modelo.getValueAt(k, 3));
 
-                if (valor > 0 && !cosa.equals("null")) {
+                if (valor > 0) {
 
                     this.nombreDelPlato = String.valueOf(modelo.getValueAt(k, 0));
                     this.precio = Integer.parseInt(String.valueOf(modelo.getValueAt(k, 1)));
@@ -614,8 +631,8 @@ public class VistaMenu extends javax.swing.JFrame {
         AgregarPlatosAUnPedido(this.modeloTablaPostres, "Postre");
         AgregarPlatosAUnPedido(this.modeloTablaBebidas, "Bebida");
 
-        this.listaPedidos.Agregar(new Pedido(this.mesasJList.getSelectedValue(), this.listaDePlatosDeUnPedido, this.total));
-        this.listaDePlatosDeUnPedido = new Lista();//Reinicio esta lista, porque de lo contrario me guadaria informacion de los platos antes pedidos.
+        listaPedidos.Agregar(new Pedido(this.mesasJList.getSelectedValue(), listaDePlatosDeUnPedido, total));
+        listaDePlatosDeUnPedido = new Lista();//Reinicio esta lista, porque de lo contrario me guadaria informacion de los platos antes pedidos.
     }
 
     void cambiarPedido(String mesa) {
@@ -665,7 +682,7 @@ public class VistaMenu extends javax.swing.JFrame {
     void agregarFilaATablaResultadoDePedidos() {
 
         this.modeloTablaResultadoPedido = (DefaultTableModel) this.resultadoPedidos.getModel();
-        this.modeloTablaResultadoPedido.addRow(new Object[]{this.mesasJList.getSelectedValue(), "0:00", "Preparando"});
+        this.modeloTablaResultadoPedido.addRow(new Object[]{this.mesasJList.getSelectedValue(), "Preparando", "Preparando"});
 
         llenarTablaDeCocina();
     }
@@ -752,5 +769,4 @@ public class VistaMenu extends javax.swing.JFrame {
     private javax.swing.JTable tablaPlatoPrincipal;
     private javax.swing.JTable tablaPostre;
     // End of variables declaration//GEN-END:variables
-
 }
