@@ -1,12 +1,12 @@
 package Modelo;
 
-public class platoPrincipal{
+public class PlatoPrincipal{
 
     private String nombre;
     private int precio, carbohidratos;
         
     
-    public platoPrincipal(String nombre, int precio, int carbohidratos) {
+    public PlatoPrincipal(String nombre, int precio, int carbohidratos) {
         
         this.nombre = nombre;
         this.precio = precio;
