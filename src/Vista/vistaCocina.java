@@ -3,14 +3,12 @@ package Vista;
 import Controlador.Lista;
 import Controlador.Pedido;
 import Modelo.ComidaAuxiliar;
-import static Vista.VistaMenu.resultadoPedidos;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class vistaCocina extends javax.swing.JFrame {
 
     /*
-    
     La tabla de pedidos dependera de lo que se realize en Menu
      */
     String visualizarPedido = "";
@@ -175,15 +173,11 @@ public class vistaCocina extends javax.swing.JFrame {
                 numeroFilaHaEliminar.Agregar(i);
             }
         }
-
-        //try {
-            
             Object desicion = JOptionPane.showConfirmDialog(this, "Esta seguro(a)?");
+            System.out.println(desicion);
             if (desicion.toString().equals("0")) {
                 filasHaEliminar(numeroFilaHaEliminar, 0, tablaResultadoPedidoCocina);
             }
-       // } catch (Exception e) {
-        //}
         cambiarResultadoPedido();
     }
 
@@ -220,7 +214,6 @@ public class vistaCocina extends javax.swing.JFrame {
     }
 
     public static void main(String args[]) {
-
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new vistaCocina().setVisible(true);

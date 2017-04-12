@@ -383,7 +383,7 @@ public class VistaMenu extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Factura", jScrollPane7);
 
-        jLabel2.setText("Usuario:");
+        jLabel2.setText("Mesero:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -392,13 +392,14 @@ public class VistaMenu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTabbedPane1)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabelUsuario)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -446,8 +447,8 @@ public class VistaMenu extends javax.swing.JFrame {
 
     private void botonPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPagarActionPerformed
 
-        this.modeloTablaFactura = (DefaultTableModel) this.tablaFactura.getModel();
-        this.modeloTablaResultadoPedido = (DefaultTableModel) this.resultadoPedidos.getModel();
+        modeloTablaFactura = (DefaultTableModel) tablaFactura.getModel();
+        modeloTablaResultadoPedido = (DefaultTableModel) resultadoPedidos.getModel();
 
         this.mostrarFactura.dispose();
 
@@ -463,7 +464,6 @@ public class VistaMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_botonCancelarActionPerformed
 
     private void cambiarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarPedidoActionPerformed
-
         this.modeloTablaCocina = (DefaultTableModel) vistaCocina.tablaCocina.getModel();
 
         llenarVectorCambioPedido();
@@ -581,6 +581,10 @@ public class VistaMenu extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Esta subrutina llena un vector temporal para mostrarlo e la lista de
+     * mesas a cambiar pedido
+     */
     void llenarVectorCambioPedido() {
         v = new Object[this.modeloTablaCocina.getRowCount()];
 
@@ -590,30 +594,29 @@ public class VistaMenu extends javax.swing.JFrame {
     }
 
     void desicionCambioPedido() {
-        this.variableBooleanaGlobal = true;
-        this.horaActual = Reloj.lblReloj.getText();
+        variableBooleanaGlobal = true;
+        horaActual = Reloj.lblReloj.getText();//captura la hora en que se decidio cambiar el pedido
 
-        while (this.numeroDeLaMesaACambiarElPedido < this.listaPedidos.getTamaño() && this.variableBooleanaGlobal) {
+        while (numeroDeLaMesaACambiarElPedido < listaPedidos.getTamaño() && variableBooleanaGlobal) {
 
-            this.pedido = (Pedido) this.listaPedidos.getPosicion(this.numeroDeLaMesaACambiarElPedido).getInfo();
+            pedido = (Pedido) listaPedidos.getPosicion(numeroDeLaMesaACambiarElPedido).getInfo();
 
             try {
 
-                if (this.mesaSeleccionada.equals(this.pedido.getMesa())) {//Busco la mesaTablaCocina  que ha sido seleccionada para realizar el cambio de visualizarPedido de dicha mesaTablaCocina.
+                if (mesaSeleccionada.equals(pedido.getMesa())) {//Busco la mesaTablaCocina  que ha sido seleccionada para realizar el cambio de visualizarPedido de dicha mesaTablaCocina.
 
-                    this.variableBooleanaGlobal = false; // para salirse del mientrasQ
-                    if (calcularDiferenciaDeTiempos(this.horaInicial, this.horaActual)) {
-
-                        cambiarPedido(this.pedido.getMesa());
-                        this.modeloTablaCocina.removeRow(this.numeroDeLaFilaAElminar);
+                    variableBooleanaGlobal = false; // para salirse del mientrasQ
+                    if (calcularDiferenciaDeTiempos(horaInicial, horaActual)) {
+                        cambiarPedido(pedido.getMesa());
+                        modeloTablaCocina.removeRow(numeroDeLaFilaAElminar);
                     } else {
 
-                        JOptionPane.showMessageDialog(this, "El tiempo necesario para cambiar el pedido de la " + this.pedido.getMesa() + " ya ha pasado, por lo que este proceso no se puede realizar.");
+                        JOptionPane.showMessageDialog(this, "El tiempo necesario para cambiar el pedido de la " + pedido.getMesa() + " ya ha pasado, por lo que este proceso no se puede realizar.");
                     }
                 }
             } catch (NullPointerException e) {
             }
-            this.numeroDeLaMesaACambiarElPedido++;
+            numeroDeLaMesaACambiarElPedido++;
         }
     }
 
@@ -658,11 +661,11 @@ public class VistaMenu extends javax.swing.JFrame {
 
     void cambiarPedido(String mesa) {
 
-        this.modeloTablaCocina = (DefaultTableModel) vistaCocina.tablaCocina.getModel();
-        this.modeloTablaResultadoPedido = (DefaultTableModel) this.resultadoPedidos.getModel();
+        modeloTablaCocina = (DefaultTableModel) vistaCocina.tablaCocina.getModel();
+        modeloTablaResultadoPedido = (DefaultTableModel) resultadoPedidos.getModel();
 
-        eliminarFilaDeUnaTabla(this.modeloTablaResultadoPedido, mesa, 0);
-        eliminarFilaDeUnaTabla(this.modeloTablaCocina, mesa, 0);
+        eliminarFilaDeUnaTabla(modeloTablaResultadoPedido, mesa, 0);
+        eliminarFilaDeUnaTabla(modeloTablaCocina, mesa, 0);
     }
 
     void llenarTablaDeCocina() {
@@ -725,13 +728,18 @@ public class VistaMenu extends javax.swing.JFrame {
 
         int inicial1 = Integer.parseInt(vec0[1]) * 60 * 1000 + Integer.parseInt(vec0[2]) * 1000;
         int final2 = Integer.parseInt(vec1[1]) * 60 * 1000 + Integer.parseInt(vec1[2]) * 1000;
-        if (final2 - inicial1 <= 10000) {
+        if (final2 - inicial1 <= 8000) {//aqui se encuetr el tiempo maximo en el que puede ser cambiado el pedido
             return true;
         } else {
             return false;
         }
     }
-
+    /**
+     * Sirve para borrar una fila de cualquier tabla 
+     * @param modelo aqui se especifica la tabla a la cual se desea borar una fila
+     * @param datoACompar se envia el dato que necessitara para saber que fila eliminara 
+     * @param columna y se le especifica en que columna estara el dato
+     */
     void eliminarFilaDeUnaTabla(DefaultTableModel modelo, String datoACompar, int columna) {
 
         for (int k = 0; k < modelo.getRowCount(); k++) {
@@ -762,6 +770,7 @@ public class VistaMenu extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new VistaMenu().setVisible(true);
+
             }
         });
     }
