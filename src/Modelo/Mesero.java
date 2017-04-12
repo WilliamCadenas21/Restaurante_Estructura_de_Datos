@@ -8,7 +8,7 @@ public class Mesero extends Empleado {
         super(nombre, edad, telefono, direccion);
         this.contraseña = contraseña;
     }
-
+    
     public String getContraseña() {
         return this.contraseña;
     }
@@ -27,9 +27,7 @@ public class Mesero extends Empleado {
 
                 comprobacion(Dato_a_comparar, i + 1);
             }
-        }
-        
+        }    
         return false;
     }
-
 }
