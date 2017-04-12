@@ -644,21 +644,19 @@ public class VistaMenu extends javax.swing.JFrame {
 
             int valor = Integer.parseInt(String.valueOf(modelo.getValueAt(k, 3)));
             if (valor > 0) {
-
                 nombreDelPlato = String.valueOf(modelo.getValueAt(k, 0));
                 precio = Integer.parseInt(String.valueOf(modelo.getValueAt(k, 1)));
                 cantidad = Integer.parseInt(String.valueOf(modelo.getValueAt(k, 3)));
 
                 listaDePlatosDeUnPedido.Agregar(new ComidaAuxiliar(tipo, nombreDelPlato, precio, cantidad));//Primero llenó una lista de objetos con los platos pedidos.    
                 total = total + precio * cantidad;
-                variableBooleanaGlobal = true;
-            }
+                variableBooleanaGlobal = true                 
+             }            
         }
-
     }
 
     void AgregarPedido() {
-        listaPedidos.Agregar(new Pedido(this.mesasJList.getSelectedValue(), listaDePlatosDeUnPedido, total));
+        listaPedidos.Agregar(new Pedido(this.mesasJList.getSelectedValue(), listaDePlatosDeUnPedido, total,horaActual,jLabelUsuario.getText()));
         listaDePlatosDeUnPedido = new Lista();//Reinicio esta lista, porque de lo contrario me guadaria informacion de los platos antes pedidos.
     }
 
@@ -708,9 +706,9 @@ public class VistaMenu extends javax.swing.JFrame {
 
     void agregarFilaATablaResultadoDePedidos() {
 
-        this.modeloTablaResultadoPedido = (DefaultTableModel) resultadoPedidos.getModel();
-        this.modeloTablaResultadoPedido.addRow(new Object[]{mesasJList.getSelectedValue(), "Preparando", "Preparando"});
-
+        modeloTablaResultadoPedido = (DefaultTableModel) resultadoPedidos.getModel();
+        modeloTablaResultadoPedido.addRow(new Object[]{mesasJList.getSelectedValue(), "Preparando", "Preparando"});
+        System.out.println(mesasJList.getSelectedValue());
         llenarTablaDeCocina();
     }
 

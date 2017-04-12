@@ -16,6 +16,7 @@ public class vistaMenuGerente extends javax.swing.JFrame {
         Add_Employ_Button = new javax.swing.JButton();
         Add_Food_Button = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -61,10 +62,21 @@ public class vistaMenuGerente extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Mesas");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(125, 125, 125)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -72,19 +84,18 @@ public class vistaMenuGerente extends javax.swing.JFrame {
                     .addComponent(Add_Employ_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Employ_Button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Food_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Change_Password_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Change_Password_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(132, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(Add_Employ_Button)
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(Add_Food_Button)
                 .addGap(18, 18, 18)
                 .addComponent(Employ_Button)
@@ -135,6 +146,10 @@ public class vistaMenuGerente extends javax.swing.JFrame {
         new LogingDeGerente().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        new InfoDeMesas().setVisible(true); 
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     public static void main(String args[]) {
       
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -151,5 +166,6 @@ public class vistaMenuGerente extends javax.swing.JFrame {
     private javax.swing.JButton Employ_Button;
     private javax.swing.JButton Food_Button;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     // End of variables declaration//GEN-END:variables
 }
