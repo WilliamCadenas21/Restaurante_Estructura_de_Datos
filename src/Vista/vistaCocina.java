@@ -183,10 +183,9 @@ public class vistaCocina extends javax.swing.JFrame {
 
     void filasHaEliminar(Lista filasHaEliminar, int i, DefaultTableModel modelo) {
         if (i < filasHaEliminar.getTamaño()) {
-            String numeroFila = String.valueOf(filasHaEliminar.getPosicion(i).getInfo());
-            System.out.println("Numero: " + numeroFila);
-            modelo.removeRow(Integer.parseInt(numeroFila));
             
+            String numeroFila = String.valueOf(filasHaEliminar.getPosicion(i).getInfo());
+            modelo.removeRow(Integer.parseInt(numeroFila));
             for (int j = 0; j < filasHaEliminar.getTamaño(); j++) {
                 int r = Integer.parseInt(String.valueOf(filasHaEliminar.getPosicion(j).getInfo()));
                 filasHaEliminar.getPosicion(j).CambiarInfo(r-1);

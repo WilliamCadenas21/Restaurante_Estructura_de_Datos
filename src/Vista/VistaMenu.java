@@ -34,13 +34,13 @@ public class VistaMenu extends javax.swing.JFrame {
                 + "\t\t\tCalle Viva N° 123\n"
                 + Reloj.lblReloj.getText();
 
-        agregarJComboBox(this.tablaPlatoPrincipal);
-        agregarJComboBox(this.tablaPostre);
-        agregarJComboBox(this.tablaBebidas);
+        agregarJComboBox(tablaPlatoPrincipal);
+        agregarJComboBox(tablaPostre);
+        agregarJComboBox(tablaBebidas);
 
-        this.modeloTablaPlatoPrincipal = (DefaultTableModel) this.tablaPlatoPrincipal.getModel();
-        this.modeloTablaPostres = (DefaultTableModel) this.tablaPostre.getModel();
-        this.modeloTablaBebidas = (DefaultTableModel) this.tablaBebidas.getModel();
+        modeloTablaPlatoPrincipal = (DefaultTableModel) tablaPlatoPrincipal.getModel();
+        modeloTablaPostres = (DefaultTableModel) tablaPostre.getModel();
+        modeloTablaBebidas = (DefaultTableModel) tablaBebidas.getModel();
 
         mostrarPlatosEnTablas(modeloTablaPlatoPrincipal, "Plato", Restaurante.listaDePlatos);
         mostrarPlatosEnTablas(modeloTablaPostres, "Postre", Restaurante.listaDePostres);
@@ -426,22 +426,22 @@ public class VistaMenu extends javax.swing.JFrame {
 
     private void tablaFacturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaFacturaMouseClicked
 
-        String mesa = String.valueOf(this.tablaFactura.getValueAt(this.tablaFactura.getSelectedRow(), 0));
+        String mesa = String.valueOf(tablaFactura.getValueAt(tablaFactura.getSelectedRow(), 0));
 
         if (evt.getClickCount() == 2) {
 
-            int posicionEnLaLista = this.listaPedidos.getTamaño() - 1;
-            this.pedido = (Pedido) this.listaPedidos.getPosicion(posicionEnLaLista).getInfo();
-            this.variableBooleanaGlobal = true;
+            int posicionEnLaLista = listaPedidos.getTamaño() - 1;
+            pedido = (Pedido) listaPedidos.getPosicion(posicionEnLaLista).getInfo();
+            variableBooleanaGlobal = true;
 
             do {//Este ciclo va de atras para adelante, porque los valores que se le ingresan a la listaPedidos, los nuevos, se agregan al final y al buscar desde el inicio se econtrarán antiguos pedidos.
 
-                this.pedido = (Pedido) this.listaPedidos.getPosicion(posicionEnLaLista).getInfo();
-                if (this.pedido.getMesa().equals(mesa)) {
+                pedido = (Pedido) listaPedidos.getPosicion(posicionEnLaLista).getInfo();
+                if (pedido.getMesa().equals(mesa)) {
                     mostrarFacturaPedido(0);
                 }
                 posicionEnLaLista--;
-            } while (posicionEnLaLista >= 0 && this.variableBooleanaGlobal);
+            } while (posicionEnLaLista >= 0 && variableBooleanaGlobal);
         }
     }//GEN-LAST:event_tablaFacturaMouseClicked
 
@@ -485,17 +485,13 @@ public class VistaMenu extends javax.swing.JFrame {
                 agregarFilaATablaResultadoDePedidos();
             } else {
                 JOptionPane.showMessageDialog(this, "Lo sentimos pero la " + mesasJList.getSelectedValue() + " ya se encuentra con un pedido pendiente");
-                reinciarValoresDeLasTablas(this.modeloTablaPlatoPrincipal);//Reinicia los valores para que este listo para una nueva seleccion
-                reinciarValoresDeLasTablas(this.modeloTablaPostres);
-                reinciarValoresDeLasTablas(this.modeloTablaBebidas);
             }
         } else {
             JOptionPane.showMessageDialog(this, "Lo sentimos pero el mesero solo puede tener 5 mesas pendientes por pedido");
-            reinciarValoresDeLasTablas(this.modeloTablaPlatoPrincipal);//Reinicia los valores para que este listo para una nueva seleccion
-            reinciarValoresDeLasTablas(this.modeloTablaPostres);
-            reinciarValoresDeLasTablas(this.modeloTablaBebidas);
         }
-
+        reinciarValoresDeLasTablas(this.modeloTablaPlatoPrincipal);//Reinicia los valores para que este listo para una nueva seleccion
+        reinciarValoresDeLasTablas(this.modeloTablaPostres);
+        reinciarValoresDeLasTablas(this.modeloTablaBebidas);
     }
 
     void mostrarFacturaPedido(int alturaFrame) {
@@ -573,8 +569,8 @@ public class VistaMenu extends javax.swing.JFrame {
             try {
 
                 if (this.mesaSeleccionada.equals(mesaTablaCocina)) {
-                    this.horaInicial = (String) this.modeloTablaCocina.getValueAt(k, 2);
-                    this.numeroDeLaFilaAElminar = k;
+                    horaInicial = (String) this.modeloTablaCocina.getValueAt(k, 2);
+                    numeroDeLaFilaAElminar = k;
                 }
             } catch (NullPointerException e) {
             }
@@ -595,9 +591,11 @@ public class VistaMenu extends javax.swing.JFrame {
 
     void desicionCambioPedido() {
         variableBooleanaGlobal = true;
-        horaActual = Reloj.lblReloj.getText();//captura la hora en que se decidio cambiar el pedido
 
-        while (numeroDeLaMesaACambiarElPedido < listaPedidos.getTamaño() && variableBooleanaGlobal) {
+        horaActual = Reloj.lblReloj.getText();
+        numeroDeLaMesaACambiarElPedido = 0;//Reincia la variable para que se pueda reutilizar nuevamente.
+
+        while (numeroDeLaMesaACambiarElPedido < this.listaPedidos.getTamaño() && this.variableBooleanaGlobal) {
 
             pedido = (Pedido) listaPedidos.getPosicion(numeroDeLaMesaACambiarElPedido).getInfo();
 
@@ -627,7 +625,7 @@ public class VistaMenu extends javax.swing.JFrame {
             for (int k = 0; k < modelo.getRowCount(); k++) {
 
                 int valor = Integer.parseInt(String.valueOf(modelo.getValueAt(k, 3)));
-
+                System.out.println("Valor: " + valor);
                 if (valor > 0) {
 
                     this.nombreDelPlato = String.valueOf(modelo.getValueAt(k, 0));
