@@ -403,7 +403,6 @@ public class VistaMenu extends javax.swing.JFrame {
 
     private void AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarActionPerformed
         validarPedidoRepetido();
-
     }//GEN-LAST:event_AceptarActionPerformed
 
     private void tablaFacturaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaFacturaKeyPressed
@@ -460,16 +459,23 @@ public class VistaMenu extends javax.swing.JFrame {
     private void validarPedidoRepetido() {
         modeloTablaCocina = (DefaultTableModel) vistaCocina.tablaCocina.getModel();
         boolean mesaYaSelecionada = false;
-        for (int k = 0; k < modeloTablaCocina.getRowCount(); k++) {
-            if (mesasJList.getSelectedValue() == modeloTablaCocina.getValueAt(k, 0)) {
-                mesaYaSelecionada = true;
+        if (modeloTablaCocina.getRowCount() < 5) {
+            for (int k = 0; k < modeloTablaCocina.getRowCount(); k++) {
+                if (mesasJList.getSelectedValue() == modeloTablaCocina.getValueAt(k, 0)) {
+                    mesaYaSelecionada = true;
+                }
             }
-        }
-        if (mesaYaSelecionada == false) {
-            AgregarPedido();
-            agregarFilaATablaResultadoDePedidos();
+            if (mesaYaSelecionada == false) {
+                AgregarPedido();
+                agregarFilaATablaResultadoDePedidos();
+            } else {
+                JOptionPane.showMessageDialog(this, "Lo sentimos pero la " + mesasJList.getSelectedValue() + " ya se encuentra con un pedido pendiente");
+                reinciarValoresDeLasTablas(this.modeloTablaPlatoPrincipal);//Reinicia los valores para que este listo para una nueva seleccion
+                reinciarValoresDeLasTablas(this.modeloTablaPostres);
+                reinciarValoresDeLasTablas(this.modeloTablaBebidas);
+            }
         } else {
-            JOptionPane.showMessageDialog(this, "Lo sentimos pero la " + mesasJList.getSelectedValue() + " ya se encuentra con un pedido pendiente");
+            JOptionPane.showMessageDialog(this, "Lo sentimos pero el mesero solo puede tener 5 mesas pendientes por pedido");
             reinciarValoresDeLasTablas(this.modeloTablaPlatoPrincipal);//Reinicia los valores para que este listo para una nueva seleccion
             reinciarValoresDeLasTablas(this.modeloTablaPostres);
             reinciarValoresDeLasTablas(this.modeloTablaBebidas);
