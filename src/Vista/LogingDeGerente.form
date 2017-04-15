@@ -96,7 +96,6 @@
   <SubComponents>
     <Component class="javax.swing.JTextField" name="userText">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="userTextActionPerformed"/>
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="userTextKeyPressed"/>
       </Events>
     </Component>
@@ -119,6 +118,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JPasswordField" name="passwordText">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="passwordTextKeyPressed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

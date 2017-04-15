@@ -1,7 +1,11 @@
 package Vista;
 
 import Controlador.*;
+import Modelo.ComidaAuxiliar;
+import static Vista.VistaMenu.listaDePlatosDeUnPedido;
 import static Vista.VistaMenu.listaPedidos;
+import static Vista.VistaMenu.pedido;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class InfoDeMesas extends javax.swing.JFrame {
@@ -11,7 +15,6 @@ public class InfoDeMesas extends javax.swing.JFrame {
         for (int i = 1; i <= 20; i++) {
             jComboBoxMesas.addItem("Mesa " + i);
         }
-
     }
 
     @SuppressWarnings("unchecked")
@@ -55,6 +58,11 @@ public class InfoDeMesas extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTableInfoMesas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableInfoMesasMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTableInfoMesas);
@@ -134,26 +142,77 @@ public class InfoDeMesas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        System.out.println("Estoy aqui");
-        String str = String.valueOf(jComboBoxMesas.getSelectedItem());
+
         DefaultTableModel modelo = (DefaultTableModel) jTableInfoMesas.getModel();
         int contador = 1, total = 0;
+
         int fila = modelo.getRowCount();
+        //elimina lo que se encontraba anteriormente en la tabla
         for (int i = 0; i < fila; i++) {
             modelo.removeRow(0);
         }
+        //procede a buscar los pedidos realizados en la mesa especificada por el usuario:
+        String str = String.valueOf(jComboBoxMesas.getSelectedItem());
+        String hora = String.valueOf(jTableInfoMesas.getValueAt(jTableInfoMesas.getSelectedRow(), 3));
+        boolean observador = false;
         for (int i = 0; i < listaPedidos.getTamaño(); i++) {
-            Pedido pedido = (Pedido)listaPedidos.getPosicion(i).getInfo();
-            if (pedido.getMesa().equals(str)) {
-                modelo.addRow(new Object[]{contador,"Lista de platos",pedido.getMesero(),pedido.getHoraPedido()});
-                System.out.println("Valor del pedido"+contador+":"+pedido.getPrecio());
+            Pedido pedido = (Pedido) listaPedidos.getPosicion(i).getInfo();
+            if (pedido.getMesa().equals(str) && pedido.getHoraPedido().equals(hora)) {
+                modelo.addRow(new Object[]{contador, "Lista de platos", pedido.getMesero(), pedido.getHoraPedido()});
+                System.out.println("Valor del pedido" + contador + ":" + pedido.getPrecio());
                 total = total + pedido.getPrecio();
                 contador++;
+                observador = true;
             }
         }
-        jLabelTotal.setText(total+"");
-        System.out.println("Ya sali");
+        if (!observador) {
+            JOptionPane.showMessageDialog(this, "La mesa seleccionada se encuentra sin ventas hasta el momento");
+        }
+        
+        jLabelTotal.setText(total + "");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTableInfoMesasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableInfoMesasMouseClicked
+        if (evt.getClickCount() == 2) {
+            mostrarPedido();
+        }
+    }//GEN-LAST:event_jTableInfoMesasMouseClicked
+
+    private void mostrarPedido() {
+        String mesa = String.valueOf(jComboBoxMesas.getSelectedItem());//Nombre de la mesa de la fila seleccionada
+        String hora = String.valueOf(jComboBoxMesas.getSelectedItem());
+        boolean observador = true;
+        int posicionEnLaLista = VistaMenu.listaPedidos.getTamaño() - 1;
+        pedido = (Pedido) VistaMenu.listaPedidos.getPosicion(posicionEnLaLista).getInfo();
+
+        do {//Este ciclo va de atras para adelante, porque los valores que se le ingresan a la listaPedidos, los nuevos, se agregan al final y al buscar desde el inicio se econtrarán antiguos pedidos.
+
+            pedido = (Pedido) VistaMenu.listaPedidos.getPosicion(posicionEnLaLista).getInfo();
+            if (pedido.getMesa().equals(mesa)) {
+
+                resultadoBusqueda();
+                observador = false;
+            }
+
+            posicionEnLaLista--;
+        } while (posicionEnLaLista >= 0 && observador);
+    }
+
+    private void resultadoBusqueda() {
+        listaDePlatosDeUnPedido = pedido.getListaComida();
+        ComidaAuxiliar comidaAuxiliar;
+        String visualizarPedido="";
+        for (int k = 0; k < listaDePlatosDeUnPedido.getTamaño(); k++) {
+
+            comidaAuxiliar = (ComidaAuxiliar) listaDePlatosDeUnPedido.getPosicion(k).getInfo();
+            String nombre = comidaAuxiliar.getNombrePlato();
+            int cantidad = Integer.parseInt(String.valueOf(comidaAuxiliar.getCantidad()));
+            visualizarPedido = visualizarPedido + "\n" + cantidad + "....................." + nombre;
+            System.out.println(visualizarPedido + "\n");
+        }
+
+        JOptionPane.showMessageDialog(this, "Pedido: \n" + visualizarPedido, pedido.getMesa(), JOptionPane.INFORMATION_MESSAGE);
+    }
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
