@@ -22,7 +22,7 @@ public class Nodo {
         return info;
     }
 
-    public void eliminarNodo(){
+    public void eliminar(){
         this.link = null;
     }
     

@@ -151,13 +151,14 @@ public class InfoDeMesas extends javax.swing.JFrame {
         for (int i = 0; i < fila; i++) {
             modelo.removeRow(0);
         }
+        
         //procede a buscar los pedidos realizados en la mesa especificada por el usuario:
         String str = String.valueOf(jComboBoxMesas.getSelectedItem());
-        String hora = String.valueOf(jTableInfoMesas.getValueAt(jTableInfoMesas.getSelectedRow(), 3));
+        
         boolean observador = false;
         for (int i = 0; i < listaPedidos.getTamaño(); i++) {
             Pedido pedido = (Pedido) listaPedidos.getPosicion(i).getInfo();
-            if (pedido.getMesa().equals(str) && pedido.getHoraPedido().equals(hora)) {
+            if (pedido.getMesa().equals(str)) {
                 modelo.addRow(new Object[]{contador, "Lista de platos", pedido.getMesero(), pedido.getHoraPedido()});
                 System.out.println("Valor del pedido" + contador + ":" + pedido.getPrecio());
                 total = total + pedido.getPrecio();
@@ -180,7 +181,8 @@ public class InfoDeMesas extends javax.swing.JFrame {
 
     private void mostrarPedido() {
         String mesa = String.valueOf(jComboBoxMesas.getSelectedItem());//Nombre de la mesa de la fila seleccionada
-        String hora = String.valueOf(jComboBoxMesas.getSelectedItem());
+        String hora = String.valueOf(jTableInfoMesas.getValueAt(jTableInfoMesas.getSelectedRow(), 3));
+        
         boolean observador = true;
         int posicionEnLaLista = VistaMenu.listaPedidos.getTamaño() - 1;
         pedido = (Pedido) VistaMenu.listaPedidos.getPosicion(posicionEnLaLista).getInfo();
@@ -188,7 +190,7 @@ public class InfoDeMesas extends javax.swing.JFrame {
         do {//Este ciclo va de atras para adelante, porque los valores que se le ingresan a la listaPedidos, los nuevos, se agregan al final y al buscar desde el inicio se econtrarán antiguos pedidos.
 
             pedido = (Pedido) VistaMenu.listaPedidos.getPosicion(posicionEnLaLista).getInfo();
-            if (pedido.getMesa().equals(mesa)) {
+            if (pedido.getMesa().equals(mesa) && pedido.getHoraPedido().equals(hora)) {
 
                 resultadoBusqueda();
                 observador = false;
