@@ -1,20 +1,17 @@
 package Vista;
 
 import Modelo.Gerente;
+import java.awt.event.KeyEvent;
 
 public class LogingDeGerente extends javax.swing.JFrame {
 
     /*
-    
      Estructura Archivo_empleados
-    
      Name    |   Phone   |   Address   |   Age   |   Cargo   |   Password    |
-    
      */
     boolean comprobacion;
     public LogingDeGerente() {
         initComponents();
-
         passwordText.setEditable(false);
     }
 
@@ -45,11 +42,6 @@ public class LogingDeGerente extends javax.swing.JFrame {
         setName("Login"); // NOI18N
         setResizable(false);
 
-        userText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userTextActionPerformed(evt);
-            }
-        });
         userText.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 userTextKeyPressed(evt);
@@ -66,6 +58,12 @@ public class LogingDeGerente extends javax.swing.JFrame {
         });
 
         jLabel2.setText("Contraseña:");
+
+        passwordText.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                passwordTextKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,7 +109,6 @@ public class LogingDeGerente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void aceptButtonForLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptButtonForLoginActionPerformed
-
         if (userText.getText().equals("")) {
 
             javax.swing.JOptionPane.showMessageDialog(this, "Ingrese su usuario antes de proceder.");
@@ -148,12 +145,31 @@ public class LogingDeGerente extends javax.swing.JFrame {
 
             passwordText.setEditable(true);
         }
-
     }//GEN-LAST:event_userTextKeyPressed
 
-    private void userTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userTextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_userTextActionPerformed
+    private void passwordTextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordTextKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            try {
+
+                Gerente gerente = (Gerente) Controlador.Restaurante.listaDeGerentes.getPosicion(Modelo.Gerente.indiceLista).getInfo();
+
+                if (this.comprobacion == true) {//Me permite la comprobacion de que si un usuario existe y si la contraseña es correcta.
+
+                    if (gerente.getContraseña().equals(passwordText.getText())) {
+
+                        this.dispose();
+                        new vistaMenuGerente().setVisible(true);                        
+                    } else {
+
+                        javax.swing.JOptionPane.showMessageDialog(this, "Contraseña incorrecta.");
+                    }
+                }
+            } catch (NullPointerException e) {
+                
+                javax.swing.JOptionPane.showMessageDialog(this, "Usuario inexistente");
+            }
+        }
+    }//GEN-LAST:event_passwordTextKeyPressed
 
     public static void main(String args[]) {
 

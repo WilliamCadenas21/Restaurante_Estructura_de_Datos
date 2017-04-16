@@ -1,6 +1,7 @@
 package Vista;
 
 import Modelo.Mesero;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 public class logingDeMeseros extends javax.swing.JFrame {
@@ -63,6 +64,12 @@ public class logingDeMeseros extends javax.swing.JFrame {
         });
 
         jLabel2.setText("Contraseña:");
+
+        passwordText.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                passwordTextKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -149,6 +156,30 @@ public class logingDeMeseros extends javax.swing.JFrame {
 
     private void userTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userTextActionPerformed
     }//GEN-LAST:event_userTextActionPerformed
+
+    private void passwordTextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordTextKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            try {
+                Mesero mesero = (Mesero) Controlador.Restaurante.listaDeEmpleados.getPosicion(Mesero.indiceLista).getInfo();
+                if (Mesero.variableComprobacionUsuario.equals("true")) {//Me permite la comprobacionUsuario de que si un usuario existe y si la contraseña es correcta.
+
+                    if (mesero.getContraseña().equals(passwordText.getText())) {
+
+                        VistaMenu vistaMenu = new VistaMenu();
+                        vistaMenu.setTitle(mesero.getNombre());
+                        vistaMenu.setVisible(true);
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Contraseña incorrecta.");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Usuario inexistente.");
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }//GEN-LAST:event_passwordTextKeyPressed
 
     public static void main(String args[]) {
 

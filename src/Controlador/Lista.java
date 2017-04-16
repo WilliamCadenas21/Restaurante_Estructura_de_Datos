@@ -66,4 +66,24 @@ public class Lista {
     public int getTamaño() {//Longitud de la lista
         return this.Tamaño;
     }
+
+    public void eliminarNodo(int i) {
+
+        if (i >= 0) {
+            int j = 0;
+            Nodo auxiliar = inicio;//Se crea un nodo auxiliar para poder moverse por la lista sin cambiarla y poder mostrarla.
+
+            if (i > 0) {
+                while (j < i - 1) {
+
+                    auxiliar = auxiliar.Siguiente();//Se realizan saltos en la lista, para poder llegar a el termino deseado.
+                    j++;
+                }
+            }
+            auxiliar.Enlaza_a(auxiliar.Siguiente().Siguiente());
+            auxiliar.Siguiente().eliminar();
+        } else {
+            System.out.println("No se elmino ya que ingreso un numero negativo!");//Retorna nulo en caso de que se ingrese un numero negativo en la lista, no cual no es posible(aparentemente, en realidad si es posible solo que no es conveniente).
+        }
+    }
 }

@@ -1,4 +1,4 @@
-Zaragosa con paticas de cerdo|5000|500|
-Arroz con pollo|6000|200|
-Arroz chino|5000|300|
-Frijoles|2000|50|
+Carne Asada Marinada|7000|500|
+Apanado de Tilapia con Panko|6000|200|
+Mole de Pollo|5000|300|
+Waffles de Multigrano con Nectarinas|2000|50|

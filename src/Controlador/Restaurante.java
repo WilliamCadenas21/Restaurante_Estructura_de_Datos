@@ -98,13 +98,10 @@ public class Restaurante {
             Lector_X.close();
 
             if (Resultado.getPosicion(0).getInfo().equals("Ya ha ingresado")) {//verificaciones de si por lo menos ya ha ingresado un gerente.
-
                 new Vista.LogingDeGerente().setVisible(true);
                 if (Resultado.getPosicion(1).getInfo().equals("Ya ingreso un mesero")) {
-
                     new Vista.logingDeMeseros().setVisible(true);
                 } else {
-
                     new Vista.vistaAgregarEmpleados().setVisible(true);
                 }
 

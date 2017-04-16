@@ -1,3 +1,3 @@
-Coca Cola|2000|500|
-Jugo de Tomate|2000|500|
-Vino|40000|350|
+Bliss de Piña Colada|2000|500|
+Dulce de Leche Caliente|2000|500|
+Frappe de Avellana|40000|350|

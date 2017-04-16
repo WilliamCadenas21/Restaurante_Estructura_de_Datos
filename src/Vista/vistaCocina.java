@@ -13,6 +13,7 @@ public class vistaCocina extends javax.swing.JFrame {
      */
     String visualizarPedido = "";
     Lista listaResultadoDePedidosCocina = new Lista();
+    Lista listaResultadoConLaHora = new Lista();
     int alturaFrameMostrarPedido = 0;
     private Lista listaDePlatosDeUnPedido;
     private Pedido pedido;
@@ -116,7 +117,8 @@ public class vistaCocina extends javax.swing.JFrame {
     void mostrarPedido() {//Busca la mesa seleccionada, me permite mostrar el pedido de una mesa.Solo muestra, no representa incoveniente alguno.
 
         String mesa = String.valueOf(tablaCocina.getValueAt(tablaCocina.getSelectedRow(), 0));//Nombre de la mesa de la fila seleccionada
-
+        String hora= String.valueOf(tablaCocina.getValueAt(tablaCocina.getSelectedRow(), 2));//captura la hora el pedido en la tabla
+        
         int posicionEnLaLista = VistaMenu.listaPedidos.getTamaño() - 1;
         pedido = (Pedido) VistaMenu.listaPedidos.getPosicion(posicionEnLaLista).getInfo();
         variableBooleanaGlobal = true;
@@ -124,7 +126,7 @@ public class vistaCocina extends javax.swing.JFrame {
         do {//Este ciclo va de atras para adelante, porque los valores que se le ingresan a la listaPedidos, los nuevos, se agregan al final y al buscar desde el inicio se econtrarán antiguos pedidos.
 
             pedido = (Pedido) VistaMenu.listaPedidos.getPosicion(posicionEnLaLista).getInfo();
-            if (pedido.getMesa().equals(mesa)) {
+            if (pedido.getMesa().equals(mesa) && pedido.getHoraPedido().equals(hora)) {
 
                 resultadoBusqueda();
                 variableBooleanaGlobal = false;
@@ -156,7 +158,7 @@ public class vistaCocina extends javax.swing.JFrame {
         DefaultTableModel tablaFactura = (DefaultTableModel) VistaMenu.tablaFactura.getModel();
 
         for (int i = 0; i < listaResultadoDePedidosCocina.getTamaño(); i++) {
-            tablaFactura.addRow(new Object[]{listaResultadoDePedidosCocina.getPosicion(i).getInfo()});//Esto me funciona para poder mostrar el nombre de la mesa a la cual ya se le ha terminado de preparar el visualizarPedido, para que asi la factura se genere mostrandose cuando el usuario necesite.
+            tablaFactura.addRow(new Object[]{listaResultadoDePedidosCocina.getPosicion(i).getInfo(),listaResultadoConLaHora.getPosicion(i).getInfo()});//Esto me funciona para poder mostrar el nombre de la mesa a la cual ya se le ha terminado de preparar el visualizarPedido, para que asi la factura se genere mostrandose cuando el usuario necesite.
         }
     }
 
@@ -165,10 +167,12 @@ public class vistaCocina extends javax.swing.JFrame {
         DefaultTableModel tablaResultadoPedidoCocina = (DefaultTableModel) tablaCocina.getModel();
         Lista numeroFilaHaEliminar = new Lista();//Guarda las posiciones en la tabla de las filas ha eliminar
         listaResultadoDePedidosCocina = new Lista();//Borra toda la informacion de la lista, para que asi no me guarde informacion correspodiente de los procesos anteriores.
+        listaResultadoConLaHora = new Lista();//borra todo para que se enlace con la Lista listaResultadoDePedidosCocina
+        
         for (int i = 0; i < tablaResultadoPedidoCocina.getRowCount(); i++) {
 
             if (tablaResultadoPedidoCocina.getValueAt(i, 1).toString().equals("true")) {
-
+                listaResultadoConLaHora.Agregar(tablaResultadoPedidoCocina.getValueAt(i, 2));//guarda la hora
                 listaResultadoDePedidosCocina.Agregar(tablaResultadoPedidoCocina.getValueAt(i, 0));//Guarda el nombre de la mesa que se ha seleccionado para poder cambiar el valor el resultadoPedido.
                 numeroFilaHaEliminar.Agregar(i);
             }

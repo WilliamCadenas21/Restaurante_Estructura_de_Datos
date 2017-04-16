@@ -20,7 +20,7 @@ public class VistaMenu extends javax.swing.JFrame {
 
     static int i = 0, j = 0, numeroDeLaMesaACambiarElPedido = 0, precio = 0, cantidad = 0, total = 0, numeroDeLaFilaAElminar = 0;
     static boolean variableBooleanaGlobal = true;
-    static Lista listaDePlatosDeUnPedido = new Lista(), listaPedidos = new Lista();
+    static Lista listaDePlatosDeUnPedido = new Lista(), listaPedidos = new Lista(), ListaPedidosFacturados = new Lista();
     static String nombreDelPlato = "", factura = "", horaActual = "", horaInicial = "", inicioFactura = "";//Las variables inicioFactura y finFactura me sirven para poder mostrar los datos en el area de texto.
     static Pedido pedido;
     DefaultTableModel modeloTablaPlatoPrincipal, modeloTablaPostres, modeloTablaBebidas, modeloTablaResultadoPedido, modeloTablaFactura, modeloTablaCocina;
@@ -30,9 +30,6 @@ public class VistaMenu extends javax.swing.JFrame {
     public VistaMenu() {
         initComponents();
         jLabelUsuario.setText(((Mesero) Controlador.Restaurante.listaDeEmpleados.getPosicion(Mesero.indiceLista).getInfo()).getNombre());
-        inicioFactura = "\t\t\t Restaurante La Prosperidad\n"
-                + "\t\t\tCalle Viva N° 123\n"
-                + Reloj.lblReloj.getText();
 
         agregarJComboBox(tablaPlatoPrincipal);
         agregarJComboBox(tablaPostre);
@@ -317,7 +314,7 @@ public class VistaMenu extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mesa", "Tiempo", "Resultado"
+                "Mesa", "Tiempo que tardo:", "Resultado"
             }
         ) {
             Class[] types = new Class [] {
@@ -350,14 +347,14 @@ public class VistaMenu extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mesa"
+                "Mesa", "Hora del Pedido"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class
+                java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -374,12 +371,11 @@ public class VistaMenu extends javax.swing.JFrame {
                 tablaFacturaMouseClicked(evt);
             }
         });
-        tablaFactura.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                tablaFacturaKeyPressed(evt);
-            }
-        });
         jScrollPane7.setViewportView(tablaFactura);
+        if (tablaFactura.getColumnModel().getColumnCount() > 0) {
+            tablaFactura.getColumnModel().getColumn(0).setResizable(false);
+            tablaFactura.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         jTabbedPane1.addTab("Factura", jScrollPane7);
 
@@ -404,7 +400,7 @@ public class VistaMenu extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabelUsuario))
@@ -421,12 +417,10 @@ public class VistaMenu extends javax.swing.JFrame {
         validarPedidoRepetido();
     }//GEN-LAST:event_AceptarActionPerformed
 
-    private void tablaFacturaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaFacturaKeyPressed
-    }//GEN-LAST:event_tablaFacturaKeyPressed
-
     private void tablaFacturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaFacturaMouseClicked
 
         String mesa = String.valueOf(tablaFactura.getValueAt(tablaFactura.getSelectedRow(), 0));
+        String hora = String.valueOf(tablaFactura.getValueAt(tablaFactura.getSelectedRow(), 1));
 
         if (evt.getClickCount() == 2) {
 
@@ -434,10 +428,14 @@ public class VistaMenu extends javax.swing.JFrame {
             pedido = (Pedido) listaPedidos.getPosicion(posicionEnLaLista).getInfo();
             variableBooleanaGlobal = true;
 
-            do {//Este ciclo va de atras para adelante, porque los valores que se le ingresan a la listaPedidos, los nuevos, se agregan al final y al buscar desde el inicio se econtrarán antiguos pedidos.
-
+            do {//Este ciclo va de atras para adelante, porque los valores que se le ingresan a la listaPedidos, los nuevos, se agregan al final y al buscar desde el inicio se econtrarán antiguos pedidos.   
+                
                 pedido = (Pedido) listaPedidos.getPosicion(posicionEnLaLista).getInfo();
-                if (pedido.getMesa().equals(mesa)) {
+                if (pedido.getMesa().equals(mesa) && pedido.getHoraPedido().equals(hora)) {
+                    inicioFactura = "\t\t\t Restaurante La Prosperidad\n"
+                            +"\t\t\t Donde todo lo que comes te da felicidad\n"
+                            + "\t\t\tCalle 49 N° 52-22\n"
+                            + Reloj.lblReloj.getText();
                     mostrarFacturaPedido(0);
                 }
                 posicionEnLaLista--;
@@ -454,7 +452,7 @@ public class VistaMenu extends javax.swing.JFrame {
 
         int posicionMesaFactura = tablaFactura.getSelectedRow();
         String mesaFactura = String.valueOf(modeloTablaFactura.getValueAt(posicionMesaFactura, 0));
-
+        
         eliminarFilaDeUnaTabla(modeloTablaResultadoPedido, mesaFactura, posicionMesaFactura);
         eliminarFilaDeUnaTabla(modeloTablaFactura, mesaFactura, tablaFactura.getSelectedRow());
     }//GEN-LAST:event_botonPagarActionPerformed
@@ -481,7 +479,7 @@ public class VistaMenu extends javax.swing.JFrame {
                 }
             }
             if (mesaYaSelecionada == false) {
-
+                //aqui entra si todas las validaciones con correctas
                 sePuedeRealizarElPedidoSiONo();
             } else {
                 JOptionPane.showMessageDialog(this, "Lo sentimos pero la " + mesasJList.getSelectedValue() + " ya se encuentra con un pedido pendiente");
@@ -500,11 +498,9 @@ public class VistaMenu extends javax.swing.JFrame {
         modeloTablaPostres = (DefaultTableModel) tablaPostre.getModel();
         modeloTablaBebidas = (DefaultTableModel) tablaBebidas.getModel();
 
-        AgregarPlatosAUnPedido(modeloTablaPlatoPrincipal, "Plato");
-        AgregarPlatosAUnPedido(modeloTablaPostres, "Postre");
-        AgregarPlatosAUnPedido(modeloTablaBebidas, "Bebida");
-
-        if (variableBooleanaGlobal == false) {
+        if (!AgregarPlatosAUnPedido(modeloTablaPlatoPrincipal, "Plato")
+                && !AgregarPlatosAUnPedido(modeloTablaPostres, "Postre")
+                && !AgregarPlatosAUnPedido(modeloTablaBebidas, "Bebida")) {
             listaDePlatosDeUnPedido = new Lista();
             JOptionPane.showMessageDialog(this, "Por favor seleccione siquiera un plato para agregar al pedido.");
         } else {
@@ -517,7 +513,7 @@ public class VistaMenu extends javax.swing.JFrame {
 
         listaDePlatosDeUnPedido = pedido.getListaComida();
         ComidaAuxiliar comidaAuxiliar;
-        alturaFrame = 180;
+        alturaFrame = 300;
 
         for (int k = 0; k < listaDePlatosDeUnPedido.getTamaño(); k++) {
 
@@ -626,8 +622,8 @@ public class VistaMenu extends javax.swing.JFrame {
                     if (calcularDiferenciaDeTiempos(horaInicial, horaActual)) {
                         cambiarPedido(pedido.getMesa());
                         modeloTablaCocina.removeRow(numeroDeLaFilaAElminar);
+                        JOptionPane.showMessageDialog(this, "La cancelacion del pedido se a realizado con exito");
                     } else {
-
                         JOptionPane.showMessageDialog(this, "El tiempo necesario para cambiar el pedido de la " + pedido.getMesa() + " ya ha pasado, por lo que este proceso no se puede realizar.");
                     }
                 }
@@ -637,8 +633,8 @@ public class VistaMenu extends javax.swing.JFrame {
         }
     }
 
-    void AgregarPlatosAUnPedido(DefaultTableModel modelo, String tipo) {
-
+    boolean AgregarPlatosAUnPedido(DefaultTableModel modelo, String tipo) {
+        total = 0;
         variableBooleanaGlobal = false;
         for (int k = 0; k < modelo.getRowCount(); k++) {
 
@@ -650,13 +646,15 @@ public class VistaMenu extends javax.swing.JFrame {
 
                 listaDePlatosDeUnPedido.Agregar(new ComidaAuxiliar(tipo, nombreDelPlato, precio, cantidad));//Primero llenó una lista de objetos con los platos pedidos.    
                 total = total + precio * cantidad;
-                variableBooleanaGlobal = true                 
-             }            
+                variableBooleanaGlobal = true;
+            }
         }
+        return variableBooleanaGlobal;
     }
 
     void AgregarPedido() {
-        listaPedidos.Agregar(new Pedido(this.mesasJList.getSelectedValue(), listaDePlatosDeUnPedido, total,horaActual,jLabelUsuario.getText()));
+        horaActual = Reloj.lblReloj.getText();//Captura del tiempo actual en el que se ordena el pedido
+        listaPedidos.Agregar(new Pedido(this.mesasJList.getSelectedValue(), listaDePlatosDeUnPedido, total, horaActual, jLabelUsuario.getText()));
         listaDePlatosDeUnPedido = new Lista();//Reinicio esta lista, porque de lo contrario me guadaria informacion de los platos antes pedidos.
     }
 
@@ -675,8 +673,6 @@ public class VistaMenu extends javax.swing.JFrame {
         modeloTablaPostres = (DefaultTableModel) tablaPostre.getModel();
         modeloTablaBebidas = (DefaultTableModel) tablaBebidas.getModel();
         modeloTablaCocina = (DefaultTableModel) vistaCocina.tablaCocina.getModel();
-
-        horaActual = Reloj.lblReloj.getText();//Captura del tiempo actual en el que se ordena el visualizarPedido para cocina 
 
         try {
 
@@ -707,7 +703,7 @@ public class VistaMenu extends javax.swing.JFrame {
     void agregarFilaATablaResultadoDePedidos() {
 
         modeloTablaResultadoPedido = (DefaultTableModel) resultadoPedidos.getModel();
-        modeloTablaResultadoPedido.addRow(new Object[]{mesasJList.getSelectedValue(), "Preparando", "Preparando"});
+        modeloTablaResultadoPedido.addRow(new Object[]{mesasJList.getSelectedValue(), "Tiempo que tardo el pedido", "Preparando"});
         System.out.println(mesasJList.getSelectedValue());
         llenarTablaDeCocina();
     }

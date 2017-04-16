@@ -34,7 +34,6 @@ public class Pedido {
     }
 
     public Lista getListaComida(){
-    
         return this.listaComida;
     }
 }
