@@ -1,3 +1,3 @@
-Tres leches|6000|700|4:30|
-Pay de chocolate|10000|700|2:30|
-Pastel de queso con fresas|10000|700|1:00|
+Tres leches|6000|700|4:30|leche1_50_cc_,leche2_50_gr_cc_,leche3_50_gr_cc_,|
+Pay de chocolate|10000|700|2:30|chocolate_50_gr_,leche_100_cc_,algo mas_1000_gr_,|
+Pastel de queso con fresas|10000|700|1:00|queso_60_gr_,fresas_30_gr_,leche_70_cc_,|

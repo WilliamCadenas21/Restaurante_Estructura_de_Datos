@@ -165,7 +165,7 @@ public class VistaMenu extends javax.swing.JFrame {
             tablaPlatoPrincipal.getColumnModel().getColumn(3).setPreferredWidth(3);
         }
 
-        jTabbedPane2.addTab("Plato_principal", jScrollPane1);
+        jTabbedPane2.addTab("Plato principal", jScrollPane1);
 
         tablaPostre.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -433,7 +433,7 @@ public class VistaMenu extends javax.swing.JFrame {
                 pedido = (Pedido) listaPedidos.getPosicion(posicionEnLaLista).getInfo();
                 if (pedido.getMesa().equals(mesa) && pedido.getHoraPedido().equals(hora)) {
                     inicioFactura = "\t\t\t Restaurante La Prosperidad\n"
-                            +"\t\t\t Donde todo lo que comes te da felicidad\n"
+                            + "\t\t\t Donde todo lo que comes te da felicidad\n"
                             + "\t\t\tCalle 49 N° 52-22\n"
                             + Reloj.lblReloj.getText();
                     mostrarFacturaPedido(0);
@@ -452,7 +452,7 @@ public class VistaMenu extends javax.swing.JFrame {
 
         int posicionMesaFactura = tablaFactura.getSelectedRow();
         String mesaFactura = String.valueOf(modeloTablaFactura.getValueAt(posicionMesaFactura, 0));
-        
+
         eliminarFilaDeUnaTabla(modeloTablaResultadoPedido, mesaFactura, posicionMesaFactura);
         eliminarFilaDeUnaTabla(modeloTablaFactura, mesaFactura, tablaFactura.getSelectedRow());
     }//GEN-LAST:event_botonPagarActionPerformed
@@ -546,19 +546,19 @@ public class VistaMenu extends javax.swing.JFrame {
 
                     PlatoPrincipal algo0 = (PlatoPrincipal) lista.getPosicion(i).getInfo();
 
-                    modelo.addRow(new Object[]{algo0.getNombre(), algo0.getPrecio(), algo0.getCarbohidratos(), 0});
+                    modelo.addRow(new Object[]{algo0.getNombre(), "$ " + algo0.getPrecio(), algo0.getCarbohidratos(), 0});
                     break;
                 case "Postre":
 
                     Postre algo1 = (Postre) lista.getPosicion(i).getInfo();
 
-                    modelo.addRow(new Object[]{algo1.getNombre(), algo1.getPrecio(), algo1.getCarbohidratos(), 0});
+                    modelo.addRow(new Object[]{algo1.getNombre(), "$ " + algo1.getPrecio(), algo1.getCarbohidratos(), 0});
                     break;
                 case "Bebida":
 
                     Bebida algo2 = (Bebida) lista.getPosicion(i).getInfo();
 
-                    modelo.addRow(new Object[]{algo2.getNombre(), algo2.getPrecio(), algo2.getCarbohidratos(), 0});
+                    modelo.addRow(new Object[]{algo2.getNombre(), "$ " + algo2.getPrecio(), algo2.getCarbohidratos(), 0});
                     break;
             }
 
@@ -566,7 +566,10 @@ public class VistaMenu extends javax.swing.JFrame {
         }
     }
 
-    void tiempo() {//Me sirve para que la ejecucion entre ciclo y ciclo se frene, para asi poder evitar que el programa se coloque muy lento.
+    /**
+     * Detiene ejecuciones para evitar el relentizado.
+     */
+    void tiempo() {
         j = 0;
         i = 0;
         try {
@@ -641,10 +644,24 @@ public class VistaMenu extends javax.swing.JFrame {
             int valor = Integer.parseInt(String.valueOf(modelo.getValueAt(k, 3)));
             if (valor > 0) {
                 nombreDelPlato = String.valueOf(modelo.getValueAt(k, 0));
-                precio = Integer.parseInt(String.valueOf(modelo.getValueAt(k, 1)));
+                
+                String algo = String.valueOf(modelo.getValueAt(k, 1));
+                algo = algo.substring(2, algo.length());
+                precio = Integer.parseInt(algo);
+                
                 cantidad = Integer.parseInt(String.valueOf(modelo.getValueAt(k, 3)));
-
-                listaDePlatosDeUnPedido.Agregar(new ComidaAuxiliar(tipo, nombreDelPlato, precio, cantidad));//Primero llenó una lista de objetos con los platos pedidos.    
+                
+                Lista ingredientes = new Lista();
+                switch(tipo){
+                    case "Plato":
+                        ingredientes = PlatoPrincipal.getIngredientes(nombreDelPlato);
+                        break;
+                    case "Postre":
+                        ingredientes = Postre.getIngredientes(nombreDelPlato);
+                        break;
+                }
+                
+                listaDePlatosDeUnPedido.Agregar(new ComidaAuxiliar(tipo, nombreDelPlato, precio, cantidad, ingredientes));//Primero llenó una lista de objetos con los platos pedidos.    
                 total = total + precio * cantidad;
                 variableBooleanaGlobal = true;
             }

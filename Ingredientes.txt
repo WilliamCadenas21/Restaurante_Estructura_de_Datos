@@ -1,0 +1,6 @@
+carne_5000_gr_
+pollo_10000_gr_
+sal_6000_gr_
+salsa de soya_5000_cc_
+tilapia_70000_gr_
+pan rallado_9000_gr_

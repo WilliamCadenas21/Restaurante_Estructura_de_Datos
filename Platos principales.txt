@@ -1,4 +1,4 @@
-Carne Asada Marinada|7000|500|
-Apanado de Tilapia con Panko|6000|200|
-Mole de Pollo|5000|300|
-Waffles de Multigrano con Nectarinas|2000|50|
+Carne Asada Marinada|7000|500|carne_500_gr_,sal_100_gr_,|
+Apanado de Tilapia con Panko|6000|200|tilapia_600_gr_,pan rallado_50_gr_,|
+Mole de Pollo|5000|300|pollo_500_gr_,gato_200_gr_,|
+Waffles de Multigrano con Nectarinas|2000|50|perro_60_gr_,huevos de iguana_40_gr_,|

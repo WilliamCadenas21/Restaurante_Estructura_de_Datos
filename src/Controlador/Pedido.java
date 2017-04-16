@@ -17,23 +17,27 @@ public class Pedido {
         return Mesero;
     }
 
-    public Pedido(String mesa,Lista listaCcomida, int precio, String horaPedido, String Mesero) {
+    public Pedido(String mesa,Lista listaComida, int precio, String horaPedido, String Mesero) {
         this.mesa = mesa;
         this.precio = precio;
         this.horaPedido = horaPedido;
         this.Mesero = Mesero;
-        this.listaComida = listaCcomida;
+        this.listaComida = listaComida;
     }
 
     public String getMesa() {
-        return mesa;
+        return this.mesa;
     }
 
     public int getPrecio() {
-        return precio;
+        return this.precio;
     }
 
     public Lista getListaComida(){
         return this.listaComida;
+    }
+    
+    public void verificacionIngredientes(Lista listaPlatos){
+        
     }
 }

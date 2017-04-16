@@ -184,7 +184,7 @@ public class vistaAgregarComida extends javax.swing.JFrame {
 
                 case 1:
 
-                    listaDePostres.Agregar(new Postre(nombre, precio, carbohidratos, tiempo));
+                    listaDePostres.Agregar(new Postre(nombre, precio, carbohidratos, tiempo, new Lista()));
 
                     escritor = new FileWriter(archivoPostres, true);
                     escritorX = new BufferedWriter(escritor);
