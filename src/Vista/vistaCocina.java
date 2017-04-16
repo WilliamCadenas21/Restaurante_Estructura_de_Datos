@@ -117,7 +117,8 @@ public class vistaCocina extends javax.swing.JFrame {
     void mostrarPedido() {//Busca la mesa seleccionada, me permite mostrar el pedido de una mesa.Solo muestra, no representa incoveniente alguno.
 
         String mesa = String.valueOf(tablaCocina.getValueAt(tablaCocina.getSelectedRow(), 0));//Nombre de la mesa de la fila seleccionada
-
+        String hora= String.valueOf(tablaCocina.getValueAt(tablaCocina.getSelectedRow(), 2));//captura la hora el pedido en la tabla
+        
         int posicionEnLaLista = VistaMenu.listaPedidos.getTamaño() - 1;
         pedido = (Pedido) VistaMenu.listaPedidos.getPosicion(posicionEnLaLista).getInfo();
         variableBooleanaGlobal = true;
@@ -125,7 +126,7 @@ public class vistaCocina extends javax.swing.JFrame {
         do {//Este ciclo va de atras para adelante, porque los valores que se le ingresan a la listaPedidos, los nuevos, se agregan al final y al buscar desde el inicio se econtrarán antiguos pedidos.
 
             pedido = (Pedido) VistaMenu.listaPedidos.getPosicion(posicionEnLaLista).getInfo();
-            if (pedido.getMesa().equals(mesa)) {
+            if (pedido.getMesa().equals(mesa) && pedido.getHoraPedido().equals(hora)) {
 
                 resultadoBusqueda();
                 variableBooleanaGlobal = false;

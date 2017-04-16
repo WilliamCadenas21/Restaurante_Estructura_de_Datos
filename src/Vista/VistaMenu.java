@@ -428,8 +428,8 @@ public class VistaMenu extends javax.swing.JFrame {
             pedido = (Pedido) listaPedidos.getPosicion(posicionEnLaLista).getInfo();
             variableBooleanaGlobal = true;
 
-            do {//Este ciclo va de atras para adelante, porque los valores que se le ingresan a la listaPedidos, los nuevos, se agregan al final y al buscar desde el inicio se econtrarán antiguos pedidos.
-
+            do {//Este ciclo va de atras para adelante, porque los valores que se le ingresan a la listaPedidos, los nuevos, se agregan al final y al buscar desde el inicio se econtrarán antiguos pedidos.   
+                
                 pedido = (Pedido) listaPedidos.getPosicion(posicionEnLaLista).getInfo();
                 if (pedido.getMesa().equals(mesa) && pedido.getHoraPedido().equals(hora)) {
                     inicioFactura = "\t\t\t Restaurante La Prosperidad\n"
