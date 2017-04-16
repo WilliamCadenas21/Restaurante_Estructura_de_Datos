@@ -30,7 +30,7 @@ public class VistaMenu extends javax.swing.JFrame {
     public VistaMenu() {
         initComponents();
         jLabelUsuario.setText(((Mesero) Controlador.Restaurante.listaDeEmpleados.getPosicion(Mesero.indiceLista).getInfo()).getNombre());
-
+        mesasJList.setSelectedIndex(0);
         agregarJComboBox(tablaPlatoPrincipal);
         agregarJComboBox(tablaPostre);
         agregarJComboBox(tablaBebidas);
@@ -429,7 +429,7 @@ public class VistaMenu extends javax.swing.JFrame {
             variableBooleanaGlobal = true;
 
             do {//Este ciclo va de atras para adelante, porque los valores que se le ingresan a la listaPedidos, los nuevos, se agregan al final y al buscar desde el inicio se econtrarán antiguos pedidos.   
-                
+
                 pedido = (Pedido) listaPedidos.getPosicion(posicionEnLaLista).getInfo();
                 if (pedido.getMesa().equals(mesa) && pedido.getHoraPedido().equals(hora)) {
                     inicioFactura = "\t\t\t Restaurante La Prosperidad\n"
@@ -437,6 +437,7 @@ public class VistaMenu extends javax.swing.JFrame {
                             + "\t\t\tCalle 49 N° 52-22\n"
                             + Reloj.lblReloj.getText();
                     mostrarFacturaPedido(0);
+                    variableBooleanaGlobal = false;
                 }
                 posicionEnLaLista--;
             } while (posicionEnLaLista >= 0 && variableBooleanaGlobal);
@@ -497,10 +498,13 @@ public class VistaMenu extends javax.swing.JFrame {
         modeloTablaPlatoPrincipal = (DefaultTableModel) tablaPlatoPrincipal.getModel();
         modeloTablaPostres = (DefaultTableModel) tablaPostre.getModel();
         modeloTablaBebidas = (DefaultTableModel) tablaBebidas.getModel();
-
-        if (!AgregarPlatosAUnPedido(modeloTablaPlatoPrincipal, "Plato")
-                && !AgregarPlatosAUnPedido(modeloTablaPostres, "Postre")
-                && !AgregarPlatosAUnPedido(modeloTablaBebidas, "Bebida")) {
+        
+        variableBooleanaGlobal = false;
+        AgregarPlatosAUnPedido(modeloTablaPlatoPrincipal, "Plato");
+        AgregarPlatosAUnPedido(modeloTablaPostres, "Postre");
+        AgregarPlatosAUnPedido(modeloTablaBebidas, "Bebida");
+        
+        if (variableBooleanaGlobal == false) {
             listaDePlatosDeUnPedido = new Lista();
             JOptionPane.showMessageDialog(this, "Por favor seleccione siquiera un plato para agregar al pedido.");
         } else {
@@ -534,6 +538,7 @@ public class VistaMenu extends javax.swing.JFrame {
         mostrarFactura.setVisible(true);//Se abre el frame que muestra la factura. 
         variableBooleanaGlobal = false;
         factura = "";
+        listaDePlatosDeUnPedido = new Lista();
     }
 
     void mostrarPlatosEnTablas(DefaultTableModel modelo, String TipoDeObjeto, Lista lista) {
@@ -636,23 +641,22 @@ public class VistaMenu extends javax.swing.JFrame {
         }
     }
 
-    boolean AgregarPlatosAUnPedido(DefaultTableModel modelo, String tipo) {
+    void AgregarPlatosAUnPedido(DefaultTableModel modelo, String tipo) {
         total = 0;
-        variableBooleanaGlobal = false;
         for (int k = 0; k < modelo.getRowCount(); k++) {
 
             int valor = Integer.parseInt(String.valueOf(modelo.getValueAt(k, 3)));
             if (valor > 0) {
                 nombreDelPlato = String.valueOf(modelo.getValueAt(k, 0));
-                
+
                 String algo = String.valueOf(modelo.getValueAt(k, 1));
                 algo = algo.substring(2, algo.length());
                 precio = Integer.parseInt(algo);
-                
+
                 cantidad = Integer.parseInt(String.valueOf(modelo.getValueAt(k, 3)));
-                
+
                 Lista ingredientes = new Lista();
-                switch(tipo){
+                switch (tipo) {
                     case "Plato":
                         ingredientes = PlatoPrincipal.getIngredientes(nombreDelPlato);
                         break;
@@ -660,19 +664,20 @@ public class VistaMenu extends javax.swing.JFrame {
                         ingredientes = Postre.getIngredientes(nombreDelPlato);
                         break;
                 }
-                
+
                 listaDePlatosDeUnPedido.Agregar(new ComidaAuxiliar(tipo, nombreDelPlato, precio, cantidad, ingredientes));//Primero llenó una lista de objetos con los platos pedidos.    
                 total = total + precio * cantidad;
                 variableBooleanaGlobal = true;
             }
         }
-        return variableBooleanaGlobal;
     }
 
     void AgregarPedido() {
         horaActual = Reloj.lblReloj.getText();//Captura del tiempo actual en el que se ordena el pedido
         listaPedidos.Agregar(new Pedido(this.mesasJList.getSelectedValue(), listaDePlatosDeUnPedido, total, horaActual, jLabelUsuario.getText()));
-        listaDePlatosDeUnPedido = new Lista();//Reinicio esta lista, porque de lo contrario me guadaria informacion de los platos antes pedidos.
+        
+        listaDePlatosDeUnPedido = null;//Reinicio esta lista, porque de lo contrario me guadaria informacion de los platos antes pedidos.
+        listaDePlatosDeUnPedido = new Lista();
     }
 
     void cambiarPedido(String mesa) {

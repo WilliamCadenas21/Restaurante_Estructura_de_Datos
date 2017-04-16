@@ -152,6 +152,7 @@ public class vistaCocina extends javax.swing.JFrame {
 
         JOptionPane.showMessageDialog(this, "Pedido: \n" + visualizarPedido, pedido.getMesa(), JOptionPane.INFORMATION_MESSAGE);
         visualizarPedido = "";//Reiniciar para que no se concatenen los datos anteriores.
+        listaDePlatosDeUnPedido = new Lista();
     }
 
     void Factura() {//Me permite llenar la tabla factura que se encuentra en mesero para poder mostrarla.
