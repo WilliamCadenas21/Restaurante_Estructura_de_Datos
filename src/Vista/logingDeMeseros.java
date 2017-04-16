@@ -120,26 +120,22 @@ public class logingDeMeseros extends javax.swing.JFrame {
         if (userText.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Ingrese su usuario antes de proceder.");
         } else {
-            try {
-                Mesero mesero = (Mesero) Controlador.Restaurante.listaDeEmpleados.getPosicion(Mesero.indiceLista).getInfo();
-                if (Mesero.variableComprobacionUsuario.equals("true")) {//Me permite la comprobacionUsuario de que si un usuario existe y si la contraseña es correcta.
+            
+            Mesero mesero = (Mesero) Controlador.Restaurante.listaDeEmpleados.getPosicion(Mesero.indiceLista).getInfo();
+            if (Mesero.variableComprobacionUsuario.equals("true")) {//Me permite la comprobacionUsuario de que si un usuario existe y si la contraseña es correcta.
 
-                    if (mesero.getContraseña().equals(passwordText.getText())) {
+                if (mesero.getContraseña().equals(passwordText.getText())) {
 
-                        VistaMenu vistaMenu = new VistaMenu();
-                        vistaMenu.setTitle(mesero.getNombre());
-                        vistaMenu.setVisible(true);
-                        this.dispose();
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Contraseña incorrecta.");
-                    }
+                    VistaMenu vistaMenu = new VistaMenu();
+                    vistaMenu.setTitle(mesero.getNombre());
+                    vistaMenu.setVisible(true);
+                    this.dispose();
                 } else {
-                    JOptionPane.showMessageDialog(this, "Usuario inexistente.");
+                    JOptionPane.showMessageDialog(this, "Contraseña incorrecta.");
                 }
-            } catch (Exception e) {
-                System.out.println(e);
+            } else {
+                JOptionPane.showMessageDialog(this, "Usuario inexistente.");
             }
-
         }
 
         Mesero.variableComprobacionUsuario = "false";

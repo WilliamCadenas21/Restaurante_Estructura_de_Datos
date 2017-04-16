@@ -10,6 +10,7 @@ public class LogingDeGerente extends javax.swing.JFrame {
      Name    |   Phone   |   Address   |   Age   |   Cargo   |   Password    |
      */
     boolean comprobacion;
+
     public LogingDeGerente() {
         initComponents();
         passwordText.setEditable(false);
@@ -118,30 +119,31 @@ public class LogingDeGerente extends javax.swing.JFrame {
 
                 Gerente gerente = (Gerente) Controlador.Restaurante.listaDeGerentes.getPosicion(Modelo.Gerente.indiceLista).getInfo();
 
-                if (this.comprobacion == true) {//Me permite la comprobacion de que si un usuario existe y si la contraseña es correcta.
+                if (Gerente.variableComprobacionUsuario.equals("true")) {//Me permite la comprobacion de que si un usuario existe y si la contraseña es correcta.
 
                     if (gerente.getContraseña().equals(passwordText.getText())) {
 
                         this.dispose();
-                        new vistaMenuGerente().setVisible(true);                        
+                        new vistaMenuGerente().setVisible(true);
                     } else {
 
                         javax.swing.JOptionPane.showMessageDialog(this, "Contraseña incorrecta.");
                     }
                 }
             } catch (NullPointerException e) {
-                
+
                 javax.swing.JOptionPane.showMessageDialog(this, "Usuario inexistente");
             }
         }
+        Gerente.variableComprobacionUsuario.equals("true");
     }//GEN-LAST:event_aceptButtonForLoginActionPerformed
 
 
     private void userTextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_userTextKeyPressed
 
-        this.comprobacion = Modelo.Gerente.Comprobacion(userText.getText() + evt.getKeyChar(), 0);
+        Modelo.Gerente.Comprobacion(userText.getText() + evt.getKeyChar(), 0);
 
-        if (true == this.comprobacion) {
+        if (Gerente.variableComprobacionUsuario.equals("true")) {
 
             passwordText.setEditable(true);
         }
@@ -158,14 +160,14 @@ public class LogingDeGerente extends javax.swing.JFrame {
                     if (gerente.getContraseña().equals(passwordText.getText())) {
 
                         this.dispose();
-                        new vistaMenuGerente().setVisible(true);                        
+                        new vistaMenuGerente().setVisible(true);
                     } else {
 
                         javax.swing.JOptionPane.showMessageDialog(this, "Contraseña incorrecta.");
                     }
                 }
             } catch (NullPointerException e) {
-                
+
                 javax.swing.JOptionPane.showMessageDialog(this, "Usuario inexistente");
             }
         }
