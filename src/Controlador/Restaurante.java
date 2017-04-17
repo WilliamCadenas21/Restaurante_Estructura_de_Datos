@@ -118,7 +118,7 @@ public class Restaurante {
         if (listaOString == 0) {
             pedido(tipoDeLista, lista);
         } else {
-            separacionIngredientes(lista, 0, 0, 0, 0, 0, "");
+            separacionIngredientes(lista, 0, 1, 0, 0, 0, "");
         }
     }
 
@@ -179,7 +179,7 @@ public class Restaurante {
 
             listaIngredientesPlato.Agregar(new Ingrediente(nombre, cantidad, unidad));
             i = i + 1;
-            tipo = 0;
+            tipo = 1;
             inicio = 0;
             fin = 0;
             j = 0;

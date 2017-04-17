@@ -5,6 +5,8 @@ import Controlador.Pedido;
 import Controlador.Restaurante;
 import Modelo.Bebida;
 import Modelo.ComidaAuxiliar;
+import Modelo.Ingrediente;
+import static Modelo.Ingrediente.platosQueNoSePuedenRealizar;
 import Modelo.Mesero;
 import Modelo.PlatoPrincipal;
 import Modelo.Postre;
@@ -509,6 +511,13 @@ public class VistaMenu extends javax.swing.JFrame {
         if (variableBooleanaGlobal == false) {
             JOptionPane.showMessageDialog(this, "Por favor seleccione siquiera un plato para agregar al pedido.");
         } else {
+            
+            Ingrediente.busquedaIngredientes(listaDePlatosDeUnPedido);
+            String r = "";
+            for (int k = 0; k < platosQueNoSePuedenRealizar.getTamaño(); k++) {
+                r = r + "\n" +((ComidaAuxiliar)platosQueNoSePuedenRealizar.getPosicion(k).getInfo()).getNombrePlato();
+            }
+            JOptionPane.showMessageDialog(this, r);
             AgregarPedido();
             agregarFilaATablaResultadoDePedidos();
         }
@@ -666,7 +675,7 @@ public class VistaMenu extends javax.swing.JFrame {
                         ingredientes = Postre.getIngredientes(nombreDelPlato);
                         break;
                 }
-
+                
                 listaDePlatosDeUnPedido.Agregar(new ComidaAuxiliar(tipo, nombreDelPlato, precio, cantidad, ingredientes));//Primero llenó una lista de objetos con los platos pedidos.    
                 total = total + precio * cantidad;
                 variableBooleanaGlobal = true;

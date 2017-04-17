@@ -1,9 +1,8 @@
 package Controlador;
 
-
 public class Pedido {
 
-    private String mesa;    
+    private String mesa;
     private int precio;
     private Lista listaComida;
     private String horaPedido;
@@ -17,7 +16,7 @@ public class Pedido {
         return Mesero;
     }
 
-    public Pedido(String mesa,Lista listaComida, int precio, String horaPedido, String Mesero) {
+    public Pedido(String mesa, Lista listaComida, int precio, String horaPedido, String Mesero) {
         this.mesa = mesa;
         this.precio = precio;
         this.horaPedido = horaPedido;
@@ -33,11 +32,7 @@ public class Pedido {
         return this.precio;
     }
 
-    public Lista getListaComida(){
+    public Lista getListaComida() {
         return this.listaComida;
-    }
-    
-    public void verificacionIngredientes(Lista listaPlatos){
-        
     }
 }

@@ -135,7 +135,7 @@ public class LogingDeGerente extends javax.swing.JFrame {
                 javax.swing.JOptionPane.showMessageDialog(this, "Usuario inexistente");
             }
         }
-        Gerente.variableComprobacionUsuario.equals("true");
+        Gerente.variableComprobacionUsuario = "false";
     }//GEN-LAST:event_aceptButtonForLoginActionPerformed
 
 
@@ -151,25 +151,7 @@ public class LogingDeGerente extends javax.swing.JFrame {
 
     private void passwordTextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordTextKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            try {
-
-                Gerente gerente = (Gerente) Controlador.Restaurante.listaDeGerentes.getPosicion(Modelo.Gerente.indiceLista).getInfo();
-
-                if (this.comprobacion == true) {//Me permite la comprobacion de que si un usuario existe y si la contraseña es correcta.
-
-                    if (gerente.getContraseña().equals(passwordText.getText())) {
-
-                        this.dispose();
-                        new vistaMenuGerente().setVisible(true);
-                    } else {
-
-                        javax.swing.JOptionPane.showMessageDialog(this, "Contraseña incorrecta.");
-                    }
-                }
-            } catch (NullPointerException e) {
-
-                javax.swing.JOptionPane.showMessageDialog(this, "Usuario inexistente");
-            }
+            this.aceptButtonForLoginActionPerformed(null); 
         }
     }//GEN-LAST:event_passwordTextKeyPressed
 
