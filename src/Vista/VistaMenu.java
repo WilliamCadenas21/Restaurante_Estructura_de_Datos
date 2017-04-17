@@ -129,7 +129,7 @@ public class VistaMenu extends javax.swing.JFrame {
 
         mostrarFacturaLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {botonCancelar, botonPagar});
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setName("Tablet Mesero"); // NOI18N
         setResizable(false);
 

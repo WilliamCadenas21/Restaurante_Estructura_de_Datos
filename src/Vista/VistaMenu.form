@@ -85,7 +85,7 @@
     </Container>
   </NonVisualComponents>
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="defaultCloseOperation" type="int" value="0"/>
     <Property name="name" type="java.lang.String" value="Tablet Mesero" noResource="true"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>

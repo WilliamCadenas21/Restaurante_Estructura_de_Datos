@@ -20,7 +20,7 @@ public class Reloj extends javax.swing.JFrame implements Runnable{
 
         lblReloj = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setLocation(new java.awt.Point(450, 50));
         setName("Reloj"); // NOI18N
         setResizable(false);
