@@ -26,6 +26,7 @@ public class Reloj extends javax.swing.JFrame implements Runnable{
         setResizable(false);
 
         lblReloj.setFont(new java.awt.Font("Trebuchet MS", 1, 48)); // NOI18N
+        lblReloj.setForeground(new java.awt.Color(0, 153, 255));
         lblReloj.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblReloj.setText("jLabel1");
 

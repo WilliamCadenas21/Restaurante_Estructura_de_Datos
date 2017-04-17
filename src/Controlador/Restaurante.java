@@ -13,6 +13,9 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
+import javax.swing.UIManager;
+import javax.swing.plaf.metal.MetalLookAndFeel;
+
 
 public class Restaurante {
 
@@ -21,7 +24,10 @@ public class Restaurante {
     public static int cantidad;
 
     public static void main(String[] args) {
-
+        try {
+            UIManager.setLookAndFeel(new MetalLookAndFeel());
+        } catch (Exception e) {
+        }
         try {
 
             llenarListas(listaDeGerentes, new File("Archivo_Gerente.txt"), "Gerente", "|");
