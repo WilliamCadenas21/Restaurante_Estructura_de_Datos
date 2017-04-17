@@ -20,12 +20,13 @@ public class Reloj extends javax.swing.JFrame implements Runnable{
 
         lblReloj = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setLocation(new java.awt.Point(450, 50));
         setName("Reloj"); // NOI18N
         setResizable(false);
 
         lblReloj.setFont(new java.awt.Font("Trebuchet MS", 1, 48)); // NOI18N
+        lblReloj.setForeground(new java.awt.Color(0, 153, 255));
         lblReloj.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblReloj.setText("jLabel1");
 

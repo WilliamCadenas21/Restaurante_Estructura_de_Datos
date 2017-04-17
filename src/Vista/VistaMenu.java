@@ -30,12 +30,12 @@ public class VistaMenu extends javax.swing.JFrame {
     Object mesaSeleccionada;
 
     public VistaMenu() {
-        initComponents();
 
+        initComponents();
         mesasJList.setSelectedIndex(0);
 
         jLabelUsuario.setText(((Mesero) Controlador.Restaurante.listaDeEmpleados.getPosicion(Mesero.indiceLista).getInfo()).getNombre());
-
+        mesasJList.setSelectedIndex(0);
         agregarJComboBox(tablaPlatoPrincipal);
         agregarJComboBox(tablaPostre);
         agregarJComboBox(tablaBebidas);
@@ -78,6 +78,7 @@ public class VistaMenu extends javax.swing.JFrame {
         tablaFactura = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabelUsuario = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         mostrarFactura.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -133,9 +134,13 @@ public class VistaMenu extends javax.swing.JFrame {
 
         mostrarFacturaLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {botonCancelar, botonPagar});
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setName("Tablet Mesero"); // NOI18N
         setResizable(false);
+
+        jTabbedPane1.setForeground(new java.awt.Color(0, 153, 255));
+
+        jTabbedPane2.setForeground(new java.awt.Color(0, 153, 255));
 
         tablaPlatoPrincipal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -245,6 +250,8 @@ public class VistaMenu extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Bebida", jScrollPane3);
 
+        Aceptar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        Aceptar.setForeground(new java.awt.Color(0, 153, 255));
         Aceptar.setText("Aceptar");
         Aceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -252,6 +259,8 @@ public class VistaMenu extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 153, 255));
         jLabel1.setText("Mesa:");
 
         mesasJList.setModel(new javax.swing.AbstractListModel<String>() {
@@ -261,6 +270,8 @@ public class VistaMenu extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(mesasJList);
 
+        cambiarPedido.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        cambiarPedido.setForeground(new java.awt.Color(0, 153, 255));
         cambiarPedido.setText("Cambiar pedido");
         cambiarPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -384,7 +395,17 @@ public class VistaMenu extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Factura", jScrollPane7);
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 153, 255));
         jLabel2.setText("Mesero:");
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pictures/FontAwesome_f057(0)_48.png"))); // NOI18N
+        jButton1.setText("Cerrar Sesion");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -400,7 +421,9 @@ public class VistaMenu extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabelUsuario)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(31, 31, 31))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -408,8 +431,9 @@ public class VistaMenu extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabelUsuario))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabelUsuario)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -440,7 +464,9 @@ public class VistaMenu extends javax.swing.JFrame {
                             + "\t\t\t Donde todo lo que comes te da felicidad\n"
                             + "\t\t\tCalle 49 N° 52-22\n"
                             + Reloj.lblReloj.getText();
+                  
                     mostrarFacturaPedido(300, pedido);
+
                     variableBooleanaGlobal = false;
                 }
                 posicionEnLaLista--;
@@ -473,6 +499,11 @@ public class VistaMenu extends javax.swing.JFrame {
         seleccionDeHoraInicial();
         desicionCambioPedido();
     }//GEN-LAST:event_cambiarPedidoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+        new logingDeMeseros().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void validarPedidoRepetido() {
         modeloTablaCocina = (DefaultTableModel) vistaCocina.tablaCocina.getModel();
@@ -652,7 +683,6 @@ public class VistaMenu extends javax.swing.JFrame {
     }
 
     void AgregarPlatosAUnPedido(DefaultTableModel modelo, String tipo) {
-
         total = 0;
         for (int k = 0; k < modelo.getRowCount(); k++) {
 
@@ -675,7 +705,7 @@ public class VistaMenu extends javax.swing.JFrame {
                         ingredientes = Postre.getIngredientes(nombreDelPlato);
                         break;
                 }
-                
+
                 listaDePlatosDeUnPedido.Agregar(new ComidaAuxiliar(tipo, nombreDelPlato, precio, cantidad, ingredientes));//Primero llenó una lista de objetos con los platos pedidos.    
                 total = total + precio * cantidad;
                 variableBooleanaGlobal = true;
@@ -787,6 +817,7 @@ public class VistaMenu extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+
                 new VistaMenu().setVisible(true);
 
             }
@@ -798,6 +829,7 @@ public class VistaMenu extends javax.swing.JFrame {
     private javax.swing.JButton botonCancelar;
     private javax.swing.JButton botonPagar;
     private javax.swing.JButton cambiarPedido;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelUsuario;

@@ -1,6 +1,8 @@
 package Vista;
 
+import static Controlador.Restaurante.listaDeEmpleados;
 import Modelo.Mesero;
+import static Modelo.Mesero.indiceLista;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
@@ -27,6 +29,8 @@ public class logingDeMeseros extends javax.swing.JFrame {
         Acept_Button_For_login = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         passwordText = new javax.swing.JPasswordField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout Menu_GerenteLayout = new javax.swing.GroupLayout(Menu_Gerente.getContentPane());
         Menu_Gerente.getContentPane().setLayout(Menu_GerenteLayout);
@@ -43,26 +47,28 @@ public class logingDeMeseros extends javax.swing.JFrame {
         setTitle("Meseros");
         setResizable(false);
 
-        userText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userTextActionPerformed(evt);
-            }
-        });
         userText.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 userTextKeyPressed(evt);
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 153, 255));
         jLabel1.setText("Usuario:");
 
-        Acept_Button_For_login.setText("Aceptar");
+        Acept_Button_For_login.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        Acept_Button_For_login.setForeground(new java.awt.Color(0, 153, 255));
+        Acept_Button_For_login.setText("Ingresar");
+        Acept_Button_For_login.setToolTipText("Ingresar");
         Acept_Button_For_login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Acept_Button_For_loginActionPerformed(evt);
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 153, 255));
         jLabel2.setText("Contraseña:");
 
         passwordText.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -71,6 +77,12 @@ public class logingDeMeseros extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 153, 255));
+        jLabel3.setText("Ingreso de  Meseros");
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pictures/Entypo_d83d(0)_128.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -78,37 +90,43 @@ public class logingDeMeseros extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(59, 59, 59)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(userText)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(passwordText)
+                            .addComponent(Acept_Button_For_login, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(128, 128, 128)
-                        .addComponent(Acept_Button_For_login, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 131, Short.MAX_VALUE))
+                        .addGap(105, 105, 105)
+                        .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(passwordText)))
-                .addContainerGap())
+                        .addGap(112, 112, 112)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(9, 9, 9)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(userText, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(passwordText, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(Acept_Button_For_login)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Acept_Button_For_login, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
 
         pack();
@@ -121,7 +139,7 @@ public class logingDeMeseros extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Ingrese su usuario antes de proceder.");
         } else {
             
-            Mesero mesero = (Mesero) Controlador.Restaurante.listaDeEmpleados.getPosicion(Mesero.indiceLista).getInfo();
+            Mesero mesero = (Mesero) listaDeEmpleados.getPosicion(indiceLista).getInfo();
             if (Mesero.variableComprobacionUsuario.equals("true")) {//Me permite la comprobacionUsuario de que si un usuario existe y si la contraseña es correcta.
 
                 if (mesero.getContraseña().equals(passwordText.getText())) {
@@ -150,30 +168,9 @@ public class logingDeMeseros extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_userTextKeyPressed
 
-    private void userTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userTextActionPerformed
-    }//GEN-LAST:event_userTextActionPerformed
-
     private void passwordTextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordTextKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            try {
-                Mesero mesero = (Mesero) Controlador.Restaurante.listaDeEmpleados.getPosicion(Mesero.indiceLista).getInfo();
-                if (Mesero.variableComprobacionUsuario.equals("true")) {//Me permite la comprobacionUsuario de que si un usuario existe y si la contraseña es correcta.
-
-                    if (mesero.getContraseña().equals(passwordText.getText())) {
-
-                        VistaMenu vistaMenu = new VistaMenu();
-                        vistaMenu.setTitle(mesero.getNombre());
-                        vistaMenu.setVisible(true);
-                        this.dispose();
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Contraseña incorrecta.");
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(this, "Usuario inexistente.");
-                }
-            } catch (Exception e) {
-                System.out.println(e);
-            }
+            this.Acept_Button_For_loginActionPerformed(null);
         }
     }//GEN-LAST:event_passwordTextKeyPressed
 
@@ -191,6 +188,8 @@ public class logingDeMeseros extends javax.swing.JFrame {
     public static javax.swing.JFrame Menu_Gerente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPasswordField passwordText;
     private javax.swing.JTextField userText;
     // End of variables declaration//GEN-END:variables
