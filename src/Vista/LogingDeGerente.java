@@ -180,7 +180,7 @@ public class LogingDeGerente extends javax.swing.JFrame {
 
     private void passwordTextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordTextKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            this.aceptButtonForLoginActionPerformed(null);
+            this.aceptButtonForLoginActionPerformed(null); 
         }
     }//GEN-LAST:event_passwordTextKeyPressed
 

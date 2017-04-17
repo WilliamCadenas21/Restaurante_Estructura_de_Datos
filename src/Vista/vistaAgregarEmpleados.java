@@ -41,16 +41,6 @@ public class vistaAgregarEmpleados extends javax.swing.JFrame {
     public vistaAgregarEmpleados() {
         initComponents();
 
-        Vector_Mesas[0] = Mesa1_Text;
-        Vector_Mesas[1] = Mesa2_Text;
-        Vector_Mesas[2] = Mesa3_Text;
-        Vector_Mesas[3] = Mesa4_Text;
-        Vector_Mesas[4] = Mesa5_Text;
-        for (int j = 0; j < Vector_Mesas.length; j++) {
-
-            Vector_Mesas[j].setEditable(false);
-        }
-
         Password_Text.setText("");
     }
 
@@ -75,13 +65,6 @@ public class vistaAgregarEmpleados extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         Age_Spinner = new javax.swing.JSpinner();
         Password_Text = new javax.swing.JPasswordField();
-        Mesa1_Text = new javax.swing.JTextField();
-        Mesa2_Text = new javax.swing.JTextField();
-        Mesa5_Text = new javax.swing.JTextField();
-        Mesa4_Text = new javax.swing.JTextField();
-        Mesa3_Text = new javax.swing.JTextField();
-        Mesas_Combobox = new javax.swing.JComboBox();
-        jLabel8 = new javax.swing.JLabel();
 
         jLabel5.setText("Nombre:");
 
@@ -139,50 +122,31 @@ public class vistaAgregarEmpleados extends javax.swing.JFrame {
 
         Password_Text.setText("jPasswordField1");
 
-        Mesas_Combobox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mesa 1", "Mesa 2", "Mesa 3", "Mesa 4", "Mesa 5", "Mesa 6", "Mesa 7", "Mesa 8", "Mesa 9", "Mesa 10", "Mesa 11", "Mesa 12", "Mesa 13", "Mesa 14", "Mesa 15", "Mesa 16", "Mesa 17", "Mesa 18", "Mesa 19", "Mesa 20" }));
-        Mesas_Combobox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Mesas_ComboboxActionPerformed(evt);
-            }
-        });
-
-        jLabel8.setText("Mesas: ");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(138, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(Photo, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addComponent(Add_Picture_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(Boton_Agregar_Empleado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Photo, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(Add_Picture_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(132, 132, 132))
             .addGroup(layout.createSequentialGroup()
                 .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel7)
+                        .addComponent(Password_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Boton_Agregar_Empleado, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(87, 87, 87)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(jLabel6))
-                    .addComponent(jLabel8)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel7)
-                        .addComponent(Password_Text)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(Mesa1_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(Mesa2_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(Mesa3_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(Mesa4_Text)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(Mesa5_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(Mesas_Combobox, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Age_Spinner, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel4)
@@ -191,11 +155,8 @@ public class vistaAgregarEmpleados extends javax.swing.JFrame {
                         .addComponent(Phone_Text, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addComponent(Name_Text, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 45, Short.MAX_VALUE))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Mesa1_Text, Mesa2_Text, Mesa3_Text, Mesa4_Text, Mesa5_Text});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -220,23 +181,12 @@ public class vistaAgregarEmpleados extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Age_Spinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Mesas_Combobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Mesa1_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Mesa2_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Mesa3_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Mesa4_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Mesa5_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Password_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Boton_Agregar_Empleado)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -335,30 +285,6 @@ public class vistaAgregarEmpleados extends javax.swing.JFrame {
         
     }//GEN-LAST:event_Boton_Agregar_EmpleadoActionPerformed
 
-    private void Mesas_ComboboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mesas_ComboboxActionPerformed
-
-        try {
-
-            Vector_Mesas[i].setText(String.valueOf(Mesas_Combobox.getSelectedItem()));
-            Vector_Mesas[i].setEditable(false);
-            Vector_Mesas[i].setEnabled(true);
-
-            i++;
-
-        } catch (ArrayIndexOutOfBoundsException e) {
-
-            for (int j = 0; j < 5; j++) {
-
-                Vector_Mesas[0].setText((String) Mesas_Combobox.getSelectedItem());
-                Vector_Mesas[j].setText("");
-            }
-
-            i = 0;
-
-        }
-
-    }//GEN-LAST:event_Mesas_ComboboxActionPerformed
-
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -375,12 +301,6 @@ public class vistaAgregarEmpleados extends javax.swing.JFrame {
     private javax.swing.JButton Boton_Agregar_Empleado;
     private javax.swing.JFrame Imagen;
     private javax.swing.JFileChooser Imagen_Selector;
-    private javax.swing.JTextField Mesa1_Text;
-    private javax.swing.JTextField Mesa2_Text;
-    private javax.swing.JTextField Mesa3_Text;
-    private javax.swing.JTextField Mesa4_Text;
-    private javax.swing.JTextField Mesa5_Text;
-    private javax.swing.JComboBox Mesas_Combobox;
     private javax.swing.JTextField Name_Text;
     private javax.swing.JTextField Name_Text3;
     private javax.swing.JPasswordField Password_Text;
@@ -392,6 +312,5 @@ public class vistaAgregarEmpleados extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     // End of variables declaration//GEN-END:variables
 }

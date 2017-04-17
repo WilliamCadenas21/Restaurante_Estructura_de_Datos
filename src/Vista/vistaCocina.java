@@ -3,6 +3,7 @@ package Vista;
 import Controlador.Lista;
 import Controlador.Pedido;
 import Modelo.ComidaAuxiliar;
+import static Vista.VistaMenu.listaPedidos;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,7 +16,7 @@ public class vistaCocina extends javax.swing.JFrame {
     Lista listaResultadoDePedidosCocina = new Lista();
     Lista listaResultadoConLaHora = new Lista();
     int alturaFrameMostrarPedido = 0;
-    private Lista listaDePlatosDeUnPedido;
+    private Lista listaDePlatosDeUnPedidoCocina;
     private Pedido pedido;
     private boolean variableBooleanaGlobal;
 
@@ -136,13 +137,12 @@ public class vistaCocina extends javax.swing.JFrame {
         String mesa = String.valueOf(tablaCocina.getValueAt(tablaCocina.getSelectedRow(), 0));//Nombre de la mesa de la fila seleccionada
         String hora= String.valueOf(tablaCocina.getValueAt(tablaCocina.getSelectedRow(), 2));//captura la hora el pedido en la tabla
         
-        int posicionEnLaLista = VistaMenu.listaPedidos.getTamaño() - 1;
-        pedido = (Pedido) VistaMenu.listaPedidos.getPosicion(posicionEnLaLista).getInfo();
+        int posicionEnLaLista = listaPedidos.getTamaño() - 1;
         variableBooleanaGlobal = true;
 
         do {//Este ciclo va de atras para adelante, porque los valores que se le ingresan a la listaPedidos, los nuevos, se agregan al final y al buscar desde el inicio se econtrarán antiguos pedidos.
 
-            pedido = (Pedido) VistaMenu.listaPedidos.getPosicion(posicionEnLaLista).getInfo();
+            pedido = (Pedido) listaPedidos.getPosicion(posicionEnLaLista).getInfo();
             if (pedido.getMesa().equals(mesa) && pedido.getHoraPedido().equals(hora)) {
 
                 resultadoBusqueda();
@@ -155,16 +155,15 @@ public class vistaCocina extends javax.swing.JFrame {
 
     void resultadoBusqueda() {//Una vez a encontrado la mesa comienza la concatenacion de lo que se mostrará. Funciona de la mano con mostrarPedido.
 
-        listaDePlatosDeUnPedido = pedido.getListaComida();
+        listaDePlatosDeUnPedidoCocina = pedido.getListaComida();
         ComidaAuxiliar comidaAuxiliar;
+        visualizarPedido = "";
+        for (int k = 0; k < listaDePlatosDeUnPedidoCocina.getTamaño(); k++) {
 
-        for (int k = 0; k < listaDePlatosDeUnPedido.getTamaño(); k++) {
-
-            comidaAuxiliar = (ComidaAuxiliar) listaDePlatosDeUnPedido.getPosicion(k).getInfo();
+            comidaAuxiliar = (ComidaAuxiliar) listaDePlatosDeUnPedidoCocina.getPosicion(k).getInfo();
             String nombre = comidaAuxiliar.getNombrePlato();
             int cantidad = Integer.parseInt(String.valueOf(comidaAuxiliar.getCantidad()));
             visualizarPedido = visualizarPedido + "\n" + cantidad + "....................." + nombre;
-            System.out.println(visualizarPedido + "\n");
         }
 
         JOptionPane.showMessageDialog(this, "Pedido: \n" + visualizarPedido, pedido.getMesa(), JOptionPane.INFORMATION_MESSAGE);
